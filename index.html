@@ -1,1049 +1,1095 @@
 <!DOCTYPE html>
 <html lang="mr" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STAR EVENT LIVE | थेट प्रक्षेपण आणि मीडिया प्रॉडक्शन - रायगड</title>
-    <meta name="description" content="आपल्या सर्व प्रकारच्या कार्यक्रमांचे YouTube, Facebook आणि Instagram वर थेट प्रक्षेपण (LIVE Streaming) केले जाते. संपर्क: 9890175727">
-    
-    <!-- Google Fonts: Poppins, Oswald & Noto Sans Devanagari for crisp Marathi typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700;800;900&family=Oswald:ital,wght@0,700;1,700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome 6 for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Poppins', 'Noto Sans Devanagari', 'sans-serif'],
-                        marathi: ['Noto Sans Devanagari', 'Poppins', 'sans-serif'],
-                        display: ['Oswald', 'Noto Sans Devanagari', 'sans-serif'],
-                    },
-                    colors: {
-                        crimson: {
-                            800: '#8b0000',
-                            900: '#640000',
-                            950: '#3d0000',
-                        },
-                        gold: {
-                            400: '#ffea00',
-                            500: '#ffd000',
-                            600: '#eab308',
-                        }
-                    },
-                    animation: {
-                        'pulse-fast': 'pulse 1.2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'signal-wave': 'signalWave 2s infinite',
-                        'float': 'float 4s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        signalWave: {
-                            '0%, 100%': { opacity: '1', transform: 'scale(1)' },
-                            '50%': { opacity: '0.45', transform: 'scale(1.08)' },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-8px)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STAR EVENT LIVE | आपल्या सर्व प्रकारच्या कार्यक्रमांचे थेट प्रक्षेपण</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Poppins, Oswald & Noto Sans Devanagari for crisp Marathi/English typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700;800;900&family=Oswald:wght@700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-    <style>
-        /* Custom Banner Gradient & Halftone Pattern matching Star Event Live identity */
-        .hero-banner-bg {
-            background-color: #5c0000;
-            background-image: 
-                radial-gradient(circle at 50% 35%, rgba(190, 18, 18, 0.78) 0%, rgba(65, 0, 0, 0.96) 80%),
-                radial-gradient(#ff0000 1.5px, transparent 1.5px);
-            background-size: 100% 100%, 18px 18px;
-        }
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'Noto Sans Devanagari', 'sans-serif'],
+            display: ['Oswald', 'Noto Sans Devanagari', 'sans-serif'],
+            marathi: ['Noto Sans Devanagari', 'Poppins', 'sans-serif'],
+          },
+          colors: {
+            crimsonDark: '#3a0004',
+            crimsonMain: '#7a0008',
+            studioDark: '#0d0709',
+            goldBright: '#ffd700',
+            goldDeep: '#f59e0b',
+            liveRed: '#ff1e1e',
+          },
+          animation: {
+            'float-slow': 'floatSlow 6s ease-in-out infinite',
+            'float-delayed': 'floatSlow 7s ease-in-out 2s infinite',
+            'pulse-glow': 'pulseGlow 2.2s infinite',
+            'spin-slow': 'spin 18s linear infinite',
+            'marquee': 'marquee 22s linear infinite',
+            'wave-1': 'broadcastWave 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite',
+            'wave-2': 'broadcastWave 2.4s cubic-bezier(0.16, 1, 0.3, 1) 0.8s infinite',
+            'wave-3': 'broadcastWave 2.4s cubic-bezier(0.16, 1, 0.3, 1) 1.6s infinite',
+          },
+          keyframes: {
+            floatSlow: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-14px) rotate(2deg)' },
+            },
+            pulseGlow: {
+              '0%, 100%': { boxShadow: '0 0 15px rgba(255, 30, 30, 0.7), 0 0 30px rgba(255, 30, 30, 0.4)' },
+              '50%': { boxShadow: '0 0 28px rgba(255, 30, 30, 1), 0 0 55px rgba(255, 215, 0, 0.6)' },
+            },
+            broadcastWave: {
+              '0%': { transform: 'scale(0.8)', opacity: '0.95' },
+              '100%': { transform: 'scale(2.3)', opacity: '0' },
+            },
+            marquee: {
+              '0%': { transform: 'translateX(0%)' },
+              '100%': { transform: 'translateX(-50%)' },
+            },
+          },
+        },
+      },
+    };
+  </script>
 
-        .brand-title-shadow {
-            text-shadow: 0 5px 0 #1a0000, 0 10px 25px rgba(0, 0, 0, 0.85);
-        }
+  <style>
+    /* Custom Studio Broadcast Effects */
+    body {
+      background-color: #0d0709;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
 
-        .live-badge-glow {
-            box-shadow: 0 0 25px rgba(239, 68, 68, 0.75), inset 0 0 10px rgba(255, 255, 255, 0.35);
-        }
+    .hero-halftone {
+      background-image:
+        radial-gradient(circle at 20% 25%, rgba(255, 215, 0, 0.14) 0%, transparent 45%),
+        radial-gradient(circle at 80% 20%, rgba(255, 30, 30, 0.25) 0%, transparent 50%),
+        radial-gradient(rgba(255, 255, 255, 0.06) 1.5px, transparent 1.5px),
+        linear-gradient(165deg, #4b0005 0%, #830009 42%, #290306 78%, #0d0709 100%);
+      background-size: 100% 100%, 100% 100%, 22px 22px, 100% 100%;
+    }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #111827;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #991b1b;
-            border-radius: 9999px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #ffd000;
-        }
-    </style>
+    .gold-text-3d {
+      background: linear-gradient(180deg, #fff6a9 0%, #ffd700 48%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 5px 0 #3a0004) drop-shadow(0 10px 22px rgba(255, 215, 0, 0.35));
+    }
+
+    .glass-card {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 215, 0, 0.18);
+    }
+
+    .service-card {
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+      transform-style: preserve-3d;
+    }
+
+    .service-card:hover {
+      border-color: rgba(255, 215, 0, 0.75);
+      box-shadow: 0 22px 45px -12px rgba(255, 30, 30, 0.45), 0 0 25px rgba(255, 215, 0, 0.25);
+    }
+
+    /* Scroll Reveal Utility */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px) scale(0.97);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0d0709;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #ffd700, #99000a);
+      border-radius: 9999px;
+    }
+  </style>
 </head>
-<body class="bg-neutral-950 text-white font-sans antialiased selection:bg-gold-500 selection:text-black overflow-x-hidden">
+<body class="font-sans antialiased selection:bg-goldBright selection:text-crimsonDark">
 
-    <!-- Top Blessing & Sticky Navbar -->
-    <header class="sticky top-0 z-50 bg-neutral-950/95 backdrop-blur-md border-b border-red-900/50 shadow-xl">
-        <!-- Top Blessing Bar -->
-        <div class="bg-gradient-to-r from-crimson-950 via-red-800 to-crimson-950 py-1.5 px-4 text-center border-b border-gold-500/30">
-            <p class="text-gold-400 font-marathi font-bold text-xs sm:text-sm tracking-wider">
-                ॥ श्री गणेशाय नमः ॥ &nbsp;•&nbsp; <span class="text-white/90 font-normal">रायगड, महाराष्ट्र (Raigad's Trusted Live Streaming Partner)</span>
-            </p>
-        </div>
+  <!-- Ambient Floating Broadcast Particles Canvas -->
+  <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-60"></canvas>
 
-        <!-- Main Navigation -->
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
-            <!-- Brand Logo -->
-            <a href="#home" class="flex items-center gap-2.5 group">
-                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-gold-400 to-amber-600 flex items-center justify-center text-neutral-950 shadow-lg group-hover:scale-105 transition-transform">
-                    <i class="fa-solid fa-video text-lg sm:text-xl"></i>
-                </div>
-                <div class="flex flex-col">
-                    <div class="flex items-center gap-1.5">
-                        <span class="font-display italic font-bold text-xl sm:text-2xl tracking-wide text-gold-400">STAR EVENT</span>
-                        <span class="bg-red-600 text-white text-[10px] sm:text-xs font-extrabold px-1.5 py-0.5 rounded flex items-center gap-1 shadow">
-                            <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span> LIVE
-                        </span>
-                    </div>
-                    <span class="text-[10px] sm:text-xs text-neutral-400 font-marathi -mt-1">थेट प्रक्षेपण आणि मीडिया प्रॉडक्शन</span>
-                </div>
-            </a>
-
-            <!-- Desktop Menu Links -->
-            <div class="hidden lg:flex items-center gap-7 text-sm font-semibold text-neutral-200">
-                <a href="#events" class="hover:text-gold-400 transition-colors">कार्यक्रम (Events)</a>
-                <a href="#features" class="hover:text-gold-400 transition-colors">वैशिष्ट्ये (Features)</a>
-                <a href="#packages" class="hover:text-gold-400 transition-colors">रेट कार्ड (Packages)</a>
-                <a href="#booking" class="hover:text-gold-400 transition-colors">बुकिंग करा (Book Now)</a>
-            </div>
-
-            <!-- Action Buttons (Language Toggle + Direct Call) -->
-            <div class="flex items-center gap-2 sm:gap-3">
-                <button id="langToggleBtn" onclick="toggleLanguage()" class="px-3 py-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 text-xs sm:text-sm font-bold text-gold-400 transition flex items-center gap-1.5 cursor-pointer" title="Switch Language">
-                    <i class="fa-solid fa-language text-base"></i>
-                    <span id="langLabel">EN / मराठी</span>
-                </button>
-
-                <a href="tel:+919890175727" class="px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold text-xs sm:text-sm shadow-lg shadow-red-900/50 flex items-center gap-2 transition transform active:scale-95">
-                    <i class="fa-solid fa-phone-volume animate-bounce"></i>
-                    <span class="hidden sm:inline">9890175727</span>
-                    <span class="sm:hidden">Call</span>
-                </a>
-            </div>
-        </nav>
-    </header>
-
-    <!-- HERO SECTION (Inspired Directly by the Uploaded Banner) -->
-    <section id="home" class="relative hero-banner-bg pt-10 pb-16 sm:pt-16 sm:pb-24 border-b-4 border-gold-500 overflow-hidden">
-        <!-- Decorative Broadcast Rings -->
-        <div class="absolute top-12 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full border border-gold-400/10 pointer-events-none"></div>
-        <div class="absolute top-4 left-1/2 -translate-x-1/2 w-[850px] h-[850px] rounded-full border border-red-500/10 pointer-events-none"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            
-            <!-- Top Broadcast Signal + Brand Title -->
-            <div class="inline-flex flex-col items-center mb-4">
-                <!-- Wi-Fi / Broadcast Arcs matching banner -->
-                <div class="text-gold-400 text-2xl sm:text-3xl mb-1 animate-signal-wave">
-                    <i class="fa-solid fa-wifi"></i>
-                </div>
-                
-                <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-5">
-                    <h1 class="font-display italic font-black text-5xl sm:text-7xl md:text-8xl tracking-tight text-gold-400 brand-title-shadow uppercase flex items-center gap-2">
-                        <i class="fa-regular fa-star text-4xl sm:text-6xl text-gold-400"></i>
-                        STAR EVENT
-                    </h1>
-                    
-                    <!-- Glowing LIVE Badge matching banner -->
-                    <div class="bg-red-600 border-2 border-white/80 rounded-2xl px-4 py-1.5 sm:px-6 sm:py-2.5 flex items-center gap-2.5 live-badge-glow transform -skew-x-6">
-                        <span class="font-display italic font-extrabold text-3xl sm:text-5xl text-white tracking-wider">LIVE</span>
-                        <span class="w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-white text-red-600 flex items-center justify-center shadow-md">
-                            <i class="fa-solid fa-play text-base sm:text-xl ml-0.5"></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Main Tagline in Marathi + English -->
-            <div class="max-w-3xl mx-auto mt-3 mb-6">
-                <h2 class="font-marathi font-extrabold text-xl sm:text-3xl md:text-4xl text-white leading-snug drop-shadow-md">
-                    आपल्या सर्व प्रकारच्या कार्यक्रमांचे <span class="text-gold-400 underline decoration-red-500 decoration-4 underline-offset-4">थेट प्रक्षेपण (LIVE)</span> केले जाते.
-                </h2>
-                <p data-i18n="hero_sub" class="text-neutral-200 text-sm sm:text-lg mt-2.5 font-medium">
-                    High-Definition Multi-Camera Live Streaming on YouTube, Facebook & Instagram across Raigad & Maharashtra.
-                </p>
-            </div>
-
-            <!-- Social Platforms Pill Bar (Matching Banner) -->
-            <div class="inline-flex flex-wrap items-center justify-center gap-3 sm:gap-4 bg-neutral-950/90 border border-white/15 px-5 py-3 rounded-2xl sm:rounded-full shadow-2xl mb-8">
-                <div class="flex items-center gap-2.5">
-                    <span class="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center text-white shadow"><i class="fa-brands fa-youtube"></i></span>
-                    <span class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white shadow"><i class="fa-brands fa-facebook-f"></i></span>
-                    <span class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-500 via-pink-600 to-purple-600 flex items-center justify-center text-white shadow"><i class="fa-brands fa-instagram"></i></span>
-                </div>
-                <span class="text-neutral-500 hidden sm:inline">|</span>
-                <p class="font-marathi font-bold text-sm sm:text-base text-white">
-                    YouTube • Facebook • Instagram वर <span class="text-gold-400">LIVE Streaming</span> उपलब्ध
-                </p>
-                <span class="bg-red-600 text-white text-xs font-extrabold px-2.5 py-1 rounded-full flex items-center gap-1.5 animate-pulse">
-                    <i class="fa-solid fa-tower-broadcast"></i> ON AIR
-                </span>
-            </div>
-
-            <!-- Direct Call & WhatsApp CTAs -->
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto">
-                <a href="tel:+919890175727" class="w-full sm:w-auto flex-1 bg-gradient-to-r from-gold-400 to-amber-500 hover:from-gold-300 hover:to-amber-400 text-neutral-950 font-extrabold text-base sm:text-lg px-7 py-4 rounded-2xl shadow-xl shadow-black/50 flex items-center justify-center gap-3 transition transform hover:-translate-y-0.5">
-                    <i class="fa-solid fa-phone text-xl"></i>
-                    <div class="text-left leading-tight">
-                        <span class="block text-[11px] uppercase tracking-wider font-bold opacity-80">संपर्क करा (Call Now)</span>
-                        <span class="font-display text-xl tracking-wide">9890175727</span>
-                    </div>
-                </a>
-
-                <a href="https://wa.me/919890175727?text=नमस्कार%20Star%20Event%20Live,%20मला%20कार्यक्रमाच्या%20LIVE%20Streaming%20बद्दल%20माहिती%20हवी%20आहे." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-base sm:text-lg px-7 py-4 rounded-2xl shadow-xl shadow-black/50 flex items-center justify-center gap-3 transition transform hover:-translate-y-0.5">
-                    <i class="fa-brands fa-whatsapp text-2xl"></i>
-                    <div class="text-left leading-tight">
-                        <span class="block text-[11px] uppercase tracking-wider font-bold opacity-90">तत्काळ बुकिंग</span>
-                        <span>WhatsApp Chat</span>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Emotional Footer Slogan Ribbon from Banner -->
-            <div class="mt-10 pt-5 border-t border-white/15 max-w-2xl mx-auto">
-                <p class="font-marathi font-bold text-base sm:text-xl text-gold-400 flex items-center justify-center gap-2.5">
-                    <i class="fa-solid fa-star text-xs sm:text-sm"></i>
-                    <span>तुमचा कार्यक्रम... आमची जबाबदारी... आठवणी राहतील कायमच्या</span>
-                    <i class="fa-solid fa-star text-xs sm:text-sm"></i>
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- SERVICES / EVENTS COVERED SECTION (5 Core Categories from Banner) -->
-    <section id="events" class="py-16 sm:py-24 bg-neutral-950 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-                <span class="inline-block px-3.5 py-1 rounded-full bg-red-950 border border-red-700/60 text-gold-400 text-xs font-bold uppercase tracking-wider mb-3">
-                    आमच्या सेवा • Our Live Coverage
-                </span>
-                <h2 class="font-marathi font-black text-3xl sm:text-5xl text-white">
-                    आम्ही कव्हर करत असलेले <span class="text-gold-400">प्रमुख कार्यक्रम</span>
-                </h2>
-                <p data-i18n="events_desc" class="text-neutral-400 mt-3 text-sm sm:text-base">
-                    क्रिकेटच्या मैदानापासून ते लग्न व हळदीच्या शाही सोहळ्यांपर्यंत — प्रत्येक क्षण जगाच्या कानाकोपऱ्यात पोहोचवा.
-                </p>
-            </div>
-
-            <!-- 5 Event Cards Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-                
-                <!-- 1. Cricket Matches -->
-                <div class="group bg-neutral-900 rounded-3xl overflow-hidden border border-neutral-800 hover:border-blue-500 transition-all duration-300 shadow-lg hover:shadow-blue-950/40 flex flex-col">
-                    <div class="relative h-48 overflow-hidden bg-neutral-800">
-                        <img src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=600&q=80" 
-                             onerror="this.src='https://placehold.co/600x400/1e3a8a/ffffff?text=Cricket+Live'" 
-                             alt="क्रिकेट सामने Live" 
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent"></div>
-                        <div class="absolute bottom-3 left-3 w-11 h-11 rounded-2xl bg-blue-600 text-white flex items-center justify-center text-xl shadow-lg border-2 border-white/20">
-                            <i class="fa-solid fa-baseball-bat-ball"></i>
-                        </div>
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-marathi font-extrabold text-xl text-white group-hover:text-blue-400 transition-colors">क्रिकेट सामने</h3>
-                            <p class="text-xs font-bold text-blue-400 uppercase tracking-wider mb-2">Cricket Tournaments</p>
-                            <p class="text-neutral-400 text-xs leading-relaxed">
-                                लाईव्ह स्कोअरबोर्ड ग्राफिक्स, थर्ड अंपायर रिप्ले, बाउंड्री ॲनिमेशन आणि मल्टी-कॅमेरा सेटअपसह थेट प्रक्षेपण.
-                            </p>
-                        </div>
-                        <button onclick="selectEventForBooking('क्रिकेट सामने (Cricket Match)')" class="mt-4 w-full py-2.5 rounded-xl bg-blue-600/20 hover:bg-blue-600 text-blue-300 hover:text-white font-bold text-xs transition cursor-pointer">
-                            पॅकेज निवडा <i class="fa-solid fa-arrow-right ml-1"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 2. Haldi Ceremony -->
-                <div class="group bg-neutral-900 rounded-3xl overflow-hidden border border-neutral-800 hover:border-pink-500 transition-all duration-300 shadow-lg hover:shadow-pink-950/40 flex flex-col">
-                    <div class="relative h-48 overflow-hidden bg-neutral-800">
-                        <img src="https://images.unsplash.com/photo-1610173827043-9db50e0d8ef9?auto=format&fit=crop&w=600&q=80" 
-                             onerror="this.src='https://placehold.co/600x400/be185d/ffffff?text=Haldi+Ceremony'" 
-                             alt="हळदी समारंभ Live" 
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent"></div>
-                        <div class="absolute bottom-3 left-3 w-11 h-11 rounded-2xl bg-pink-600 text-white flex items-center justify-center text-xl shadow-lg border-2 border-white/20">
-                            <i class="fa-solid fa-spa"></i>
-                        </div>
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-marathi font-extrabold text-xl text-white group-hover:text-pink-400 transition-colors">हळदी समारंभ</h3>
-                            <p class="text-xs font-bold text-pink-400 uppercase tracking-wider mb-2">Haldi Ceremony</p>
-                            <p class="text-neutral-400 text-xs leading-relaxed">
-                                रंगतदार हळदी समारंभ, डीजे नाईट आणि कुटुंबातील आनंदाचे क्षण फुल HD क्वालिटीमध्ये थेट प्रक्षेपित करा.
-                            </p>
-                        </div>
-                        <button onclick="selectEventForBooking('हळदी समारंभ (Haldi Ceremony)')" class="mt-4 w-full py-2.5 rounded-xl bg-pink-600/20 hover:bg-pink-600 text-pink-300 hover:text-white font-bold text-xs transition cursor-pointer">
-                            पॅकेज निवडा <i class="fa-solid fa-arrow-right ml-1"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 3. Birthday Celebrations -->
-                <div class="group bg-neutral-900 rounded-3xl overflow-hidden border border-neutral-800 hover:border-purple-500 transition-all duration-300 shadow-lg hover:shadow-purple-950/40 flex flex-col">
-                    <div class="relative h-48 overflow-hidden bg-neutral-800">
-                        <img src="https://images.unsplash.com/photo-1558636508-e0db3814bd1d?auto=format&fit=crop&w=600&q=80" 
-                             onerror="this.src='https://placehold.co/600x400/6b21a8/ffffff?text=Birthday+Live'" 
-                             alt="वाढदिवस Live" 
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent"></div>
-                        <div class="absolute bottom-3 left-3 w-11 h-11 rounded-2xl bg-purple-600 text-white flex items-center justify-center text-xl shadow-lg border-2 border-white/20">
-                            <i class="fa-solid fa-cake-candles"></i>
-                        </div>
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-marathi font-extrabold text-xl text-white group-hover:text-purple-400 transition-colors">वाढदिवस</h3>
-                            <p class="text-xs font-bold text-purple-400 uppercase tracking-wider mb-2">Birthday Celebrations</p>
-                            <p class="text-neutral-400 text-xs leading-relaxed">
-                                लाडक्या मुलांचा पहिला वाढदिवस किंवा भव्य अभिष्टचिंतन सोहळा — दूरवरच्या नातेवाईकांना घरबसल्या दाखवा.
-                            </p>
-                        </div>
-                        <button onclick="selectEventForBooking('वाढदिवस (Birthday Celebration)')" class="mt-4 w-full py-2.5 rounded-xl bg-purple-600/20 hover:bg-purple-600 text-purple-300 hover:text-white font-bold text-xs transition cursor-pointer">
-                            पॅकेज निवडा <i class="fa-solid fa-arrow-right ml-1"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 4. Wedding Ceremonies -->
-                <div class="group bg-neutral-900 rounded-3xl overflow-hidden border border-neutral-800 hover:border-red-500 transition-all duration-300 shadow-lg hover:shadow-red-950/40 flex flex-col">
-                    <div class="relative h-48 overflow-hidden bg-neutral-800">
-                        <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&q=80" 
-                             onerror="this.src='https://placehold.co/600x400/991b1b/ffffff?text=Wedding+Live'" 
-                             alt="लग्न समारंभ Live" 
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent"></div>
-                        <div class="absolute bottom-3 left-3 w-11 h-11 rounded-2xl bg-red-600 text-white flex items-center justify-center text-xl shadow-lg border-2 border-white/20">
-                            <i class="fa-solid fa-rings-wedding"></i>
-                            <i class="fa-solid fa-heart text-sm"></i>
-                        </div>
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-marathi font-extrabold text-xl text-white group-hover:text-red-400 transition-colors">लग्न समारंभ</h3>
-                            <p class="text-xs font-bold text-red-400 uppercase tracking-wider mb-2">Wedding & Reception</p>
-                            <p class="text-neutral-400 text-xs leading-relaxed">
-                                शाही विवाह सोहळा, मंगलाष्टके, वरमाला आणि रिसेप्शनचे मल्टी-कॅमेरा, ड्रोन व LED वॉलसह भव्य प्रक्षेपण.
-                            </p>
-                        </div>
-                        <button onclick="selectEventForBooking('लग्न समारंभ (Wedding Ceremony)')" class="mt-4 w-full py-2.5 rounded-xl bg-red-600/20 hover:bg-red-600 text-red-300 hover:text-white font-bold text-xs transition cursor-pointer">
-                            पॅकेज निवडा <i class="fa-solid fa-arrow-right ml-1"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 5. All Other Events -->
-                <div class="group bg-neutral-900 rounded-3xl overflow-hidden border border-neutral-800 hover:border-emerald-500 transition-all duration-300 shadow-lg hover:shadow-emerald-950/40 flex flex-col">
-                    <div class="relative h-48 overflow-hidden bg-neutral-800">
-                        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=600&q=80" 
-                             onerror="this.src='https://placehold.co/600x400/065f46/ffffff?text=Cultural+Events'" 
-                             alt="इतर सर्व कार्यक्रम Live" 
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent"></div>
-                        <div class="absolute bottom-3 left-3 w-11 h-11 rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-xl shadow-lg border-2 border-white/20">
-                            <i class="fa-solid fa-users"></i>
-                        </div>
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-marathi font-extrabold text-xl text-white group-hover:text-emerald-400 transition-colors">इतर सर्व कार्यक्रम</h3>
-                            <p class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2">Cultural & Social Events</p>
-                            <p class="text-neutral-400 text-xs leading-relaxed">
-                                कीर्तन सोहळा, गणपती उत्सव, जयंती, सांस्कृतिक कार्यक्रम, वास्तुशांती आणि राजकीय सभांचे थेट प्रक्षेपण.
-                            </p>
-                        </div>
-                        <button onclick="selectEventForBooking('इतर सांस्कृतिक / सामाजिक कार्यक्रम')" class="mt-4 w-full py-2.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600 text-emerald-300 hover:text-white font-bold text-xs transition cursor-pointer">
-                            पॅकेज निवडा <i class="fa-solid fa-arrow-right ml-1"></i>
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- PRODUCTION QUALITY & FEATURES SECTION (From Banner Bottom Strip) -->
-    <section id="features" class="py-16 bg-gradient-to-b from-neutral-900 to-neutral-950 border-y border-neutral-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-12">
-                <h2 class="font-marathi font-black text-2xl sm:text-4xl text-white">
-                    आधुनिक तंत्रज्ञान आणि <span class="text-gold-400">प्रोफेशनल क्वालिटी</span>
-                </h2>
-                <p class="text-neutral-400 text-sm sm:text-base mt-2">
-                    प्रत्येक कार्यक्रमासाठी सर्वोत्कृष्ट ऑडिओ-व्हिज्युअल सेटअप
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Feature 1 -->
-                <div class="bg-neutral-950 p-6 rounded-3xl border border-neutral-800 hover:border-gold-500/60 transition">
-                    <div class="w-14 h-14 rounded-2xl bg-red-600/15 text-red-500 flex items-center justify-center text-2xl mb-4">
-                        <i class="fa-solid fa-camera-retro"></i>
-                    </div>
-                    <h3 class="font-marathi font-bold text-lg text-white mb-1">हाय क्वालिटी कॅमेरा सेटअप</h3>
-                    <p class="text-xs font-semibold text-gold-400 mb-2">4K & Full HD Broadcast Cameras</p>
-                    <p class="text-neutral-400 text-xs leading-relaxed">
-                        स्पष्ट आणि सिनेमॅटिक व्हिडिओ क्वालिटीसाठी अत्याधुनिक प्रोफेशनल कॅमेरे आणि हाय-स्पीड इंटरनेट बॉन्डिंग.
-                    </p>
-                </div>
-
-                <!-- Feature 2 -->
-                <div class="bg-neutral-950 p-6 rounded-3xl border border-neutral-800 hover:border-gold-500/60 transition">
-                    <div class="w-14 h-14 rounded-2xl bg-gold-500/15 text-gold-400 flex items-center justify-center text-2xl mb-4">
-                        <i class="fa-solid fa-user-tie"></i>
-                    </div>
-                    <h3 class="font-marathi font-bold text-lg text-white mb-1">प्रोफेशनल टीम द्वारे सेवा</h3>
-                    <p class="text-xs font-semibold text-gold-400 mb-2">Experienced Crew & Technicians</p>
-                    <p class="text-neutral-400 text-xs leading-relaxed">
-                        अनुभवी कॅमेरामन, स्विचर ऑपरेटर आणि तांत्रिक टीमकडून विनाअडथळा संपूर्ण कार्यक्रमाचे व्यवस्थापन.
-                    </p>
-                </div>
-
-                <!-- Feature 3 -->
-                <div class="bg-neutral-950 p-6 rounded-3xl border border-neutral-800 hover:border-gold-500/60 transition">
-                    <div class="w-14 h-14 rounded-2xl bg-blue-500/15 text-blue-400 flex items-center justify-center text-2xl mb-4">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    </div>
-                    <h3 class="font-marathi font-bold text-lg text-white mb-1">स्क्रीन ग्राफिक्स & ॲनिमेशन</h3>
-                    <p class="text-xs font-semibold text-gold-400 mb-2">Custom Overlays & Live Titles</p>
-                    <p class="text-neutral-400 text-xs leading-relaxed">
-                        कार्यक्रमाचे नाव, पाहुण्यांचे स्वागत, वधू-वर नावे आणि क्रिकेट स्कोअरकार्डसाठी आकर्षक कस्टम ग्राफिक्स.
-                    </p>
-                </div>
-
-                <!-- Feature 4 -->
-                <div class="bg-neutral-950 p-6 rounded-3xl border border-neutral-800 hover:border-gold-500/60 transition">
-                    <div class="w-14 h-14 rounded-2xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-2xl mb-4">
-                        <i class="fa-solid fa-film"></i>
-                    </div>
-                    <h3 class="font-marathi font-bold text-lg text-white mb-1">रेकॉर्डिंग आणि एडिटिंग</h3>
-                    <p class="text-xs font-semibold text-gold-400 mb-2">Full Backup & Highlights Editing</p>
-                    <p class="text-neutral-400 text-xs leading-relaxed">
-                        लाईव्ह प्रक्षेपणासोबतच संपूर्ण कार्यक्रमाचे स्वच्छ रेकॉर्डिंग आणि प्रोफेशनल व्हिडिओ एडिटिंग उपलब्ध.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- EQUIPMENT & PACKAGES RATE CARD + INTERACTIVE CALCULATOR -->
-    <section id="packages" class="py-16 sm:py-24 bg-neutral-950">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-12">
-                <span class="inline-block px-3.5 py-1 rounded-full bg-gold-500/15 border border-gold-500/40 text-gold-400 text-xs font-bold uppercase tracking-wider mb-3">
-                    पारदर्शक दरपत्रक • Rate Card & Packages
-                </span>
-                <h2 class="font-marathi font-black text-3xl sm:text-5xl text-white">
-                    कॅमेरा सेटअप आणि <span class="text-gold-400">स्पेशल पॅकेजेस</span>
-                </h2>
-                <p class="text-neutral-400 mt-3 text-sm sm:text-base">
-                    आपल्या गरजेनुसार सिंगल/ड्युअल कॅमेरा, ड्रोन किंवा LED वॉल निवडा आणि थेट अंदाजित खर्च पहा.
-                </p>
-            </div>
-
-            <!-- Interactive Equipment Rate Cards (Selectable) -->
-            <div class="mb-12">
-                <h3 class="font-marathi font-bold text-lg sm:text-xl text-gold-400 mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-sliders"></i> १. इक्विपमेंट रेट कार्ड (Equipment Add-ons — निवडा)
-                </h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                    
-                    <!-- Option 1: Single Camera -->
-                    <label class="cursor-pointer group relative bg-neutral-900 border-2 border-neutral-800 has-[:checked]:border-gold-400 has-[:checked]:bg-red-950/25 rounded-3xl p-6 transition-all shadow-lg">
-                        <input type="checkbox" class="equip-checkbox sr-only" data-name="Single Camera Setup" data-price="3800" onchange="updateCalculator()">
-                        <div class="flex items-start justify-between mb-4">
-                            <div class="w-12 h-12 rounded-2xl bg-neutral-800 group-has-[:checked]:bg-gold-400 group-has-[:checked]:text-black text-gold-400 flex items-center justify-center text-xl transition">
-                                <i class="fa-solid fa-video"></i>
-                            </div>
-                            <span class="w-6 h-6 rounded-full border-2 border-neutral-600 group-has-[:checked]:border-gold-400 group-has-[:checked]:bg-gold-400 flex items-center justify-center text-black text-xs">
-                                <i class="fa-solid fa-check opacity-0 group-has-[:checked]:opacity-100"></i>
-                            </span>
-                        </div>
-                        <h4 class="font-bold text-lg text-white">Single Camera Setup</h4>
-                        <p class="text-xs text-neutral-400 mt-1">1 HD/4K Camera + Live Streaming + Custom Graphics</p>
-                        <div class="mt-5 pt-4 border-t border-neutral-800 flex items-baseline justify-between">
-                            <span class="font-display font-bold text-3xl text-gold-400">₹3,800</span>
-                            <span class="text-[11px] text-neutral-400">प्रती कार्यक्रम</span>
-                        </div>
-                    </label>
-
-                    <!-- Option 2: Dual Camera -->
-                    <label class="cursor-pointer group relative bg-neutral-900 border-2 border-neutral-800 has-[:checked]:border-gold-400 has-[:checked]:bg-red-950/25 rounded-3xl p-6 transition-all shadow-lg">
-                        <span class="absolute -top-3 right-5 bg-red-600 text-white text-[10px] font-extrabold px-3 py-0.5 rounded-full uppercase tracking-wider shadow">Popular</span>
-                        <input type="checkbox" class="equip-checkbox sr-only" data-name="Dual Camera Setup" data-price="6499" onchange="updateCalculator()">
-                        <div class="flex items-start justify-between mb-4">
-                            <div class="w-12 h-12 rounded-2xl bg-neutral-800 group-has-[:checked]:bg-gold-400 group-has-[:checked]:text-black text-gold-400 flex items-center justify-center text-xl transition">
-                                <i class="fa-solid fa-cameras"></i>
-                                <i class="fa-solid fa-clapperboard"></i>
-                            </div>
-                            <span class="w-6 h-6 rounded-full border-2 border-neutral-600 group-has-[:checked]:border-gold-400 group-has-[:checked]:bg-gold-400 flex items-center justify-center text-black text-xs">
-                                <i class="fa-solid fa-check opacity-0 group-has-[:checked]:opacity-100"></i>
-                            </span>
-                        </div>
-                        <h4 class="font-bold text-lg text-white">Dual Camera Setup</h4>
-                        <p class="text-xs text-neutral-400 mt-1">2 Multi-Angle Cameras + Live Switcher + Overlays</p>
-                        <div class="mt-5 pt-4 border-t border-neutral-800 flex items-baseline justify-between">
-                            <span class="font-display font-bold text-3xl text-gold-400">₹6,499</span>
-                            <span class="text-[11px] text-neutral-400">प्रती कार्यक्रम</span>
-                        </div>
-                    </label>
-
-                    <!-- Option 3: Drone Coverage -->
-                    <label class="cursor-pointer group relative bg-neutral-900 border-2 border-neutral-800 has-[:checked]:border-gold-400 has-[:checked]:bg-red-950/25 rounded-3xl p-6 transition-all shadow-lg">
-                        <input type="checkbox" class="equip-checkbox sr-only" data-name="Drone Coverage" data-price="4000" onchange="updateCalculator()">
-                        <div class="flex items-start justify-between mb-4">
-                            <div class="w-12 h-12 rounded-2xl bg-neutral-800 group-has-[:checked]:bg-gold-400 group-has-[:checked]:text-black text-gold-400 flex items-center justify-center text-xl transition">
-                                <i class="fa-solid fa-helicopter"></i>
-                            </div>
-                            <span class="w-6 h-6 rounded-full border-2 border-neutral-600 group-has-[:checked]:border-gold-400 group-has-[:checked]:bg-gold-400 flex items-center justify-center text-black text-xs">
-                                <i class="fa-solid fa-check opacity-0 group-has-[:checked]:opacity-100"></i>
-                            </span>
-                        </div>
-                        <h4 class="font-bold text-lg text-white">Drone Coverage</h4>
-                        <p class="text-xs text-neutral-400 mt-1">Aerial 4K Drone Shots & Live Entry / Ground View</p>
-                        <div class="mt-5 pt-4 border-t border-neutral-800 flex items-baseline justify-between">
-                            <span class="font-display font-bold text-3xl text-gold-400">₹4,000</span>
-                            <span class="text-[11px] text-neutral-400">Add-on</span>
-                        </div>
-                    </label>
-
-                    <!-- Option 4: 8x12 LED Wall -->
-                    <label class="cursor-pointer group relative bg-neutral-900 border-2 border-neutral-800 has-[:checked]:border-gold-400 has-[:checked]:bg-red-950/25 rounded-3xl p-6 transition-all shadow-lg">
-                        <input type="checkbox" class="equip-checkbox sr-only" data-name="8x12 LED Wall" data-price="11999" onchange="updateCalculator()">
-                        <div class="flex items-start justify-between mb-4">
-                            <div class="w-12 h-12 rounded-2xl bg-neutral-800 group-has-[:checked]:bg-gold-400 group-has-[:checked]:text-black text-gold-400 flex items-center justify-center text-xl transition">
-                                <i class="fa-solid fa-tv"></i>
-                            </div>
-                            <span class="w-6 h-6 rounded-full border-2 border-neutral-600 group-has-[:checked]:border-gold-400 group-has-[:checked]:bg-gold-400 flex items-center justify-center text-black text-xs">
-                                <i class="fa-solid fa-check opacity-0 group-has-[:checked]:opacity-100"></i>
-                            </span>
-                        </div>
-                        <h4 class="font-bold text-lg text-white">8x12 LED Wall</h4>
-                        <p class="text-xs text-neutral-400 mt-1">High-Brightness Giant Stage Screen Display</p>
-                        <div class="mt-5 pt-4 border-t border-neutral-800 flex items-baseline justify-between">
-                            <span class="font-display font-bold text-3xl text-gold-400">₹11,999</span>
-                            <span class="text-[11px] text-neutral-400">Full Setup</span>
-                        </div>
-                    </label>
-
-                </div>
-            </div>
-
-            <!-- Event-Wise Combo Packages -->
-            <div>
-                <h3 class="font-marathi font-bold text-lg sm:text-xl text-gold-400 mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-box-open"></i> २. इव्हेंट स्पेशल कॉम्बो पॅकेजेस (Event Packages)
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    
-                    <!-- Cricket Combo -->
-                    <div class="bg-gradient-to-b from-neutral-900 to-neutral-950 border border-neutral-800 rounded-3xl p-6 flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="px-3 py-1 rounded-full bg-blue-600/20 text-blue-400 text-xs font-bold">CRICKET LIVE</span>
-                                <i class="fa-solid fa-trophy text-gold-400"></i>
-                            </div>
-                            <h4 class="font-marathi font-extrabold text-xl text-white">क्रिकेट टूर्नामेंट पॅकेज</h4>
-                            <p class="font-display text-2xl font-bold text-gold-400 mt-2">₹6,499 <span class="text-xs font-sans text-neutral-400 font-normal">पासून सुरू</span></p>
-                            <ul class="mt-4 space-y-2 text-xs text-neutral-300">
-                                <li><i class="fa-solid fa-circle-check text-blue-400 mr-2"></i>Dual Camera Pitch & Ground View</li>
-                                <li><i class="fa-solid fa-circle-check text-blue-400 mr-2"></i>Live Ball-by-Ball Score Graphics</li>
-                                <li><i class="fa-solid fa-circle-check text-blue-400 mr-2"></i>4/6/Wicket Replay Animations</li>
-                                <li><i class="fa-solid fa-circle-check text-blue-400 mr-2"></i>YouTube & Facebook Live</li>
-                            </ul>
-                        </div>
-                        <button onclick="applyPresetPackage('क्रिकेट सामने (Cricket Match)', ['Dual Camera Setup'])" class="mt-6 w-full py-3 rounded-xl bg-neutral-800 hover:bg-blue-600 text-white font-bold text-xs transition cursor-pointer">
-                            हे पॅकेज निवडा
-                        </button>
-                    </div>
-
-                    <!-- Birthday Combo -->
-                    <div class="bg-gradient-to-b from-neutral-900 to-neutral-950 border border-neutral-800 rounded-3xl p-6 flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="px-3 py-1 rounded-full bg-purple-600/20 text-purple-400 text-xs font-bold">BIRTHDAY SPECIAL</span>
-                                <i class="fa-solid fa-cake-candles text-purple-400"></i>
-                            </div>
-                            <h4 class="font-marathi font-extrabold text-xl text-white">वाढदिवस लाईव्ह पॅकेज</h4>
-                            <p class="font-display text-2xl font-bold text-gold-400 mt-2">₹3,800 <span class="text-xs font-sans text-neutral-400 font-normal">पासून सुरू</span></p>
-                            <ul class="mt-4 space-y-2 text-xs text-neutral-300">
-                                <li><i class="fa-solid fa-circle-check text-purple-400 mr-2"></i>Single HD Camera Live Coverage</li>
-                                <li><i class="fa-solid fa-circle-check text-purple-400 mr-2"></i>Custom Birthday Name Banner</li>
-                                <li><i class="fa-solid fa-circle-check text-purple-400 mr-2"></i>Cake Cutting & Wishes Highlight</li>
-                                <li><i class="fa-solid fa-circle-check text-purple-400 mr-2"></i>Full Event Recording Backup</li>
-                            </ul>
-                        </div>
-                        <button onclick="applyPresetPackage('वाढदिवस (Birthday Celebration)', ['Single Camera Setup'])" class="mt-6 w-full py-3 rounded-xl bg-neutral-800 hover:bg-purple-600 text-white font-bold text-xs transition cursor-pointer">
-                            हे पॅकेज निवडा
-                        </button>
-                    </div>
-
-                    <!-- Haldi Combo -->
-                    <div class="bg-gradient-to-b from-neutral-900 to-neutral-950 border border-neutral-800 rounded-3xl p-6 flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="px-3 py-1 rounded-full bg-pink-600/20 text-pink-400 text-xs font-bold">HALDI & DJ NIGHT</span>
-                                <i class="fa-solid fa-spa text-pink-400"></i>
-                            </div>
-                            <h4 class="font-marathi font-extrabold text-xl text-white">हळदी समारंभ पॅकेज</h4>
-                            <p class="font-display text-2xl font-bold text-gold-400 mt-2">₹7,800 <span class="text-xs font-sans text-neutral-400 font-normal">कॉम्बो</span></p>
-                            <ul class="mt-4 space-y-2 text-xs text-neutral-300">
-                                <li><i class="fa-solid fa-circle-check text-pink-400 mr-2"></i>Single Camera + Drone Aerial View</li>
-                                <li><i class="fa-solid fa-circle-check text-pink-400 mr-2"></i>Haldi Entry & Dance Live Stream</li>
-                                <li><i class="fa-solid fa-circle-check text-pink-400 mr-2"></i>Custom Couple Graphic Frame</li>
-                                <li><i class="fa-solid fa-circle-check text-pink-400 mr-2"></i>YouTube / Instagram Live</li>
-                            </ul>
-                        </div>
-                        <button onclick="applyPresetPackage('हळदी समारंभ (Haldi Ceremony)', ['Single Camera Setup', 'Drone Coverage'])" class="mt-6 w-full py-3 rounded-xl bg-neutral-800 hover:bg-pink-600 text-white font-bold text-xs transition cursor-pointer">
-                            हे पॅकेज निवडा
-                        </button>
-                    </div>
-
-                    <!-- Lagna / Royal Wedding Combo -->
-                    <div class="bg-gradient-to-b from-crimson-950/60 to-neutral-950 border-2 border-gold-500/60 rounded-3xl p-6 flex flex-col justify-between relative">
-                        <span class="absolute -top-3 right-5 bg-gold-400 text-black text-[10px] font-extrabold px-3 py-0.5 rounded-full uppercase">Best Value</span>
-                        <div>
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="px-3 py-1 rounded-full bg-red-600/30 text-gold-400 text-xs font-bold">SHAHI LAGNA</span>
-                                <i class="fa-solid fa-crown text-gold-400"></i>
-                            </div>
-                            <h4 class="font-marathi font-extrabold text-xl text-white">शाही लग्न समारंभ पॅकेज</h4>
-                            <p class="font-display text-2xl font-bold text-gold-400 mt-2">₹22,498 <span class="text-xs font-sans text-neutral-400 font-normal">फुल सेटअप</span></p>
-                            <ul class="mt-4 space-y-2 text-xs text-neutral-200">
-                                <li><i class="fa-solid fa-circle-check text-gold-400 mr-2"></i>Dual Camera + Drone Coverage</li>
-                                <li><i class="fa-solid fa-circle-check text-gold-400 mr-2"></i>8x12 Giant Stage LED Wall</li>
-                                <li><i class="fa-solid fa-circle-check text-gold-400 mr-2"></i>Custom Marathi Wedding Overlays</li>
-                                <li><i class="fa-solid fa-circle-check text-gold-400 mr-2"></i>Full Live + Recording & Editing</li>
-                            </ul>
-                        </div>
-                        <button onclick="applyPresetPackage('लग्न समारंभ (Wedding Ceremony)', ['Dual Camera Setup', 'Drone Coverage', '8x12 LED Wall'])" class="mt-6 w-full py-3 rounded-xl bg-gold-400 hover:bg-gold-300 text-black font-extrabold text-xs transition cursor-pointer shadow-lg">
-                            शाही पॅकेज निवडा
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Live Estimate Banner -->
-            <div class="mt-10 bg-gradient-to-r from-crimson-950 via-red-900 to-crimson-950 border border-gold-500/40 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
-                <div>
-                    <span class="text-xs uppercase tracking-wider font-bold text-gold-400">निवडलेले पॅकेज (Selected Estimate)</span>
-                    <p id="selectedSummaryText" class="font-marathi text-sm sm:text-base text-white mt-1">
-                        अद्याप कोणतेही इक्विपमेंट निवडलेले नाही. वरील कार्ड्सवर क्लिक करा.
-                    </p>
-                </div>
-                <div class="flex items-center gap-5 w-full md:w-auto justify-between md:justify-end">
-                    <div class="text-left md:text-right">
-                        <span class="block text-xs text-neutral-300">अंदाजित एकूण रक्कम</span>
-                        <span id="totalEstimateAmount" class="font-display font-black text-3xl sm:text-4xl text-gold-400">₹0</span>
-                    </div>
-                    <a href="#booking" class="px-6 py-3.5 rounded-2xl bg-gold-400 hover:bg-gold-300 text-black font-extrabold text-sm shadow-lg transition whitespace-nowrap">
-                        पुढे बुकिंग करा <i class="fa-solid fa-arrow-down ml-1"></i>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- BOOKING & CONTACT SECTION -->
-    <section id="booking" class="py-16 sm:py-24 bg-neutral-900/70 border-t border-neutral-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-                
-                <!-- Left Column: Direct Contact Info -->
-                <div class="lg:col-span-5 space-y-6">
-                    <div>
-                        <span class="inline-block px-3.5 py-1 rounded-full bg-red-600/20 border border-red-500/40 text-gold-400 text-xs font-bold uppercase tracking-wider mb-3">
-                            संपर्क साधा • Contact Us
-                        </span>
-                        <h2 class="font-marathi font-black text-3xl sm:text-4xl text-white leading-tight">
-                            आजच आपल्या कार्यक्रमाची तारीख <span class="text-gold-400">बुक करा!</span>
-                        </h2>
-                        <p class="text-neutral-300 text-sm mt-3 leading-relaxed">
-                            लग्न, हळद, वाढदिवस किंवा क्रिकेट सामन्याच्या थेट प्रक्षेपणासाठी थेट कॉल करा किंवा फॉर्म भरून WhatsApp वर त्वरित कोटेशन मिळवा.
-                        </p>
-                    </div>
-
-                    <!-- Contact Cards -->
-                    <div class="space-y-4">
-                        <a href="tel:+919890175727" class="flex items-center gap-4 p-5 rounded-2xl bg-neutral-950 border border-neutral-800 hover:border-gold-400 transition group">
-                            <div class="w-12 h-12 rounded-2xl bg-red-600 text-white flex items-center justify-center text-xl shadow-lg group-hover:scale-105 transition">
-                                <i class="fa-solid fa-phone"></i>
-                            </div>
-                            <div>
-                                <span class="block text-xs text-neutral-400 font-semibold">संपर्क / WhatsApp नंबर</span>
-                                <span class="font-display font-bold text-2xl text-gold-400 tracking-wide">9890175727</span>
-                            </div>
-                        </a>
-
-                        <!-- Dual Email Addresses Card with Clickable mailto & One-Click Copy -->
-                        <div class="p-5 rounded-2xl bg-neutral-950 border border-neutral-800 hover:border-gold-400 transition space-y-3">
-                            <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 rounded-2xl bg-neutral-800 text-gold-400 flex items-center justify-center text-xl shrink-0">
-                                    <i class="fa-solid fa-envelope"></i>
-                                </div>
-                                <div>
-                                    <span class="block text-xs text-neutral-400 font-semibold">अधिकृत ईमेल (Official Email IDs)</span>
-                                    <span class="text-[11px] text-neutral-500">क्लिक करा किंवा कॉपी करा</span>
-                        <!-- Official Email Address Card with Clickable mailto & One-Click Copy -->
-                        <div class="p-5 rounded-2xl bg-neutral-950 border border-neutral-800 hover:border-gold-400 transition space-y-3">
-                            <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 rounded-2xl bg-neutral-800 text-gold-400 flex items-center justify-center text-xl shrink-0">
-                                    <i class="fa-solid fa-envelope"></i>
-                                </div>
-                                <div>
-                                    <span class="block text-xs text-neutral-400 font-semibold">अधिकृत ईमेल (Official Email ID)</span>
-                                    <span class="text-[11px] text-neutral-500">क्लिक करा किंवा कॉपी करा</span>
-                                </div>
-                            </div>
-
-                            <div class="pt-1">
-                                <div class="flex items-center justify-between gap-2 bg-neutral-900/90 px-3.5 py-2.5 rounded-xl border border-neutral-800">
-                                    <a href="mailto:starevent01@gmail.com" class="font-semibold text-sm sm:text-base text-white hover:text-gold-400 transition truncate">
-                                        starevent01@gmail.com
-                                    </a>
-                                    <button type="button" onclick="copyEmailAddress('starevent01@gmail.com', this)" class="px-2.5 py-1.5 rounded-lg bg-neutral-800 hover:bg-gold-400 hover:text-black text-neutral-300 text-xs font-bold transition shrink-0 cursor-pointer" title="Copy Email">
-                                        <i class="fa-regular fa-copy"></i> Copy
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center gap-4 p-5 rounded-2xl bg-neutral-950 border border-neutral-800">
-                            <div class="w-12 h-12 rounded-2xl bg-neutral-800 text-emerald-400 flex items-center justify-center text-xl shrink-0">
-                                <i class="fa-solid fa-location-dot"></i>
-                            </div>
-                            <div>
-                                <span class="block text-xs text-neutral-400 font-semibold">सेवा क्षेत्र व पत्ता (Address & Service Area)</span>
-                                <span class="font-marathi font-bold text-sm sm:text-base text-white">Mamdapurwadi Neral, Karjat, Raigad - 410101</span>
-                                <span class="block text-xs text-gold-400 mt-1"><i class="fa-brands fa-instagram mr-1"></i> @suraj_kh_5050</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Column: Interactive Instant WhatsApp Booking Form -->
-                <div class="lg:col-span-7 bg-neutral-950 border border-neutral-800 rounded-3xl p-6 sm:p-10 shadow-2xl">
-                    <div class="flex items-center justify-between border-b border-neutral-800 pb-4 mb-6">
-                        <div>
-                            <h3 class="font-marathi font-extrabold text-xl sm:text-2xl text-white">त्वरित बुकिंग फॉर्म (Quick Booking)</h3>
-                            <p class="text-xs text-neutral-400 mt-0.5">माहिती भरा आणि थेट WhatsApp वर मेसेज पाठवा</p>
-                        </div>
-                        <span class="w-10 h-10 rounded-full bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl">
-                            <i class="fa-brands fa-whatsapp"></i>
-                        </span>
-                    </div>
-
-                    <form id="bookingForm" onsubmit="handleBookingSubmit(event)" class="space-y-5">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                            <!-- Customer Name -->
-                            <div>
-                                <label class="block text-xs font-bold text-neutral-300 mb-2">आपले नाव (Full Name) *</label>
-                                <input type="text" id="custName" required placeholder="उदा. राहुल पाटील" class="w-full px-4 py-3.5 rounded-xl bg-neutral-900 border border-neutral-700 focus:border-gold-400 focus:outline-none text-white text-sm">
-                            </div>
-
-                            <!-- Customer Mobile -->
-                            <div>
-                                <label class="block text-xs font-bold text-neutral-300 mb-2">मोबाईल नंबर (Mobile Number) *</label>
-                                <input type="tel" id="custPhone" required pattern="[0-9]{10}" placeholder="10 अंकी मोबाईल नंबर" class="w-full px-4 py-3.5 rounded-xl bg-neutral-900 border border-neutral-700 focus:border-gold-400 focus:outline-none text-white text-sm">
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                            <!-- Event Type -->
-                            <div>
-                                <label class="block text-xs font-bold text-neutral-300 mb-2">कार्यक्रमाचा प्रकार (Event Type) *</label>
-                                <select id="eventType" required class="w-full px-4 py-3.5 rounded-xl bg-neutral-900 border border-neutral-700 focus:border-gold-400 focus:outline-none text-white text-sm">
-                                    <option value="लग्न समारंभ (Wedding Ceremony)">लग्न समारंभ (Wedding Ceremony)</option>
-                                    <option value="हळदी समारंभ (Haldi Ceremony)">हळदी समारंभ (Haldi Ceremony)</option>
-                                    <option value="क्रिकेट सामने (Cricket Match)">क्रिकेट सामने (Cricket Match)</option>
-                                    <option value="वाढदिवस (Birthday Celebration)">वाढदिवस (Birthday Celebration)</option>
-                                    <option value="इतर सांस्कृतिक / सामाजिक कार्यक्रम">इतर सर्व कार्यक्रम (Other Events)</option>
-                                </select>
-                            </div>
-
-                            <!-- Event Date -->
-                            <div>
-                                <label class="block text-xs font-bold text-neutral-300 mb-2">कार्यक्रमाची तारीख (Event Date) *</label>
-                                <input type="date" id="eventDate" required class="w-full px-4 py-3.5 rounded-xl bg-neutral-900 border border-neutral-700 focus:border-gold-400 focus:outline-none text-white text-sm">
-                            </div>
-                        </div>
-
-                        <!-- Location -->
-                        <div>
-                            <label class="block text-xs font-bold text-neutral-300 mb-2">कार्यक्रमाचे ठिकाण / गाव (Location in Raigad) *</label>
-                            <input type="text" id="eventLocation" required placeholder="उदा. अलिबाग / पेण / पनवेल / रोहा / महाड, रायगड" class="w-full px-4 py-3.5 rounded-xl bg-neutral-900 border border-neutral-700 focus:border-gold-400 focus:outline-none text-white text-sm">
-                        </div>
-
-                        <!-- Selected Package / Notes -->
-                        <div>
-                            <label class="block text-xs font-bold text-neutral-300 mb-2">निवडलेले पॅकेज / इतर माहिती (Selected Setup)</label>
-                            <textarea id="packageNotes" rows="2" placeholder="उदा. Dual Camera + Drone Coverage हवे आहे." class="w-full px-4 py-3 rounded-xl bg-neutral-900 border border-neutral-700 focus:border-gold-400 focus:outline-none text-white text-sm"></textarea>
-                        </div>
-
-                        <!-- Custom Status Alert Box (No browser alert()) -->
-                        <div id="formFeedback" class="hidden p-4 rounded-xl bg-emerald-950/80 border border-emerald-500 text-emerald-200 text-xs font-semibold"></div>
-
-                        <!-- Submit Buttons: WhatsApp + Email Inquiry -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                            <button type="submit" class="w-full py-4 px-5 rounded-2xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-extrabold text-sm sm:text-base shadow-xl shadow-emerald-950/60 flex items-center justify-center gap-2.5 transition transform active:scale-98 cursor-pointer">
-                                <i class="fa-brands fa-whatsapp text-xl"></i>
-                                <span>WhatsApp वर बुकिंग पाठवा</span>
-                            </button>
-
-                            <button type="button" onclick="handleEmailInquiry()" class="w-full py-4 px-5 rounded-2xl bg-gradient-to-r from-gold-400 to-amber-500 hover:from-gold-300 hover:to-amber-400 text-neutral-950 font-extrabold text-sm sm:text-base shadow-xl shadow-black/50 flex items-center justify-center gap-2.5 transition transform active:scale-98 cursor-pointer">
-                                <i class="fa-solid fa-envelope text-lg"></i>
-                                <span>Email वर कोटेशन पाठवा</span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="bg-black border-t border-red-900/50 py-10 text-center">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p class="text-gold-400 font-marathi font-bold text-sm mb-2">॥ श्री गणेशाय नमः ॥</p>
-            <div class="flex items-center justify-center gap-2 mb-3">
-                <span class="font-display italic font-black text-2xl text-white">STAR EVENT</span>
-                <span class="bg-red-600 text-white text-xs font-extrabold px-2 py-0.5 rounded">LIVE</span>
-            </div>
-            <p class="font-marathi text-gold-400 font-semibold text-sm sm:text-base mb-4">
-                ★ तुमचा कार्यक्रम... आमची जबाबदारी... आठवणी राहतील कायमच्या ★
-            </p>
-            <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs text-neutral-300 mb-3">
-                <a href="tel:+919890175727" class="hover:text-gold-400 transition"><i class="fa-solid fa-phone text-gold-400 mr-1"></i> 9890175727</a>
-                <span class="text-neutral-600">•</span>
-                <a href="mailto:starevent01@gmail.com" class="hover:text-gold-400 transition"><i class="fa-solid fa-envelope text-gold-400 mr-1"></i> starevent01@gmail.com</a>
-            </div>
-            <div class="flex flex-wrap items-center justify-center gap-3 text-xs text-neutral-400 mb-6">
-                <span><i class="fa-solid fa-location-dot text-gold-400 mr-1"></i> Mamdapurwadi Neral, Karjat, Raigad - 410101</span>
-                <span class="text-neutral-600">•</span>
-                <span><i class="fa-brands fa-instagram text-gold-400 mr-1"></i> @suraj_kh_5050</span>
-            </div>
-            <p class="text-[11px] text-neutral-600">
-                © <span id="currentYear"></span> STAR EVENT LIVE. All Rights Reserved.
-            </p>
-        </div>
-    </footer>
-
-    <!-- Floating Quick Call & WhatsApp Bar for Mobile -->
-    <div class="fixed bottom-4 right-4 z-50 flex flex-col gap-3 sm:hidden">
-        <a href="https://wa.me/919890175727?text=नमस्कार%20Star%20Event%20Live,%20मला%20बुकिंग%20करायची%20आहे." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="w-13 h-13 p-3.5 rounded-full bg-emerald-500 text-white shadow-2xl flex items-center justify-center text-2xl border-2 border-white">
-            <i class="fa-brands fa-whatsapp"></i>
-        </a>
-        <a href="tel:+919890175727" aria-label="Call Now" class="w-13 h-13 p-3.5 rounded-full bg-red-600 text-white shadow-2xl flex items-center justify-center text-xl border-2 border-gold-400">
-            <i class="fa-solid fa-phone"></i>
-        </a>
+  <!-- Sticky Top Navigation Bar -->
+  <header class="sticky top-0 z-50 bg-studioDark/85 backdrop-blur-lg border-b border-goldBright/20">
+    <!-- Top Auspicious Blessing Strip -->
+    <div class="bg-gradient-to-r from-crimsonDark via-crimsonMain to-crimsonDark py-1.5 px-4 text-center border-b border-goldBright/25">
+      <p class="font-marathi text-goldBright font-bold tracking-wider text-xs sm:text-sm drop-shadow">
+        ॥ श्री गणेशाय नमः ॥
+      </p>
     </div>
 
-    <!-- Interactive JavaScript -->
-    <script>
-        // Set dynamic year & minimum date for booking
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
-            const today = new Date().toISOString().split('T')[0];
-            const dateInput = document.getElementById('eventDate');
-            if (dateInput) dateInput.setAttribute('min', today);
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-3">
+      <!-- Brand Logo Compact -->
+      <a href="#home" class="flex items-center gap-2.5 group">
+        <div class="relative w-10 h-10 rounded-xl bg-gradient-to-br from-goldBright to-goldDeep p-0.5 shadow-lg shadow-goldBright/20 group-hover:scale-105 transition-transform">
+          <div class="w-full h-full bg-crimsonDark rounded-[10px] flex items-center justify-center">
+            <!-- Star + Lens SVG -->
+            <svg class="w-6 h-6 text-goldBright" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="rgba(255,215,0,0.2)"/>
+              <circle cx="12" cy="12" r="3.2" fill="#ff1e1e" stroke="#ffd700" stroke-width="1.5"/>
+            </svg>
+          </div>
+        </div>
+        <div class="leading-none">
+          <span class="font-display font-extrabold text-xl sm:text-2xl tracking-wide text-goldBright">STAR EVENT</span>
+          <span class="ml-1 inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-liveRed text-white font-display font-bold text-xs sm:text-sm tracking-wider animate-pulse">
+            LIVE
+            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Menu Links -->
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-gray-200">
+        <a href="#services" class="hover:text-goldBright transition-colors" data-mr="सेवा (Services)" data-en="Live Services">सेवा (Services)</a>
+        <a href="#platforms" class="hover:text-goldBright transition-colors" data-mr="प्लॅटफॉर्म्स" data-en="Platforms">प्लॅटफॉर्म्स</a>
+        <a href="#features" class="hover:text-goldBright transition-colors" data-mr="वैशिष्ट्ये" data-en="Studio Tech">वैशिष्ट्ये</a>
+        <a href="#booking" class="hover:text-goldBright transition-colors" data-mr="बुकिंग करा" data-en="Book Event">बुकिंग करा</a>
+      </nav>
+
+      <!-- Language Switcher + Quick Call -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <button id="langToggle" onclick="toggleLanguage()" class="px-3 py-1.5 rounded-full text-xs font-bold border border-goldBright/40 bg-white/5 hover:bg-goldBright hover:text-crimsonDark text-goldBright transition-all cursor-pointer" title="Switch Marathi / English">
+          मराठी / EN
+        </button>
+        <a href="tel:9890175727" class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-full bg-gradient-to-r from-goldBright to-goldDeep text-crimsonDark font-extrabold text-xs sm:text-sm shadow-lg shadow-goldBright/25 hover:scale-105 active:scale-95 transition-transform">
+          <svg class="w-4 h-4 animate-bounce" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/>
+          </svg>
+          <span class="hidden sm:inline">9890175727</span>
+          <span class="sm:hidden">Call</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== 1. HERO SECTION ==================== -->
+  <section id="home" class="relative hero-halftone pt-10 pb-20 sm:pt-16 sm:pb-28 overflow-hidden border-b border-goldBright/25">
+    <!-- Floating DSLR Camera Illustration (Left) -->
+    <div class="hidden lg:block absolute left-6 top-20 w-44 animate-float-slow pointer-events-none opacity-90 z-10">
+      <div class="relative p-4 rounded-3xl bg-black/40 border border-goldBright/30 backdrop-blur-md shadow-2xl">
+        <!-- Custom Stylized DSLR Vector -->
+        <svg viewBox="0 0 180 130" class="w-full h-auto drop-shadow-[0_12px_18px_rgba(0,0,0,0.8)]">
+          <rect x="20" y="34" width="140" height="82" rx="16" fill="#1e1e24" stroke="#ffd700" stroke-width="2.5"/>
+          <path d="M58 34 L70 16 L110 16 L122 34 Z" fill="#2a2a32" stroke="#ffd700" stroke-width="2"/>
+          <rect x="32" y="24" width="20" height="10" rx="3" fill="#ff1e1e"/>
+          <circle cx="95" cy="76" r="34" fill="#111115" stroke="#ffd700" stroke-width="3"/>
+          <circle cx="95" cy="76" r="25" fill="#1d2436" stroke="#38bdf8" stroke-width="1.5"/>
+          <circle cx="95" cy="76" r="14" fill="#090d16"/>
+          <circle cx="88" cy="69" r="5" fill="rgba(255,255,255,0.65)"/>
+          <circle cx="144" cy="48" r="5" fill="#ff1e1e"/>
+        </svg>
+        <div class="mt-2 text-center text-[11px] font-bold tracking-wider text-goldBright uppercase">4K DSLR Rig</div>
+      </div>
+    </div>
+
+    <!-- Floating Broadcast Cinema Camcorder (Right) -->
+    <div class="hidden lg:block absolute right-6 top-24 w-48 animate-float-delayed pointer-events-none opacity-90 z-10">
+      <div class="relative p-4 rounded-3xl bg-black/40 border border-liveRed/40 backdrop-blur-md shadow-2xl">
+        <svg viewBox="0 0 200 130" class="w-full h-auto drop-shadow-[0_12px_18px_rgba(0,0,0,0.8)]">
+          <!-- Handle & Mic -->
+          <rect x="65" y="18" width="75" height="12" rx="6" fill="#2c2c35" stroke="#ffd700" stroke-width="1.8"/>
+          <rect x="25" y="14" width="46" height="14" rx="7" fill="#18181f" stroke="#9ca3af" stroke-width="1.5"/>
+          <!-- Main Body -->
+          <rect x="58" y="36" width="95" height="62" rx="12" fill="#191920" stroke="#ffd700" stroke-width="2.2"/>
+          <!-- Matte Box Hood -->
+          <polygon points="18,32 58,42 58,92 18,102" fill="#111116" stroke="#ff1e1e" stroke-width="2"/>
+          <ellipse cx="22" cy="67" rx="6" ry="24" fill="#0ea5e9" fill-opacity="0.35"/>
+          <!-- Viewfinder -->
+          <rect x="153" y="46" width="28" height="22" rx="5" fill="#272730" stroke="#ffd700" stroke-width="1.5"/>
+          <circle cx="136" cy="50" r="5" fill="#ff1e1e"/>
+        </svg>
+        <div class="mt-2 text-center text-[11px] font-bold tracking-wider text-red-400 uppercase flex items-center justify-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-liveRed animate-ping"></span> ON AIR CAM
+        </div>
+      </div>
+    </div>
+
+    <!-- Center Hero Container -->
+    <div class="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 text-center">
+      <!-- Top Studio Pill -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/45 border border-goldBright/40 text-goldBright text-xs sm:text-sm font-semibold mb-6 shadow-lg">
+        <span class="w-2.5 h-2.5 rounded-full bg-liveRed animate-ping"></span>
+        <span data-mr="प्रोफेशनल मल्टि-कॅमेरा लाईव्ह ब्रॉडकास्ट स्टुडिओ" data-en="Professional Multi-Camera Live Broadcast Studio">
+          प्रोफेशनल मल्टि-कॅमेरा लाईव्ह ब्रॉडकास्ट स्टुडिओ
+        </span>
+      </div>
+
+      <!-- Main Logo Display matching Banner -->
+      <div class="flex flex-col md:flex-row items-center justify-center gap-4 sm:gap-6 mb-6">
+        <!-- Star Outline + STAR EVENT with Camera Lens inside 'A' -->
+        <div class="flex items-center justify-center flex-wrap gap-2 sm:gap-3">
+          <!-- Glowing Star SVG -->
+          <svg class="w-14 h-14 sm:w-20 sm:h-20 text-goldBright drop-shadow-[0_0_18px_rgba(255,215,0,0.75)] animate-pulse" viewBox="0 0 64 64" fill="none">
+            <path d="M32 4L39.8 22.4L59.6 24.4L44.6 37.6L49 57L32 46.8L15 57L19.4 37.6L4.4 24.4L24.2 22.4L32 4Z" stroke="#ffd700" stroke-width="4" fill="rgba(255, 215, 0, 0.14)" stroke-linejoin="round"/>
+          </svg>
+
+          <h1 class="font-display font-extrabold text-5xl sm:text-7xl md:text-8xl tracking-tight leading-none uppercase flex items-center">
+            <span class="gold-text-3d">ST</span>
+            <!-- Custom 'A' with embedded Camera Aperture Lens -->
+            <span class="relative inline-flex items-center justify-center mx-0.5">
+              <span class="gold-text-3d">A</span>
+              <span class="absolute top-[44%] w-6 h-6 sm:w-9 sm:h-9 rounded-full bg-gray-950 border-2 border-goldBright shadow-inner flex items-center justify-center overflow-hidden">
+                <span class="w-3.5 h-3.5 sm:w-5 sm:h-5 rounded-full bg-gradient-to-tr from-blue-600 via-emerald-400 to-purple-500 animate-spin-slow flex items-center justify-center">
+                  <span class="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 rounded-full bg-black"></span>
+                </span>
+              </span>
+            </span>
+            <span class="gold-text-3d">R EVENT</span>
+          </h1>
+        </div>
+
+        <!-- Pulsing Red LIVE Badge with Radiating Broadcast Signal Waves -->
+        <div class="relative inline-flex items-center justify-center mt-2 md:mt-0">
+          <!-- Signal Waves Above Badge -->
+          <div class="absolute -top-7 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none">
+            <svg class="w-12 h-7 text-goldBright animate-bounce" viewBox="0 0 60 32" fill="none">
+              <path d="M12 22C22 12 38 12 48 22" stroke="#ffd700" stroke-width="4" stroke-linecap="round"/>
+              <path d="M20 27C26 21 34 21 40 27" stroke="#ffd700" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="30" cy="30" r="3" fill="#ffd700"/>
+            </svg>
+          </div>
+
+          <!-- Expanding Pulse Rings -->
+          <span class="absolute inset-0 rounded-2xl bg-liveRed/60 animate-wave-1 pointer-events-none"></span>
+          <span class="absolute inset-0 rounded-2xl bg-liveRed/40 animate-wave-2 pointer-events-none"></span>
+
+          <!-- Main LIVE Pill -->
+          <div class="relative z-10 flex items-center gap-3 px-6 py-3 sm:px-7 sm:py-3.5 rounded-2xl bg-gradient-to-b from-[#ff2a2a] to-[#b80000] border-2 border-white/80 animate-pulse-glow">
+            <span class="font-display font-extrabold italic text-3xl sm:text-5xl tracking-wider text-white drop-shadow">
+              LIVE
+            </span>
+            <!-- White Play Circle Icon -->
+            <span class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white flex items-center justify-center shadow-md">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6 text-liveRed ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tagline from Banner -->
+      <div class="max-w-3xl mx-auto mb-8">
+        <p class="font-marathi text-xl sm:text-3xl font-extrabold text-white leading-snug drop-shadow-[0_3px_10px_rgba(0,0,0,0.85)]">
+          आपल्या सर्व प्रकारच्या कार्यक्रमांचे
+          <span class="text-goldBright underline decoration-liveRed decoration-4 underline-offset-4">थेट प्रक्षेपण (LIVE)</span>
+          केले जाते.
+        </p>
+        <p id="englishSubTagline" class="mt-2 text-sm sm:text-base text-amber-100/90 font-medium">
+          Crystal-clear HD & 4K Live Streaming for Weddings, Cricket Tournaments, Haldi, Birthdays & Cultural Events.
+        </p>
+      </div>
+
+      <!-- Primary Call & WhatsApp Action Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+        <a href="tel:9890175727" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-goldBright via-yellow-400 to-goldDeep text-crimsonDark font-extrabold text-lg sm:text-xl shadow-[0_10px_30px_rgba(255,215,0,0.4)] hover:scale-105 active:scale-95 transition-all">
+          <span class="w-9 h-9 rounded-full bg-crimsonDark text-goldBright flex items-center justify-center">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/>
+            </svg>
+          </span>
+          <div class="text-left leading-tight">
+            <span class="block text-xs font-bold uppercase tracking-wider opacity-85" data-mr="संपर्क करा (Call Now)" data-en="Call Directly">संपर्क करा (Call Now)</span>
+            <span class="font-display text-2xl tracking-wide">9890175727</span>
+          </div>
+        </a>
+
+        <a href="https://wa.me/919890175727?text=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%BE%E0%A4%B0%20STAR%20EVENT%20LIVE!%20%E0%A4%AE%E0%A4%B2%E0%A4%BE%20%E0%A4%AE%E0%A4%BE%E0%A4%9D%E0%A5%8D%E0%A4%AF%E0%A4%BE%20%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%AF%E0%A4%95%E0%A5%8D%E0%A4%B0%E0%A4%AE%E0%A4%BE%E0%A4%9A%E0%A5%87%20LIVE%20Streaming%20%E0%A4%AC%E0%A5%81%E0%A4%95%20%E0%A4%95%E0%A4%B0%E0%A4%BE%E0%A4%AF%E0%A4%9A%E0%A5%87%20%E0%A4%86%E0%A4%B9%E0%A5%87." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-green-600 text-white font-extrabold text-lg sm:text-xl shadow-[0_10px_30px_rgba(16,185,129,0.35)] hover:scale-105 active:scale-95 transition-all">
+          <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/>
+          </svg>
+          <div class="text-left leading-tight">
+            <span class="block text-xs font-semibold opacity-90" data-mr="त्वरित चौकशी करा" data-en="Instant Inquiry">त्वरित चौकशी करा</span>
+            <span data-mr="WhatsApp बुकिंग" data-en="WhatsApp Booking">WhatsApp बुकिंग</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Live Broadcast Status Bar -->
+      <div class="inline-flex flex-wrap items-center justify-center gap-4 sm:gap-6 px-5 py-2.5 rounded-2xl glass-card text-xs sm:text-sm text-gray-200">
+        <span class="flex items-center gap-1.5 font-semibold text-goldBright">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span> 1080p Full HD / 4K
+        </span>
+        <span class="hidden sm:inline text-white/25">|</span>
+        <span class="flex items-center gap-1.5 font-semibold">
+          🎥 Multi-Camera Setup
+        </span>
+        <span class="hidden sm:inline text-white/25">|</span>
+        <span class="flex items-center gap-1.5 font-semibold text-red-400">
+          📡 Zero-Lag Streaming
+        </span>
+      </div>
+    </div>
+
+    <!-- Torn Paper / Brush Divider at Bottom of Hero (Inspired by Banner) -->
+    <div class="absolute bottom-0 left-0 right-0 overflow-hidden leading-none pointer-events-none">
+      <svg class="relative block w-full h-7 sm:h-11" viewBox="0 0 1200 40" preserveAspectRatio="none">
+        <path d="M0,40 L0,18 Q60,5 120,22 T240,15 T360,25 T480,14 T600,24 T720,16 T840,26 T960,15 T1080,23 T1200,16 L1200,40 Z" fill="#0d0709"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ==================== 2. 5 EVENT LIVE-STREAMING SERVICES ==================== -->
+  <section id="services" class="relative z-10 py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-14 reveal">
+      <span class="inline-block px-4 py-1 rounded-full bg-crimsonMain/40 border border-goldBright/40 text-goldBright text-xs font-bold tracking-widest uppercase mb-3">
+        OUR LIVE STREAMING SERVICES
+      </span>
+      <h2 class="font-marathi text-3xl sm:text-5xl font-black text-white mb-3">
+        सर्व प्रकारच्या कार्यक्रमांचे <span class="text-goldBright">थेट प्रक्षेपण</span>
+      </h2>
+      <p class="text-gray-300 text-sm sm:text-base" data-mr="तुमचा आनंद जगभरातील नातेवाईक आणि मित्रांपर्यंत पोहोचवा — कोणत्याही कार्डवर क्लिक करून थेट बुकिंग करा!" data-en="Share your special moments live with family & friends worldwide — click any event card to book instantly!">
+        तुमचा आनंद जगभरातील नातेवाईक आणि मित्रांपर्यंत पोहोचवा — कोणत्याही कार्डवर क्लिक करून थेट बुकिंग करा!
+      </p>
+    </div>
+
+    <!-- 5 Interactive Service Cards Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+
+      <!-- Card 1: क्रिकेट सामने (Cricket Matches) -->
+      <div onclick="selectEventAndScroll('क्रिकेट सामने (Cricket Match)')" class="service-card reveal group cursor-pointer rounded-3xl overflow-hidden glass-card flex flex-col justify-between">
+        <div>
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=600&q=80" alt="क्रिकेट सामने Live Streaming" onerror="this.src='https://placehold.co/600x400/0f294a/ffd700?text=Cricket+Live'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+            <div class="absolute inset-0 bg-gradient-to-t from-studioDark via-studioDark/30 to-transparent"></div>
+            <span class="absolute top-3 right-3 px-2.5 py-0.5 rounded-full bg-liveRed text-white text-[10px] font-bold tracking-wider flex items-center gap-1 shadow">
+              <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span> LIVE SCORE
+            </span>
+          </div>
+
+          <!-- Floating Pill Badge matching Banner -->
+          <div class="relative -mt-6 px-3 flex justify-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-500 border-2 border-white shadow-lg">
+              <span class="w-6 h-6 rounded-full bg-white text-blue-700 flex items-center justify-center text-sm">🏏</span>
+              <span class="font-marathi font-extrabold text-sm text-white whitespace-nowrap">क्रिकेट सामने</span>
+            </div>
+          </div>
+
+          <div class="p-5 text-center">
+            <h3 class="font-bold text-base text-goldBright mb-1.5">Cricket Tournaments</h3>
+            <p class="text-xs text-gray-300 leading-relaxed" data-mr="लाईव्ह स्कोअरबोर्ड ग्राफिक्स, थर्ड अंपायर रिप्ले आणि मल्टि-अँगल कॅमेरा सेटअपसह संपूर्ण स्पर्धेचे थेट प्रक्षेपण." data-en="Live digital scoreboard overlays, instant replays, and multi-angle boundary camera coverage.">
+              लाईव्ह स्कोअरबोर्ड ग्राफिक्स, रिप्ले आणि मल्टि-अँगल कॅमेरा सेटअपसह संपूर्ण स्पर्धेचे थेट प्रक्षेपण.
+            </p>
+          </div>
+        </div>
+        <div class="px-5 pb-4 text-center">
+          <span class="inline-block text-xs font-bold text-goldBright group-hover:translate-x-1 transition-transform">
+            बुक करा →
+          </span>
+        </div>
+      </div>
+
+      <!-- Card 2: हळदी समारंभ (Haldi Ceremony) -->
+      <div onclick="selectEventAndScroll('हळदी समारंभ (Haldi Ceremony)')" class="service-card reveal group cursor-pointer rounded-3xl overflow-hidden glass-card flex flex-col justify-between" style="transition-delay: 80ms;">
+        <div>
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&q=80" alt="हळदी समारंभ Live Streaming" onerror="this.src='https://placehold.co/600x400/78350f/ffd700?text=Haldi+Ceremony'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+            <div class="absolute inset-0 bg-gradient-to-t from-studioDark via-studioDark/30 to-transparent"></div>
+            <span class="absolute top-3 right-3 px-2.5 py-0.5 rounded-full bg-amber-500 text-black text-[10px] font-extrabold tracking-wider shadow">
+              HD COLORS
+            </span>
+          </div>
+
+          <div class="relative -mt-6 px-3 flex justify-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-pink-600 to-rose-500 border-2 border-white shadow-lg">
+              <span class="w-6 h-6 rounded-full bg-white text-pink-600 flex items-center justify-center text-sm">🌼</span>
+              <span class="font-marathi font-extrabold text-sm text-white whitespace-nowrap">हळदी समारंभ</span>
+            </div>
+          </div>
+
+          <div class="p-5 text-center">
+            <h3 class="font-bold text-base text-goldBright mb-1.5">Haldi Ceremony</h3>
+            <p class="text-xs text-gray-300 leading-relaxed" data-mr="पारंपारिक गाणी, नृत्य आणि आनंदाचे प्रत्येक रंगीत क्षण घरबसल्या सर्व नातेवाईकांना लाईव्ह दाखवा." data-en="Vibrant colors, music, and candid celebrations streamed live to relatives near and far.">
+              पारंपारिक गाणी, नृत्य आणि आनंदाचे प्रत्येक रंगीत क्षण घरबसल्या सर्व नातेवाईकांना लाईव्ह दाखवा.
+            </p>
+          </div>
+        </div>
+        <div class="px-5 pb-4 text-center">
+          <span class="inline-block text-xs font-bold text-goldBright group-hover:translate-x-1 transition-transform">
+            बुक करा →
+          </span>
+        </div>
+      </div>
+
+      <!-- Card 3: वाढदिवस (Birthday Celebrations) -->
+      <div onclick="selectEventAndScroll('वाढदिवस (Birthday Celebration)')" class="service-card reveal group cursor-pointer rounded-3xl overflow-hidden glass-card flex flex-col justify-between" style="transition-delay: 160ms;">
+        <div>
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1558636508-e0db3814bd1d?auto=format&fit=crop&w=600&q=80" alt="वाढदिवस Live Streaming" onerror="this.src='https://placehold.co/600x400/4c1d95/ffd700?text=Birthday+Live'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+            <div class="absolute inset-0 bg-gradient-to-t from-studioDark via-studioDark/30 to-transparent"></div>
+            <span class="absolute top-3 right-3 px-2.5 py-0.5 rounded-full bg-purple-600 text-white text-[10px] font-bold tracking-wider shadow">
+              PARTY LIVE
+            </span>
+          </div>
+
+          <div class="relative -mt-6 px-3 flex justify-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-700 to-indigo-500 border-2 border-white shadow-lg">
+              <span class="w-6 h-6 rounded-full bg-white text-purple-700 flex items-center justify-center text-sm">🎂</span>
+              <span class="font-marathi font-extrabold text-sm text-white whitespace-nowrap">वाढदिवस</span>
+            </div>
+          </div>
+
+          <div class="p-5 text-center">
+            <h3 class="font-bold text-base text-goldBright mb-1.5">Birthday Celebrations</h3>
+            <p class="text-xs text-gray-300 leading-relaxed" data-mr="केक कटिंग, शुभेच्छा आणि खास सरप्राईज मोमेंट्सचे आकर्षक स्क्रीन ग्राफिक्ससह लाईव्ह प्रसारण." data-en="Cake cutting, blessings, and special party highlights broadcast with custom birthday graphics.">
+              केक कटिंग, शुभेच्छा आणि खास सरप्राईज मोमेंट्सचे आकर्षक स्क्रीन ग्राफिक्ससह लाईव्ह प्रसारण.
+            </p>
+          </div>
+        </div>
+        <div class="px-5 pb-4 text-center">
+          <span class="inline-block text-xs font-bold text-goldBright group-hover:translate-x-1 transition-transform">
+            बुक करा →
+          </span>
+        </div>
+      </div>
+
+      <!-- Card 4: लग्न समारंभ (Wedding Ceremonies) -->
+      <div onclick="selectEventAndScroll('लग्न समारंभ (Wedding Ceremony)')" class="service-card reveal group cursor-pointer rounded-3xl overflow-hidden glass-card flex flex-col justify-between" style="transition-delay: 240ms;">
+        <div>
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80" alt="लग्न समारंभ Live Streaming" onerror="this.src='https://placehold.co/600x400/7f1d1d/ffd700?text=Wedding+Live'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+            <div class="absolute inset-0 bg-gradient-to-t from-studioDark via-studioDark/30 to-transparent"></div>
+            <span class="absolute top-3 right-3 px-2.5 py-0.5 rounded-full bg-liveRed text-white text-[10px] font-bold tracking-wider shadow">
+              4K WEDDING
+            </span>
+          </div>
+
+          <div class="relative -mt-6 px-3 flex justify-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-red-700 to-rose-600 border-2 border-white shadow-lg">
+              <span class="w-6 h-6 rounded-full bg-white text-red-700 flex items-center justify-center text-sm">💍</span>
+              <span class="font-marathi font-extrabold text-sm text-white whitespace-nowrap">लग्न समारंभ</span>
+            </div>
+          </div>
+
+          <div class="p-5 text-center">
+            <h3 class="font-bold text-base text-goldBright mb-1.5">Wedding Ceremonies</h3>
+            <p class="text-xs text-gray-300 leading-relaxed" data-mr="मंगलाष्टके, सप्तपदी आणि शाही विवाह सोहळ्याचे देश-विदेशातील आप्तेष्टांसाठी थेट प्रक्षेपण." data-en="Complete sacred rituals, varmala, and reception streamed live for guests across the globe.">
+              मंगलाष्टके, सप्तपदी आणि शाही विवाह सोहळ्याचे देश-विदेशातील आप्तेष्टांसाठी थेट प्रक्षेपण.
+            </p>
+          </div>
+        </div>
+        <div class="px-5 pb-4 text-center">
+          <span class="inline-block text-xs font-bold text-goldBright group-hover:translate-x-1 transition-transform">
+            बुक करा →
+          </span>
+        </div>
+      </div>
+
+      <!-- Card 5: इतर सर्व कार्यक्रम (All Other Events) -->
+      <div onclick="selectEventAndScroll('इतर सर्व कार्यक्रम (Cultural / Religious / Corporate)')" class="service-card reveal group cursor-pointer rounded-3xl overflow-hidden glass-card flex flex-col justify-between" style="transition-delay: 320ms;">
+        <div>
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=600&q=80" alt="इतर सर्व कार्यक्रम Live Streaming" onerror="this.src='https://placehold.co/600x400/14532d/ffd700?text=All+Events+Live'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+            <div class="absolute inset-0 bg-gradient-to-t from-studioDark via-studioDark/30 to-transparent"></div>
+            <span class="absolute top-3 right-3 px-2.5 py-0.5 rounded-full bg-emerald-600 text-white text-[10px] font-bold tracking-wider shadow">
+              ALL EVENTS
+            </span>
+          </div>
+
+          <div class="relative -mt-6 px-3 flex justify-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-emerald-700 to-green-500 border-2 border-white shadow-lg">
+              <span class="w-6 h-6 rounded-full bg-white text-emerald-700 flex items-center justify-center text-sm">🎪</span>
+              <span class="font-marathi font-extrabold text-sm text-white whitespace-nowrap">इतर सर्व कार्यक्रम</span>
+            </div>
+          </div>
+
+          <div class="p-5 text-center">
+            <h3 class="font-bold text-base text-goldBright mb-1.5">Cultural & Social Events</h3>
+            <p class="text-xs text-gray-300 leading-relaxed" data-mr="कीर्तन, गणेशोत्सव, सांस्कृतिक संमेलन, शाळा-कॉलेज इव्हेंट्स आणि कॉर्पोरेट कार्यक्रमांचे थेट प्रक्षेपण." data-en="Religious discourses, Ganeshotsav, cultural programs, school functions, and corporate meets.">
+              कीर्तन, उत्सव, सांस्कृतिक संमेलन, शाळा-कॉलेज इव्हेंट्स आणि सामाजिक कार्यक्रमांचे थेट प्रक्षेपण.
+            </p>
+          </div>
+        </div>
+        <div class="px-5 pb-4 text-center">
+          <span class="inline-block text-xs font-bold text-goldBright group-hover:translate-x-1 transition-transform">
+            बुक करा →
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== 3. STREAMING PLATFORMS SHOWCASE ==================== -->
+  <section id="platforms" class="relative z-10 py-14 bg-gradient-to-b from-studioDark via-crimsonDark/65 to-studioDark border-y border-goldBright/25 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 reveal">
+      <!-- Dark Navy/Crimson Pill Bar matching Banner -->
+      <div class="rounded-3xl bg-[#070a1c] border-2 border-goldBright/40 p-6 sm:p-8 shadow-[0_15px_50px_rgba(0,0,0,0.85)]">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+          <!-- Left: Official Platform Badges -->
+          <div class="flex items-center gap-4">
+            <!-- YouTube Badge -->
+            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#FF0000] flex items-center justify-center shadow-[0_0_25px_rgba(255,0,0,0.6)] hover:scale-110 transition-transform">
+              <svg class="w-8 h-8 text-white fill-current" viewBox="0 0 24 24">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </div>
+
+            <!-- Facebook Badge -->
+            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#1877F2] flex items-center justify-center shadow-[0_0_25px_rgba(24,119,242,0.6)] hover:scale-110 transition-transform">
+              <svg class="w-8 h-8 text-white fill-current" viewBox="0 0 24 24">
+                <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+              </svg>
+            </div>
+
+            <!-- Instagram Badge -->
+            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] flex items-center justify-center shadow-[0_0_25px_rgba(220,39,67,0.6)] hover:scale-110 transition-transform">
+              <svg class="w-8 h-8 text-white fill-current" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Center Announcement Text -->
+          <div class="text-center lg:text-left">
+            <p class="font-marathi text-xl sm:text-3xl font-extrabold text-white tracking-wide">
+              YouTube <span class="text-goldBright">•</span> Facebook <span class="text-goldBright">•</span> Instagram वर
+              <span class="text-goldBright">LIVE Streaming</span> उपलब्ध
+            </p>
+            <p class="text-xs sm:text-sm text-gray-300 mt-1" data-mr="एकाच वेळी तिन्ही सोशल मीडिया प्लॅटफॉर्म्सवर मल्टी-स्ट्रीमिंगची सोय उपलब्ध!" data-en="Simultaneous multi-platform streaming available across YouTube, Facebook & Instagram!">
+              एकाच वेळी तिन्ही सोशल मीडिया प्लॅटफॉर्म्सवर मल्टी-स्ट्रीमिंगची सोय उपलब्ध!
+            </p>
+          </div>
+
+          <!-- Right: Interactive Live Stream Monitor Preview Button -->
+          <div>
+            <button onclick="openPreviewModal()" class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-gradient-to-r from-liveRed to-red-700 text-white font-display font-extrabold tracking-wider text-base sm:text-lg border border-white/60 shadow-[0_0_25px_rgba(255,30,30,0.75)] hover:scale-105 active:scale-95 transition-transform cursor-pointer">
+              <span class="w-6 h-6 rounded-full bg-white text-liveRed flex items-center justify-center text-xs">▶</span>
+              <span>LIVE STREAM DEMO</span>
+              <span class="w-2.5 h-2.5 rounded-full bg-white animate-ping"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Animated Streaming Ticker Marquee -->
+    <div class="mt-8 bg-goldBright text-crimsonDark py-2 font-marathi font-extrabold text-xs sm:text-sm overflow-hidden whitespace-nowrap border-y border-crimsonDark/20">
+      <div class="inline-block animate-marquee">
+        <span class="mx-6">★ YouTube LIVE HD</span>
+        <span class="mx-6">★ Facebook LIVE Broadcast</span>
+        <span class="mx-6">★ Instagram LIVE Coverage</span>
+        <span class="mx-6">★ क्रिकेट सामने लाईव्ह स्कोअरबोर्ड</span>
+        <span class="mx-6">★ शाही लग्न समारंभ थेट प्रक्षेपण</span>
+        <span class="mx-6">★ हळदी व वाढदिवस विशेष कव्हरेज</span>
+        <span class="mx-6">★ संपर्क करा: 9890175727</span>
+        <!-- Duplicate for seamless loop -->
+        <span class="mx-6">★ YouTube LIVE HD</span>
+        <span class="mx-6">★ Facebook LIVE Broadcast</span>
+        <span class="mx-6">★ Instagram LIVE Coverage</span>
+        <span class="mx-6">★ क्रिकेट सामने लाईव्ह स्कोअरबोर्ड</span>
+        <span class="mx-6">★ शाही लग्न समारंभ थेट प्रक्षेपण</span>
+        <span class="mx-6">★ हळदी व वाढदिवस विशेष कव्हरेज</span>
+        <span class="mx-6">★ संपर्क करा: 9890175727</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 4. TECHNICAL HIGHLIGHTS & STUDIO FEATURES ==================== -->
+  <section id="features" class="relative z-10 py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-14 reveal">
+      <span class="inline-block px-4 py-1 rounded-full bg-goldBright/15 border border-goldBright/40 text-goldBright text-xs font-bold tracking-widest uppercase mb-3">
+        BROADCAST EXCELLENCE
+      </span>
+      <h2 class="font-marathi text-3xl sm:text-5xl font-black text-white mb-3">
+        आधुनिक तंत्रज्ञान आणि <span class="text-goldBright">प्रोफेशनल टीम</span>
+      </h2>
+      <p class="text-gray-300 text-sm sm:text-base" data-mr="दर्जेदार कॅमेरा क्वालिटी, क्लिअर ऑडिओ आणि आकर्षक ग्राफिक्ससह तुमचा कार्यक्रम अविस्मरणीय बनवा." data-en="Broadcast-grade cameras, crisp sound engineering, and custom live graphics for a seamless viewing experience.">
+        दर्जेदार कॅमेरा क्वालिटी, क्लिअर ऑडिओ आणि आकर्षक ग्राफिक्ससह तुमचा कार्यक्रम अविस्मरणीय बनवा.
+      </p>
+    </div>
+
+    <!-- 6 Feature Cards Grid (All Banner Technical Highlights) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- 1. हाय क्वालिटी कॅमेरा सेटअप -->
+      <div class="reveal glass-card rounded-3xl p-6 hover:border-goldBright/60 transition-all group">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-goldBright to-goldDeep text-crimsonDark flex items-center justify-center mb-5 shadow-lg group-hover:scale-110 transition-transform">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <h3 class="font-marathi text-xl font-extrabold text-goldBright mb-1">हाय क्वालिटी कॅमेरा सेटअप</h3>
+        <p class="text-xs font-semibold text-amber-200/80 uppercase tracking-wider mb-2">High Quality Camera Setup</p>
+        <p class="text-sm text-gray-300 leading-relaxed">
+          फुल एचडी (1080p) आणि 4K सिनेमॅटिक कॅमेरे, गिम्बल आणि ट्रायपॉड सेटअपमुळे प्रत्येक फ्रेम अत्यंत स्पष्ट व आकर्षक दिसते.
+        </p>
+      </div>
+
+      <!-- 2. प्रोफेशनल टीम द्वारे सेवा -->
+      <div class="reveal glass-card rounded-3xl p-6 hover:border-goldBright/60 transition-all group" style="transition-delay: 80ms;">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-liveRed to-red-800 text-white flex items-center justify-center mb-5 shadow-lg group-hover:scale-110 transition-transform">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+        </div>
+        <h3 class="font-marathi text-xl font-extrabold text-goldBright mb-1">प्रोफेशनल टीम द्वारे सेवा</h3>
+        <p class="text-xs font-semibold text-amber-200/80 uppercase tracking-wider mb-2">Service by Professional Team</p>
+        <p class="text-sm text-gray-300 leading-relaxed">
+          अनुभवी कॅमेरामन, लाईव्ह स्विचर ऑपरेटर आणि साउंड इंजिनिअर्सची टीम तुमच्या संपूर्ण कार्यक्रमाची जबाबदारी समर्थपणे सांभाळते.
+        </p>
+      </div>
+
+      <!-- 3. लाईव्ह प्रक्षेपण -->
+      <div class="reveal glass-card rounded-3xl p-6 hover:border-goldBright/60 transition-all group" style="transition-delay: 160ms;">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-green-700 text-white flex items-center justify-center mb-5 shadow-lg group-hover:scale-110 transition-transform">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/>
+          </svg>
+        </div>
+        <h3 class="font-marathi text-xl font-extrabold text-goldBright mb-1">लाईव्ह प्रक्षेपण</h3>
+        <p class="text-xs font-semibold text-amber-200/80 uppercase tracking-wider mb-2">Uninterrupted Live Broadcast</p>
+        <p class="text-sm text-gray-300 leading-relaxed">
+          हाय-स्पीड इंटरनेट बाँडिंग तंत्रज्ञानामुळे कोणताही बफर किंवा व्यत्यय न येता थेट प्रक्षेपण केले जाते.
+        </p>
+      </div>
+
+      <!-- 4. रेकॉर्डिंग -->
+      <div class="reveal glass-card rounded-3xl p-6 hover:border-goldBright/60 transition-all group">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-700 text-white flex items-center justify-center mb-5 shadow-lg group-hover:scale-110 transition-transform">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9" />
+            <circle cx="12" cy="12" r="4" fill="currentColor" />
+          </svg>
+        </div>
+        <h3 class="font-marathi text-xl font-extrabold text-goldBright mb-1">रेकॉर्डिंग</h3>
+        <p class="text-xs font-semibold text-amber-200/80 uppercase tracking-wider mb-2">Full HD / 4K Master Recording</p>
+        <p class="text-sm text-gray-300 leading-relaxed">
+          लाईव्ह स्ट्रीमिंगसोबतच संपूर्ण कार्यक्रमाचे हाय-बिटरेट डिजिटल रेकॉर्डिंग सुरक्षित ठेवले जाते, जेणेकरून आठवणी कायम जपता येतील.
+        </p>
+      </div>
+
+      <!-- 5. एडिटिंग -->
+      <div class="reveal glass-card rounded-3xl p-6 hover:border-goldBright/60 transition-all group" style="transition-delay: 80ms;">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-fuchsia-700 text-white flex items-center justify-center mb-5 shadow-lg group-hover:scale-110 transition-transform">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z"/>
+          </svg>
+        </div>
+        <h3 class="font-marathi text-xl font-extrabold text-goldBright mb-1">एडिटिंग</h3>
+        <p class="text-xs font-semibold text-amber-200/80 uppercase tracking-wider mb-2">Professional Video Editing</p>
+        <p class="text-sm text-gray-300 leading-relaxed">
+          कार्यक्रमानंतर आकर्षक हायलाइट्स व्हिडिओ, कलर ग्रेडिंग आणि प्रोफेशनल एडिटिंग करून दिले जाते.
+        </p>
+      </div>
+
+      <!-- 6. स्क्रीन ग्राफिक्स -->
+      <div class="reveal glass-card rounded-3xl p-6 hover:border-goldBright/60 transition-all group" style="transition-delay: 160ms;">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-700 text-white flex items-center justify-center mb-5 shadow-lg group-hover:scale-110 transition-transform">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <h3 class="font-marathi text-xl font-extrabold text-goldBright mb-1">स्क्रीन ग्राफिक्स</h3>
+        <p class="text-xs font-semibold text-amber-200/80 uppercase tracking-wider mb-2">Custom Live Screen Graphics</p>
+        <p class="text-sm text-gray-300 leading-relaxed">
+          वधू-वरांची नावे, क्रिकेट लाईव्ह स्कोअरकार्ड, निमंत्रक नावे आणि कार्यक्रमाचे बॅनर लाईव्ह स्क्रीनवर आकर्षक अ‍ॅनिमेशनसह दाखवले जातात.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 5. CONTACT & INSTANT BOOKING SECTION ==================== -->
+  <section id="booking" class="relative z-10 py-16 sm:py-24 bg-gradient-to-t from-crimsonDark/80 via-studioDark to-studioDark border-t border-goldBright/25">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+
+        <!-- Left Column: Direct Contact Card matching Banner Red Call Box -->
+        <div class="lg:col-span-5 reveal space-y-6">
+          <span class="inline-block px-4 py-1 rounded-full bg-liveRed/20 border border-liveRed text-red-300 text-xs font-bold tracking-widest uppercase">
+            24/7 BOOKING DESK
+          </span>
+          <h2 class="font-marathi text-3xl sm:text-5xl font-black text-white leading-tight">
+            आजच आपल्या कार्यक्रमाची <span class="text-goldBright">तारीख बुक करा!</span>
+          </h2>
+          <p class="text-gray-300 text-sm sm:text-base leading-relaxed" data-mr="लग्न, हळदी, वाढदिवस किंवा क्रिकेट स्पर्धा — सर्वोत्तम लाईव्ह स्ट्रीमिंग अनुभवासाठी थेट कॉल किंवा व्हाट्सअ‍ॅप करा." data-en="Weddings, Haldi, Birthdays, or Cricket Tournaments — call or WhatsApp us directly for dates and package details.">
+            लग्न, हळदी, वाढदिवस किंवा क्रिकेट स्पर्धा — सर्वोत्तम लाईव्ह स्ट्रीमिंग अनुभवासाठी थेट कॉल किंवा व्हाट्सअ‍ॅप करा.
+          </p>
+
+          <!-- Prominent Red Call Box matching the Banner -->
+          <div class="rounded-3xl bg-gradient-to-r from-[#b80000] via-[#d90000] to-[#990000] p-6 border-2 border-goldBright shadow-[0_15px_40px_rgba(217,0,0,0.45)]">
+            <div class="flex items-center gap-4">
+              <a href="tel:9890175727" class="w-16 h-16 rounded-full bg-white text-crimsonDark flex items-center justify-center shrink-0 shadow-lg hover:scale-110 transition-transform">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/>
+                </svg>
+              </a>
+              <div>
+                <p class="font-marathi text-white font-bold text-base sm:text-lg">संपर्क करा</p>
+                <a href="tel:9890175727" class="font-display font-extrabold text-3xl sm:text-4xl text-goldBright tracking-wider drop-shadow hover:underline">
+                  9890175727
+                </a>
+                <button onclick="copyPhoneNumber()" class="mt-1.5 inline-flex items-center gap-1.5 text-xs font-semibold text-white/90 bg-black/30 hover:bg-black/50 px-3 py-1 rounded-full transition-colors cursor-pointer">
+                  <span>📋 नंबर कॉपी करा</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Toast notification for Copy -->
+          <div id="copyToast" class="hidden px-4 py-2.5 rounded-xl bg-emerald-600/90 text-white text-xs font-bold text-center shadow-lg">
+            ✓ मोबाईल नंबर 9890175727 कॉपी केला आहे!
+          </div>
+        </div>
+
+        <!-- Right Column: Interactive Quick Booking Form -->
+        <div class="lg:col-span-7 reveal">
+          <div class="glass-card rounded-3xl p-6 sm:p-8 border border-goldBright/35 shadow-2xl">
+            <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+              <div>
+                <h3 class="font-marathi text-2xl font-extrabold text-goldBright">त्वरित बुकिंग फॉर्म (Quick Booking)</h3>
+                <p class="text-xs text-gray-300 mt-0.5">माहिती भरा आणि थेट WhatsApp वर बुकिंग संदेश पाठवा</p>
+              </div>
+              <span class="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-bold">
+                Instant Reply
+              </span>
+            </div>
+
+            <form id="bookingForm" onsubmit="handleBookingSubmit(event)" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Name -->
+                <div>
+                  <label class="block text-xs font-bold text-amber-200 mb-1.5" for="clientName">तुमचे पूर्ण नाव (Your Name) *</label>
+                  <input id="clientName" type="text" required placeholder="उदा. राहुल पाटील" class="w-full px-4 py-3 rounded-xl bg-black/45 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-goldBright transition-colors" />
+                </div>
+
+                <!-- Phone -->
+                <div>
+                  <label class="block text-xs font-bold text-amber-200 mb-1.5" for="clientPhone">मोबाईल नंबर (Mobile Number) *</label>
+                  <input id="clientPhone" type="tel" required placeholder="उदा. 98XXXXXXXX" class="w-full px-4 py-3 rounded-xl bg-black/45 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-goldBright transition-colors" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Event Type -->
+                <div>
+                  <label class="block text-xs font-bold text-amber-200 mb-1.5" for="eventType">कार्यक्रमाचा प्रकार (Event Type) *</label>
+                  <select id="eventType" class="w-full px-4 py-3 rounded-xl bg-[#180d10] border border-white/20 text-white focus:outline-none focus:border-goldBright transition-colors">
+                    <option value="लग्न समारंभ (Wedding Ceremony)">💍 लग्न समारंभ (Wedding Ceremony)</option>
+                    <option value="हळदी समारंभ (Haldi Ceremony)">🌼 हळदी समारंभ (Haldi Ceremony)</option>
+                    <option value="क्रिकेट सामने (Cricket Match)">🏏 क्रिकेट सामने (Cricket Match)</option>
+                    <option value="वाढदिवस (Birthday Celebration)">🎂 वाढदिवस (Birthday Celebration)</option>
+                    <option value="इतर सर्व कार्यक्रम (Cultural / Religious / Corporate)">🎪 इतर सर्व कार्यक्रम (Other Event)</option>
+                  </select>
+                </div>
+
+                <!-- Event Date -->
+                <div>
+                  <label class="block text-xs font-bold text-amber-200 mb-1.5" for="eventDate">कार्यक्रमाची तारीख (Event Date) *</label>
+                  <input id="eventDate" type="date" required class="w-full px-4 py-3 rounded-xl bg-black/45 border border-white/20 text-white focus:outline-none focus:border-goldBright transition-colors" />
+                </div>
+              </div>
+
+              <!-- Location & Platform -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-amber-200 mb-1.5" for="eventCity">ठिकाण / गाव / शहर (Venue / City)</label>
+                  <input id="eventCity" type="text" placeholder="उदा. पुणे / नाशिक / अहमदनगर" class="w-full px-4 py-3 rounded-xl bg-black/45 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-goldBright transition-colors" />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-amber-200 mb-1.5" for="streamPlatform">Streaming प्लॅटफॉर्म निवडा</label>
+                  <select id="streamPlatform" class="w-full px-4 py-3 rounded-xl bg-[#180d10] border border-white/20 text-white focus:outline-none focus:border-goldBright transition-colors">
+                    <option value="YouTube + Facebook + Instagram (All)">All (YouTube + Facebook + Instagram)</option>
+                    <option value="YouTube LIVE">YouTube LIVE</option>
+                    <option value="Facebook LIVE">Facebook LIVE</option>
+                    <option value="Instagram LIVE">Instagram LIVE</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Submit Buttons -->
+              <div class="pt-2 flex flex-col sm:flex-row gap-3">
+                <button type="submit" class="flex-1 inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-white font-extrabold text-base shadow-lg shadow-emerald-600/30 transition-all cursor-pointer">
+                  <span>WhatsApp वर बुकिंग पाठवा</span>
+                  <span>🚀</span>
+                </button>
+                <button type="button" onclick="previewBookingSummary()" class="px-5 py-4 rounded-xl bg-white/10 hover:bg-white/20 border border-goldBright/40 text-goldBright font-bold text-sm transition-colors cursor-pointer">
+                  मेसेज प्रीव्ह्यू पहा
+                </button>
+              </div>
+            </form>
+
+            <!-- Instant Confirmation Preview Box -->
+            <div id="bookingPreviewBox" class="hidden mt-5 p-4 rounded-2xl bg-black/60 border border-goldBright/50 text-sm">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-bold text-goldBright">✅ बुकिंग तपशील तयार आहे:</span>
+                <button onclick="document.getElementById('bookingPreviewBox').classList.add('hidden')" class="text-xs text-gray-400 hover:text-white cursor-pointer">बंद करा ✕</button>
+              </div>
+              <pre id="bookingMessageText" class="whitespace-pre-wrap font-sans text-xs text-gray-200 bg-white/5 p-3 rounded-xl mb-3"></pre>
+              <a id="directWaLink" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-500">
+                WhatsApp उघडा आणि पाठवा →
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER WITH MOTTO ==================== -->
+  <footer class="relative z-10 bg-[#070a1c] border-t-2 border-goldBright">
+    <!-- Banner Bottom Navy Strip Motto -->
+    <div class="bg-gradient-to-r from-[#070a1c] via-[#101842] to-[#070a1c] py-4 px-4 text-center border-b border-white/10">
+      <p class="font-marathi text-base sm:text-2xl font-extrabold text-white tracking-wide">
+        <span class="text-goldBright">★</span>
+        तुमचा कार्यक्रम... आमची जबाबदारी... आठवणी राहतील कायमच्या
+        <span class="text-goldBright">★</span>
+      </p>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-gray-400">
+      <div class="flex items-center gap-2">
+        <span class="font-display font-extrabold text-lg text-goldBright">STAR EVENT LIVE</span>
+        <span>• प्रोफेशनल लाईव्ह स्ट्रीमिंग सर्व्हिसेस</span>
+      </div>
+      <div>
+        संपर्क: <a href="tel:9890175727" class="text-goldBright font-bold hover:underline">9890175727</a> | YouTube • Facebook • Instagram
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== LIVE STREAM DEMO MODAL ==================== -->
+  <div id="liveDemoModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-md p-4">
+    <div class="relative w-full max-w-3xl rounded-3xl bg-studioDark border-2 border-goldBright overflow-hidden shadow-2xl">
+      <!-- Top Studio Header -->
+      <div class="flex items-center justify-between px-5 py-3 bg-crimsonDark border-b border-goldBright/30">
+        <div class="flex items-center gap-2.5">
+          <span class="px-2.5 py-0.5 rounded bg-liveRed text-white font-display font-bold text-xs animate-pulse">● LIVE ON AIR</span>
+          <span class="font-display font-bold text-goldBright text-sm sm:text-base">STAR EVENT LIVE — BROADCAST MONITOR</span>
+        </div>
+        <button onclick="closePreviewModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-liveRed text-white flex items-center justify-center font-bold cursor-pointer">✕</button>
+      </div>
+
+      <!-- Simulated Broadcast Screen -->
+      <div class="relative aspect-video bg-black overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80" alt="Live Broadcast Preview" class="w-full h-full object-cover opacity-80 scale-105 animate-pulse" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/50"></div>
+
+        <!-- Top Left Channel Watermark -->
+        <div class="absolute top-4 left-4 flex items-center gap-2 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-xl border border-goldBright/40">
+          <span class="w-2.5 h-2.5 rounded-full bg-liveRed animate-ping"></span>
+          <span class="font-display font-extrabold text-goldBright text-xs sm:text-sm">STAR EVENT LIVE</span>
+          <span class="text-[11px] text-gray-300">| 1080p 60FPS</span>
+        </div>
+
+        <!-- Top Right Viewer Counter -->
+        <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/20 text-xs font-bold text-white flex items-center gap-1.5">
+          <span>👁️</span> <span id="liveViewerCount">1,428</span> Watching Live
+        </div>
+
+        <!-- Bottom Custom Screen Graphics Lower-Third -->
+        <div class="absolute bottom-4 left-4 right-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 bg-gradient-to-r from-crimsonMain/95 via-crimsonDark/95 to-black/90 border-l-4 border-goldBright px-4 py-3 rounded-r-2xl shadow-xl">
+          <div>
+            <p class="text-[11px] font-bold text-goldBright uppercase tracking-wider">CUSTOM SCREEN GRAPHICS OVERLAY</p>
+            <p class="font-marathi font-extrabold text-white text-sm sm:text-lg">शाही विवाह सोहळा व सर्व कार्यक्रमांचे थेट प्रक्षेपण</p>
+          </div>
+          <a href="tel:9890175727" class="px-4 py-2 rounded-xl bg-goldBright text-crimsonDark font-extrabold text-xs whitespace-nowrap">
+            📞 9890175727
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT INTERACTIVITY & ANIMATIONS ==================== -->
+  <script>
+    // 1. Scroll Reveal Intersection Observer
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
         });
+      },
+      { threshold: 0.12 }
+    );
+    revealElements.forEach((el) => revealObserver.observe(el));
 
-        // Interactive Rate Calculator Logic
-        function updateCalculator() {
-            const checkboxes = document.querySelectorAll('.equip-checkbox:checked');
-            let total = 0;
-            let selectedNames = [];
+    // 2. Subtle 3D Hover Tilt on Service Cards
+    document.querySelectorAll('.service-card').forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -6;
+        const rotateY = ((x - centerX) / centerX) * 6;
+        card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+      });
+    });
 
-            checkboxes.forEach(cb => {
-                const price = parseInt(cb.getAttribute('data-price'), 10) || 0;
-                const name = cb.getAttribute('data-name');
-                total += price;
-                selectedNames.push(`${name} (₹${price.toLocaleString('en-IN')})`);
-            });
+    // 3. Language Toggle (Marathi Primary / English Friendly)
+    let currentLang = 'mr';
+    function toggleLanguage() {
+      currentLang = currentLang === 'mr' ? 'en' : 'mr';
+      document.querySelectorAll('[data-mr][data-en]').forEach((el) => {
+        el.textContent = el.getAttribute(`data-${currentLang}`);
+      });
+      const toggleBtn = document.getElementById('langToggle');
+      toggleBtn.textContent = currentLang === 'mr' ? 'मराठी / EN' : 'EN / मराठी';
+    }
 
-            const summaryEl = document.getElementById('selectedSummaryText');
-            const totalEl = document.getElementById('totalEstimateAmount');
-            const notesEl = document.getElementById('packageNotes');
-
-            totalEl.textContent = `₹${total.toLocaleString('en-IN')}`;
-
-            if (selectedNames.length > 0) {
-                summaryEl.textContent = selectedNames.join(' + ');
-                notesEl.value = `निवडलेला सेटअप: ${selectedNames.join(', ')} | अंदाजित एकूण: ₹${total.toLocaleString('en-IN')}`;
-            } else {
-                summaryEl.textContent = 'अद्याप कोणतेही इक्विपमेंट निवडलेले नाही. वरील कार्ड्सवर क्लिक करा.';
-                notesEl.value = '';
-            }
+    // 4. Select Event from Card and Scroll to Booking Form
+    function selectEventAndScroll(eventValue) {
+      const select = document.getElementById('eventType');
+      for (let i = 0; i < select.options.length; i++) {
+        if (select.options[i].value === eventValue) {
+          select.selectedIndex = i;
+          break;
         }
+      }
+      document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+      select.classList.add('ring-2', 'ring-goldBright');
+      setTimeout(() => select.classList.remove('ring-2', 'ring-goldBright'), 1500);
+    }
 
-        // Apply Preset Event Package & Scroll to Booking
-        function applyPresetPackage(eventName, equipmentList) {
-            // Select event type in dropdown
-            const eventSelect = document.getElementById('eventType');
-            for (let i = 0; i < eventSelect.options.length; i++) {
-                if (eventSelect.options[i].value === eventName) {
-                    eventSelect.selectedIndex = i;
-                    break;
-                }
-            }
+    // 5. Build WhatsApp Booking Message
+    function buildBookingMessage() {
+      const name = document.getElementById('clientName').value.trim() || 'ग्राहक';
+      const phone = document.getElementById('clientPhone').value.trim() || 'Not provided';
+      const eventType = document.getElementById('eventType').value;
+      const eventDate = document.getElementById('eventDate').value || 'तारीख निश्चित करायची आहे';
+      const city = document.getElementById('eventCity').value.trim() || 'ठिकाण सांगितले नाही';
+      const platform = document.getElementById('streamPlatform').value;
 
-            // Check matching equipment checkboxes
-            const checkboxes = document.querySelectorAll('.equip-checkbox');
-            checkboxes.forEach(cb => {
-                const name = cb.getAttribute('data-name');
-                cb.checked = equipmentList.includes(name);
-            });
+      return `॥ श्री गणेशाय नमः ॥
+*STAR EVENT LIVE - नवीन बुकिंग चौकशी*
+---------------------------
+👤 नाव: ${name}
+📞 मोबाईल: ${phone}
+🎉 कार्यक्रम: ${eventType}
+📅 तारीख: ${eventDate}
+📍 ठिकाण: ${city}
+📡 प्लॅटफॉर्म: ${platform}
+---------------------------
+कृपया LIVE Streaming पॅकेज आणि उपलब्धतेबद्दल माहिती द्यावी.`;
+    }
 
-            updateCalculator();
-            document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+    function previewBookingSummary() {
+      const msg = buildBookingMessage();
+      const box = document.getElementById('bookingPreviewBox');
+      const textEl = document.getElementById('bookingMessageText');
+      const waLink = document.getElementById('directWaLink');
+
+      textEl.textContent = msg;
+      waLink.href = `https://wa.me/919890175727?text=${encodeURIComponent(msg)}`;
+      box.classList.remove('hidden');
+    }
+
+    function handleBookingSubmit(e) {
+      e.preventDefault();
+      const msg = buildBookingMessage();
+      previewBookingSummary();
+      window.open(`https://wa.me/919890175727?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
+    }
+
+    // 6. Copy Phone Number using execCommand fallback
+    function copyPhoneNumber() {
+      const tempInput = document.createElement('input');
+      tempInput.value = '9890175727';
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+
+      const toast = document.getElementById('copyToast');
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 3000);
+    }
+
+    // 7. Live Demo Modal Controls & Simulated Viewer Count
+    let viewerInterval = null;
+    function openPreviewModal() {
+      const modal = document.getElementById('liveDemoModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      let count = 1428;
+      viewerInterval = setInterval(() => {
+        count += Math.floor(Math.random() * 7) - 2;
+        document.getElementById('liveViewerCount').textContent = count.toLocaleString();
+      }, 1800);
+    }
+
+    function closePreviewModal() {
+      const modal = document.getElementById('liveDemoModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      if (viewerInterval) clearInterval(viewerInterval);
+    }
+
+    // 8. Ambient Studio Gold & Red Bokeh Particle Animation
+    window.addEventListener('load', () => {
+      const canvas = document.getElementById('particleCanvas');
+      const ctx = canvas.getContext('2d');
+      let width = (canvas.width = window.innerWidth);
+      let height = (canvas.height = window.innerHeight);
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const particles = Array.from({ length: 34 }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        r: Math.random() * 2.6 + 0.8,
+        dx: (Math.random() - 0.5) * 0.45,
+        dy: -Math.random() * 0.55 - 0.15,
+        color: Math.random() > 0.35 ? 'rgba(255, 215, 0, 0.45)' : 'rgba(255, 45, 45, 0.45)',
+      }));
+
+      function animateParticles() {
+        ctx.clearRect(0, 0, width, height);
+        for (const p of particles) {
+          p.x += p.dx;
+          p.y += p.dy;
+          if (p.y < -10) {
+            p.y = height + 10;
+            p.x = Math.random() * width;
+          }
+          if (p.x < -10) p.x = width + 10;
+          if (p.x > width + 10) p.x = -10;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.fill();
         }
+        requestAnimationFrame(animateParticles);
+      }
 
-        // Select Event directly from Event Cards
-        function selectEventForBooking(eventName) {
-            const eventSelect = document.getElementById('eventType');
-            for (let i = 0; i < eventSelect.options.length; i++) {
-                if (eventSelect.options[i].value === eventName) {
-                    eventSelect.selectedIndex = i;
-                    break;
-                }
-            }
-            document.getElementById('packages').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Handle Booking Form Submission -> Generate Pre-filled WhatsApp Message
-        function handleBookingSubmit(e) {
-            e.preventDefault();
-
-            const name = document.getElementById('custName').value.trim();
-            const phone = document.getElementById('custPhone').value.trim();
-            const eventType = document.getElementById('eventType').value;
-            const eventDate = document.getElementById('eventDate').value;
-            const location = document.getElementById('eventLocation').value.trim();
-            const notes = document.getElementById('packageNotes').value.trim();
-
-            const message = 
-`॥ श्री गणेशाय नमः ॥
-*STAR EVENT LIVE - नवीन बुकिंग चौकशी* 🎥🔴
-
-👤 *नाव:* ${name}
-📞 *मोबाईल:* ${phone}
-🎉 *कार्यक्रम:* ${eventType}
-📅 *तारीख:* ${eventDate}
-📍 *ठिकाण:* ${location}
-📦 *तपशील:* ${notes || 'सामान्य चौकशी (Standard Inquiry)'}
-
-कृपया उपलब्धता आणि दराबाबत माहिती द्यावी.`;
-
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/919890175727?text=${encodedMessage}`;
-
-            const feedback = document.getElementById('formFeedback');
-            feedback.classList.remove('hidden');
-            feedback.innerHTML = `<i class="fa-solid fa-circle-check mr-1.5"></i> तुमची माहिती तयार आहे! WhatsApp उघडत आहे... जर उघडले नाही तर <a href="${whatsappUrl}" target="_blank" class="underline text-gold-400 font-bold">येथे क्लिक करा</a>.`;
-
-            window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-        }
-
-        // Handle Email Inquiry -> Open pre-filled email to starevent01@gmail.com
-        function handleEmailInquiry() {
-            const form = document.getElementById('bookingForm');
-            if (!form.checkValidity()) {
-                form.reportValidity();
-                return;
-            }
-
-            const name = document.getElementById('custName').value.trim();
-            const phone = document.getElementById('custPhone').value.trim();
-            const eventType = document.getElementById('eventType').value;
-            const eventDate = document.getElementById('eventDate').value;
-            const location = document.getElementById('eventLocation').value.trim();
-            const notes = document.getElementById('packageNotes').value.trim();
-
-            const subject = encodeURIComponent(`STAR EVENT LIVE Booking Inquiry - ${eventType} (${eventDate})`);
-            const body = encodeURIComponent(
-`॥ श्री गणेशाय नमः ॥
-STAR EVENT LIVE - नवीन बुकिंग चौकशी (Booking Inquiry)
-
-नाव (Name): ${name}
-मोबाईल (Mobile): ${phone}
-कार्यक्रम (Event Type): ${eventType}
-तारीख (Date): ${eventDate}
-ठिकाण (Location): ${location}
-तपशील (Package / Notes): ${notes || 'Standard Inquiry'}
-
-कृपया उपलब्धता आणि दराबाबत माहिती द्यावी.`
-            );
-
-            const mailtoUrl = `mailto:starevent01@gmail.com?subject=${subject}&body=${body}`;
-
-            const feedback = document.getElementById('formFeedback');
-            feedback.classList.remove('hidden');
-            feedback.innerHTML = `<i class="fa-solid fa-envelope-circle-check mr-1.5"></i> तुमचे ईमेल ॲप उघडत आहे (To: <b>starevent01@gmail.com</b>)... न उघडल्यास <a href="${mailtoUrl}" class="underline text-gold-400 font-bold">येथे क्लिक करा</a>.`;
-
-            window.location.href = mailtoUrl;
-        }
-
-        // One-Click Copy Email Helper using execCommand fallback for iframe compatibility
-        function copyEmailAddress(email, btnEl) {
-            const tempInput = document.createElement('input');
-            tempInput.value = email;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempInput);
-
-            const originalHtml = btnEl.innerHTML;
-            btnEl.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
-            btnEl.classList.add('bg-emerald-600', 'text-white');
-            setTimeout(() => {
-                btnEl.innerHTML = originalHtml;
-                btnEl.classList.remove('bg-emerald-600', 'text-white');
-            }, 2000);
-        }
-
-        // Bilingual Language Toggle Helper (Marathi / English emphasis)
-        let isEnglishMode = false;
-        function toggleLanguage() {
-            isEnglishMode = !isEnglishMode;
-            const heroSub = document.querySelector('[data-i18n="hero_sub"]');
-            const eventsDesc = document.querySelector('[data-i18n="events_desc"]');
-            const langLabel = document.getElementById('langLabel');
-
-            if (isEnglishMode) {
-                langLabel.textContent = 'मराठी';
-                heroSub.textContent = 'Professional Multi-Camera Live Streaming on YouTube, Facebook & Instagram across Raigad & Maharashtra.';
-                eventsDesc.textContent = 'From local Cricket Tournaments to Royal Weddings, Haldi, and Birthdays — stream every special moment live worldwide.';
-            } else {
-                langLabel.textContent = 'EN / मराठी';
-                heroSub.textContent = 'आपल्या सर्व शुभ व क्रीडा कार्यक्रमांचे YouTube, Facebook आणि Instagram वर उच्च दर्जाचे थेट प्रक्षेपण.';
-                eventsDesc.textContent = 'क्रिकेटच्या मैदानापासून ते लग्न व हळदीच्या शाही सोहळ्यांपर्यंत — प्रत्येक क्षण जगाच्या कानाकोपऱ्यात पोहोचवा.';
-            }
-        }
-    </script>
+      animateParticles();
+    });
+  </script>
 </body>
 </html>
