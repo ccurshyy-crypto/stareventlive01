@@ -178,6 +178,61 @@
             animation: floatBanner 5s ease-in-out infinite;
         }
 
+        /* Animated Ken Burns Full-Screen & Hero Background Slideshow */
+        @keyframes kenBurnsPanZoom {
+            0% {
+                transform: scale(1.02) translate3d(0%, 0%, 0);
+            }
+            50% {
+                transform: scale(1.14) translate3d(-1.8%, -1.2%, 0);
+            }
+            100% {
+                transform: scale(1.06) translate3d(1.5%, -0.8%, 0);
+            }
+        }
+        @keyframes ambientLightSweep {
+            0%, 100% {
+                opacity: 0.35;
+                transform: translateX(-8%) rotate(-6deg) scale(1);
+            }
+            50% {
+                opacity: 0.65;
+                transform: translateX(8%) rotate(6deg) scale(1.08);
+            }
+        }
+        .global-bg-slide {
+            position: absolute;
+            inset: -4%;
+            background-size: cover;
+            background-position: center center;
+            opacity: 0;
+            transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: kenBurnsPanZoom 24s ease-in-out infinite alternate;
+            will-change: transform, opacity;
+            filter: saturate(1.18) contrast(1.08);
+        }
+        .global-bg-slide.active {
+            opacity: 0.32;
+        }
+        .hero-bg-slide {
+            position: absolute;
+            inset: -4%;
+            background-size: cover;
+            background-position: center center;
+            opacity: 0;
+            transition: opacity 1.4s ease-in-out;
+            animation: kenBurnsPanZoom 20s ease-in-out infinite alternate;
+            will-change: transform, opacity;
+            filter: saturate(1.22) contrast(1.06);
+        }
+        .hero-bg-slide.active {
+            opacity: 0.48;
+        }
+        .ambient-light-beam {
+            animation: ambientLightSweep 14s ease-in-out infinite;
+            will-change: transform, opacity;
+        }
+
         .reveal-on-scroll {
             opacity: 0;
             transform: translateY(24px);
@@ -190,6 +245,7 @@
 
         /* Standalone OBS / vMix Browser Source Mode (?overlay=1) */
         body.obs-mode #main-app-shell,
+        body.obs-mode #global-animated-bg-stage,
         body.obs-mode #particles-canvas {
             display: none !important;
         }
@@ -207,8 +263,18 @@
 </head>
 <body class="antialiased selection:bg-brandGold selection:text-black relative">
 
+    <!-- Full-Screen Animated Sports & Events Ken Burns Background Stage -->
+    <div id="global-animated-bg-stage" class="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#070606]">
+        <div id="global-bg-slides-container" class="absolute inset-0"></div>
+        <!-- Animated Crimson & Gold Stadium Light Beams -->
+        <div class="ambient-light-beam absolute -top-1/3 left-1/4 w-[65vw] h-[65vw] rounded-full bg-[radial-gradient(circle,rgba(220,38,38,0.28)_0%,transparent_68%)] blur-3xl"></div>
+        <div class="ambient-light-beam absolute -bottom-1/4 right-1/6 w-[55vw] h-[55vw] rounded-full bg-[radial-gradient(circle,rgba(255,215,0,0.18)_0%,transparent_68%)] blur-3xl" style="animation-delay: -6s;"></div>
+        <!-- High-Contrast Dark Broadcast Scrim for Crisp Text Readability -->
+        <div class="absolute inset-0 bg-gradient-to-b from-[#090404]/80 via-[#070606]/78 to-[#070606]/92"></div>
+    </div>
+
     <!-- Moving Gold & Crimson Particles Background -->
-    <canvas id="particles-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-75"></canvas>
+    <canvas id="particles-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-85"></canvas>
 
     <!-- Pure OBS / vMix 1920x1080 Standalone Browser Source Root -->
     <div id="obs-browser-source-root" class="hidden"></div>
@@ -309,50 +375,63 @@
 
             <!-- [HOME SECTION 3] HERO BANNER -->
             <section class="relative pt-10 pb-16 px-4 sm:px-6 overflow-hidden border-b border-brandGold/25">
-                <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#750606_0%,#1c0303_48%,#070606_100%)] -z-10"></div>
+                <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(117,6,6,0.65)_0%,rgba(28,3,3,0.55)_48%,rgba(7,6,6,0.85)_100%)] -z-10"></div>
 
                 <div class="max-w-7xl mx-auto">
                     <div class="animate-float-banner rounded-3xl p-[2px] bg-gradient-to-r from-brandGold via-brandRed to-brandGold shadow-[0_20px_65px_rgba(220,38,38,0.45)]">
-                        <div class="rounded-[22px] bg-gradient-to-br from-[#4f0404] via-[#170404] to-[#090707] p-6 sm:p-10 lg:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                            
-                            <!-- Left Main Heading & CTAs -->
-                            <div class="lg:col-span-7 space-y-5 text-center lg:text-left">
-                                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-600/25 border border-brandGold/50 text-brandGold text-xs font-extrabold tracking-wide">
-                                    <i class="fa-solid fa-video animate-pulse"></i>
-                                    <span>4K HD LIVE STREAMING • YOUTUBE • FACEBOOK • INSTAGRAM</span>
+                        <div class="relative rounded-[22px] overflow-hidden bg-[#120404]">
+                            <!-- Animated Hero Ken Burns Photography Slideshow -->
+                            <div id="hero-bg-slides-container" class="absolute inset-0 pointer-events-none"></div>
+                            <div class="absolute inset-0 bg-gradient-to-r from-[#240303]/92 via-[#170404]/82 to-[#090707]/88 pointer-events-none"></div>
+
+                            <div class="relative z-10 p-6 sm:p-10 lg:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                                <!-- Left Main Heading & CTAs -->
+                                <div class="lg:col-span-7 space-y-5 text-center lg:text-left">
+                                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-600/35 backdrop-blur-sm border border-brandGold/60 text-brandGold text-xs font-extrabold tracking-wide">
+                                        <i class="fa-solid fa-video animate-pulse"></i>
+                                        <span>4K HD LIVE STREAMING • YOUTUBE • FACEBOOK • INSTAGRAM</span>
+                                    </div>
+
+                                    <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-black tracking-wide leading-none">
+                                        <span class="text-brandGold drop-shadow-[0_4px_18px_rgba(255,215,0,0.55)]">STAR EVENT</span>
+                                        <span class="text-white bg-brandRed px-3.5 py-0.5 rounded-2xl inline-block ml-1 border-2 border-brandGold/80 shadow-lg">LIVE</span>
+                                    </h1>
+
+                                    <p class="font-marathi text-xl sm:text-2xl font-extrabold text-white leading-snug drop-shadow">
+                                        आपल्या सर्व प्रकारच्या कार्यक्रमांचे <span class="text-brandGold underline decoration-brandRed">थेट प्रक्षेपण (4K HD LIVE)</span> व प्रोफेशनल ब्रॉडकास्ट ग्राफिक्स!
+                                    </p>
+
+                                    <p class="text-xs sm:text-sm text-gray-200 max-w-2xl mx-auto lg:mx-0">
+                                        Multi-camera live sports coverage, royal Marathi wedding streaming, instant replay, and custom 1920×1080 OBS/vMix scoreboard overlays starting at just ₹19.
+                                    </p>
+
+                                    <!-- BOOK NOW and EXPLORE SERVICES Buttons -->
+                                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-1">
+                                        <button onclick="openEventBookingModal()" class="btn-gold-shine px-7 py-3.5 rounded-2xl font-black text-sm flex items-center gap-2 shadow-xl hover:scale-[1.03] transition-transform">
+                                            <i class="fa-solid fa-calendar-check"></i>
+                                            <span>BOOK NOW</span>
+                                        </button>
+                                        <a href="#home-services" class="px-7 py-3.5 rounded-2xl bg-black/80 hover:bg-brandRed/80 border-2 border-brandGold/70 text-white font-extrabold text-sm flex items-center gap-2 transition-all">
+                                            <i class="fa-solid fa-compass text-brandGold"></i>
+                                            <span>EXPLORE SERVICES</span>
+                                        </a>
+                                    </div>
+
+                                    <!-- Interactive Live Background Theme Switcher Pills -->
+                                    <div class="pt-2">
+                                        <p class="text-[10px] font-extrabold uppercase tracking-widest text-amber-300/90 mb-2">
+                                            <i class="fa-solid fa-film mr-1"></i> Live Animated Backdrop: <span id="active-bg-scene-label" class="text-brandGold">Night Cricket Stadium</span>
+                                        </p>
+                                        <div id="hero-bg-switcher-pills" class="flex flex-wrap items-center justify-center lg:justify-start gap-1.5"></div>
+                                    </div>
                                 </div>
 
-                                <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-black tracking-wide leading-none">
-                                    <span class="text-brandGold drop-shadow-[0_4px_18px_rgba(255,215,0,0.45)]">STAR EVENT</span>
-                                    <span class="text-white bg-brandRed px-3.5 py-0.5 rounded-2xl inline-block ml-1 border-2 border-brandGold/80">LIVE</span>
-                                </h1>
-
-                                <p class="font-marathi text-xl sm:text-2xl font-extrabold text-white leading-snug">
-                                    आपल्या सर्व प्रकारच्या कार्यक्रमांचे <span class="text-brandGold underline decoration-brandRed">थेट प्रक्षेपण (4K HD LIVE)</span> व प्रोफेशनल ब्रॉडकास्ट ग्राफिक्स!
-                                </p>
-
-                                <p class="text-xs sm:text-sm text-gray-300 max-w-2xl mx-auto lg:mx-0">
-                                    Multi-camera live sports coverage, royal Marathi wedding streaming, instant replay, and custom 1920×1080 OBS/vMix scoreboard overlays starting at just ₹19.
-                                </p>
-
-                                <!-- BOOK NOW and EXPLORE SERVICES Buttons -->
-                                <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
-                                    <button onclick="openEventBookingModal()" class="btn-gold-shine px-7 py-3.5 rounded-2xl font-black text-sm flex items-center gap-2 shadow-xl hover:scale-[1.03] transition-transform">
-                                        <i class="fa-solid fa-calendar-check"></i>
-                                        <span>BOOK NOW</span>
-                                    </button>
-                                    <a href="#home-services" class="px-7 py-3.5 rounded-2xl bg-black/80 hover:bg-brandRed/80 border-2 border-brandGold/70 text-white font-extrabold text-sm flex items-center gap-2 transition-all">
-                                        <i class="fa-solid fa-compass text-brandGold"></i>
-                                        <span>EXPLORE SERVICES</span>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Right 3D Circular Medallion -->
-                            <div class="lg:col-span-5 flex flex-col items-center justify-center">
-                                <div id="hero-logo-badge" class="medallion-perspective w-56 h-56 sm:w-64 sm:h-64"></div>
-                                <div class="mt-4 px-5 py-1.5 rounded-full bg-black/80 border border-brandGold/40 text-center">
-                                    <p class="text-[11px] font-bold uppercase tracking-widest text-brandGold">Bharat Nirguda • 9890175727</p>
+                                <!-- Right 3D Circular Medallion -->
+                                <div class="lg:col-span-5 flex flex-col items-center justify-center">
+                                    <div id="hero-logo-badge" class="medallion-perspective w-56 h-56 sm:w-64 sm:h-64"></div>
+                                    <div class="mt-4 px-5 py-1.5 rounded-full bg-black/85 backdrop-blur-sm border border-brandGold/50 text-center">
+                                        <p class="text-[11px] font-bold uppercase tracking-widest text-brandGold">Bharat Nirguda • 9890175727</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -391,7 +470,7 @@
                             Complete live broadcast, multi-camera production, photography, and event management solutions
                         </p>
                     </div>
-
+                    <!-- Section 5: Our Services -->
                     <div id="home-services-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 reveal-on-scroll"></div>
                 </div>
             </section>
@@ -1870,14 +1949,138 @@
             document.getElementById('mobile-nav-drawer').classList.toggle('hidden');
         }
 
+        // Animated Sports & Events Background Slideshow Engine
+        const EVENT_BG_SCENES = [
+            {
+                id: 'cricket',
+                label: 'Cricket Live',
+                title: 'Night Cricket Stadium',
+                image: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=1920&q=80',
+                fallback: 'https://placehold.co/1920x1080/3b0707/FFD700?text=STAR+EVENT+LIVE+-+CRICKET+4K'
+            },
+            {
+                id: 'kabaddi',
+                label: 'Kabaddi Pro',
+                title: 'Kabaddi Indoor Arena',
+                image: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1920&q=80',
+                fallback: 'https://placehold.co/1920x1080/450a0a/FFD700?text=STAR+EVENT+LIVE+-+KABADDI+PRO'
+            },
+            {
+                id: 'wedding',
+                label: 'Royal Wedding',
+                title: 'Royal Marathi Wedding',
+                image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1920&q=80',
+                fallback: 'https://placehold.co/1920x1080/500724/FFD700?text=STAR+EVENT+LIVE+-+WEDDING+4K'
+            },
+            {
+                id: 'haldi',
+                label: 'Haldi Ceremony',
+                title: 'Grand Haldi Celebration',
+                image: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1920&q=80',
+                fallback: 'https://placehold.co/1920x1080/713f12/FFD700?text=STAR+EVENT+LIVE+-+HALDI+SPECIAL'
+            },
+            {
+                id: 'birthday',
+                label: 'Birthday Gala',
+                title: 'Birthday Celebration Lights',
+                image: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=1920&q=80',
+                fallback: 'https://placehold.co/1920x1080/31102f/FFD700?text=STAR+EVENT+LIVE+-+BIRTHDAY+LIVE'
+            },
+            {
+                id: 'cultural',
+                label: 'Cultural Stage',
+                title: 'Live Stage & Cultural Fest',
+                image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1920&q=80',
+                fallback: 'https://placehold.co/1920x1080/1e1b4b/FFD700?text=STAR+EVENT+LIVE+-+CULTURAL+EVENTS'
+            }
+        ];
+
+        let currentBgSceneIdx = 0;
+        let bgSlideshowTimer = null;
+
+        function initAnimatedBackgroundSlideshow() {
+            const globalContainer = document.getElementById('global-bg-slides-container');
+            const heroContainer = document.getElementById('hero-bg-slides-container');
+            const pillsContainer = document.getElementById('hero-bg-switcher-pills');
+            if (!globalContainer || !heroContainer) return;
+
+            // Preload & apply fallback if offline
+            EVENT_BG_SCENES.forEach((scene, idx) => {
+                const img = new Image();
+                img.onerror = () => {
+                    scene.image = scene.fallback;
+                    const gSlide = document.getElementById(`global-slide-${idx}`);
+                    const hSlide = document.getElementById(`hero-slide-${idx}`);
+                    if (gSlide) gSlide.style.backgroundImage = `url('${scene.fallback}')`;
+                    if (hSlide) hSlide.style.backgroundImage = `url('${scene.fallback}')`;
+                };
+                img.src = scene.image;
+            });
+
+            globalContainer.innerHTML = EVENT_BG_SCENES.map((scene, idx) => `
+                <div id="global-slide-${idx}" class="global-bg-slide ${idx === 0 ? 'active' : ''}"
+                     style="background-image: url('${scene.image}'); animation-delay: -${idx * 4}s;"></div>
+            `).join('');
+
+            heroContainer.innerHTML = EVENT_BG_SCENES.map((scene, idx) => `
+                <div id="hero-slide-${idx}" class="hero-bg-slide ${idx === 0 ? 'active' : ''}"
+                     style="background-image: url('${scene.image}'); animation-delay: -${idx * 3}s;"></div>
+            `).join('');
+
+            if (pillsContainer) {
+                pillsContainer.innerHTML = EVENT_BG_SCENES.map((scene, idx) => `
+                    <button type="button" onclick="setAnimatedBgScene(${idx}, true)" id="bg-pill-${idx}"
+                        class="px-2.5 py-1 rounded-full text-[10px] font-extrabold border transition-all ${
+                            idx === 0
+                                ? 'bg-brandGold text-black border-white shadow'
+                                : 'bg-black/65 text-gray-200 border-white/20 hover:border-brandGold/70 hover:text-brandGold'
+                        }">
+                        ${scene.label}
+                    </button>
+                `).join('');
+            }
+
+            startBgAutoCycle();
+        }
+
+        function setAnimatedBgScene(index, resetTimer = false) {
+            currentBgSceneIdx = index % EVENT_BG_SCENES.length;
+            EVENT_BG_SCENES.forEach((scene, idx) => {
+                const gSlide = document.getElementById(`global-slide-${idx}`);
+                const hSlide = document.getElementById(`hero-slide-${idx}`);
+                const pill = document.getElementById(`bg-pill-${idx}`);
+                const isActive = idx === currentBgSceneIdx;
+                if (gSlide) gSlide.classList.toggle('active', isActive);
+                if (hSlide) hSlide.classList.toggle('active', isActive);
+                if (pill) {
+                    pill.className = isActive
+                        ? 'px-2.5 py-1 rounded-full text-[10px] font-extrabold border transition-all bg-brandGold text-black border-white shadow'
+                        : 'px-2.5 py-1 rounded-full text-[10px] font-extrabold border transition-all bg-black/65 text-gray-200 border-white/20 hover:border-brandGold/70 hover:text-brandGold';
+                }
+            });
+            const labelEl = document.getElementById('active-bg-scene-label');
+            if (labelEl) labelEl.textContent = EVENT_BG_SCENES[currentBgSceneIdx].title;
+
+            if (resetTimer) {
+                startBgAutoCycle();
+            }
+        }
+
+        function startBgAutoCycle() {
+            if (bgSlideshowTimer) clearInterval(bgSlideshowTimer);
+            bgSlideshowTimer = setInterval(() => {
+                setAnimatedBgScene((currentBgSceneIdx + 1) % EVENT_BG_SCENES.length, false);
+            }, 6000);
+        }
+
         // 4. Populate Home Tab Sections (4, 5, 6, 9, 10, 11)
         const HOME_CATEGORIES = [
-            { title: 'Cricket', mr: 'क्रिकेट सामने थेट प्रक्षेपण', icon: 'fa-baseball-bat-ball', template: 'cricket', desc: 'Ball-by-ball scoreboard, multi-camera pitch coverage & boundary replays.' },
-            { title: 'Kabaddi', mr: 'कबड्डी स्पर्धा थेट प्रक्षेपण', icon: 'fa-person-running', template: 'kabaddi', desc: 'Live raid points, match clock & high-energy tournament graphics.' },
-            { title: 'Wedding', mr: 'शुभविवाह / लग्न समारंभ', icon: 'fa-heart', template: 'wedding', desc: '4K cinematic wedding live stream for relatives across the globe.' },
-            { title: 'Haldi', mr: 'हळदी समारंभ', icon: 'fa-sun', template: 'wedding', desc: 'Vibrant Marathi Haldi celebration live coverage & custom frames.' },
-            { title: 'Birthday', mr: 'वाढदिवस सोहळा', icon: 'fa-cake-candles', template: 'birthday', desc: 'Grand birthday party streaming with festive lower-third wishes.' },
-            { title: 'Cultural Events', mr: 'सांस्कृतिक व इतर कार्यक्रम', icon: 'fa-crown', template: 'event', desc: 'Jatra, Kirtan, Ganpati Utsav, School Annual Days & Stage Shows.' }
+            { title: 'Cricket', mr: 'क्रिकेट सामने थेट प्रक्षेपण', icon: 'fa-baseball-bat-ball', template: 'cricket', image: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=75', desc: 'Ball-by-ball scoreboard, multi-camera pitch coverage & boundary replays.' },
+            { title: 'Kabaddi', mr: 'कबड्डी स्पर्धा थेट प्रक्षेपण', icon: 'fa-person-running', template: 'kabaddi', image: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=800&q=75', desc: 'Live raid points, match clock & high-energy tournament graphics.' },
+            { title: 'Wedding', mr: 'शुभविवाह / लग्न समारंभ', icon: 'fa-heart', template: 'wedding', image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=75', desc: '4K cinematic wedding live stream for relatives across the globe.' },
+            { title: 'Haldi', mr: 'हळदी समारंभ', icon: 'fa-sun', template: 'wedding', image: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=800&q=75', desc: 'Vibrant Marathi Haldi celebration live coverage & custom frames.' },
+            { title: 'Birthday', mr: 'वाढदिवस सोहळा', icon: 'fa-cake-candles', template: 'birthday', image: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=800&q=75', desc: 'Grand birthday party streaming with festive lower-third wishes.' },
+            { title: 'Cultural Events', mr: 'सांस्कृतिक व इतर कार्यक्रम', icon: 'fa-crown', template: 'event', image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=75', desc: 'Jatra, Kirtan, Ganpati Utsav, School Annual Days & Stage Shows.' }
         ];
 
         const HOME_SERVICES = [
@@ -1910,95 +2113,155 @@
         ];
 
         function renderHomeSections() {
-            // Section 4: Event Categories (6 items)
+            // Section 4: Event Categories (6 items with animated hover photo backdrop)
             const catGrid = document.getElementById('home-categories-grid');
             if (catGrid) {
                 catGrid.innerHTML = HOME_CATEGORIES.map(c => `
-                    <div onclick="openTemplateInStudio('${c.template}')" class="cursor-pointer bg-studioCard hover:bg-[#190808] border border-brandGold/30 hover:border-brandGold rounded-2xl p-5 transition-all group shadow-lg">
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="w-12 h-12 rounded-2xl bg-brandRed/25 border border-brandGold/40 text-brandGold flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
-                                <i class="fa-solid ${c.icon}"></i>
+                    <div onclick="openTemplateInStudio('${c.template}')" class="cursor-pointer relative overflow-hidden bg-studioCard border border-brandGold/30 hover:border-brandGold rounded-2xl p-5 transition-all group shadow-lg">
+                        <img src="${c.image}" alt="${c.title}" onerror="this.style.display='none'" class="absolute inset-0 w-full h-full object-cover opacity-25 group-hover:opacity-40 group-hover:scale-110 transition-all duration-700 pointer-events-none" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/55 pointer-events-none"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="w-12 h-12 rounded-2xl bg-brandRed/35 backdrop-blur-sm border border-brandGold/50 text-brandGold flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid ${c.icon}"></i>
+                                </div>
+                                <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-brandGold/20 border border-brandGold/40 text-brandGold group-hover:bg-brandGold group-hover:text-black transition-colors">
+                                    Live + Overlay →
+                                </span>
                             </div>
-                            <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-brandGold/15 text-brandGold group-hover:bg-brandGold group-hover:text-black transition-colors">
-                                Live + Overlay →
-                            </span>
+                            <h3 class="text-lg font-black text-white">${c.title}</h3>
+                            <p class="text-xs font-marathi font-bold text-amber-300 mt-0.5">${c.mr}</p>
+                            <p class="text-xs text-gray-300 mt-2">${c.desc}</p>
                         </div>
-                        <h3 class="text-lg font-black text-white">${c.title}</h3>
-                        <p class="text-xs font-marathi font-bold text-amber-300 mt-0.5">${c.mr}</p>
-                        <p class="text-xs text-gray-400 mt-2">${c.desc}</p>
                     </div>
                 `).join('');
             }
 
-            // Section 5: Our Services (7 items)
-            const srvHtml = HOME_SERVICES.map(s => `
-                <div class="bg-studioCard border border-white/10 hover:border-brandGold rounded-2xl p-5 transition-all group">
-                    <div class="w-11 h-11 rounded-xl bg-brandRed/20 border border-brandGold/30 text-brandGold flex items-center justify-center text-lg mb-3 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid ${s.icon}"></i>
-                    </div>
-                    <h3 class="text-base font-black text-white">${s.name}</h3>
-                    <p class="text-[11px] font-marathi text-amber-300 font-bold">${s.mr}</p>
-                    <p class="text-xs text-gray-400 mt-2">${s.desc}</p>
-                </div>
-            `).join('');
-            const homeSrvGrid = document.getElementById('home-services-grid');
-            if (homeSrvGrid) homeSrvGrid.innerHTML = srvHtml;
-            const dedSrvGrid = document.getElementById('dedicated-services-grid');
-            if (dedSrvGrid) dedSrvGrid.innerHTML = srvHtml;
-
-            // Section 6: Featured Overlays (5 distinct designs, Preview Graphic, Name, ₹19 Price, BUY NOW)
-            const featGrid = document.getElementById('home-featured-overlays-grid');
-            if (featGrid) {
-                featGrid.innerHTML = Object.values(DESIGN_TEMPLATES).map(tpl => `
-                    <div class="bg-studioCard border border-brandGold/35 hover:border-brandGold rounded-3xl overflow-hidden flex flex-col justify-between shadow-xl group transition-all">
-                        <div>
-                            <!-- Visual 16:9 Broadcast Preview Card -->
-                            <div class="aspect-video bg-gradient-to-br ${tpl.gradient} relative p-4 flex flex-col justify-between border-b border-brandGold/30 overflow-hidden">
-                                <div class="flex items-center justify-between">
-                                    <span class="px-2.5 py-0.5 rounded-full bg-black/80 border border-brandGold/50 text-[10px] font-extrabold text-brandGold">
-                                        1920×1080 OBS / vMix
-                                    </span>
-                                    <span class="px-2 py-0.5 rounded-full bg-brandRed text-white text-[10px] font-black flex items-center gap-1">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span> LIVE
-                                    </span>
-                                </div>
-
-                                <!-- Mini Lower Third Preview Graphic -->
-                                <div class="rounded-xl p-2.5 border-2 shadow-lg transform group-hover:scale-[1.03] transition-transform"
-                                     style="background: linear-gradient(90deg, ${tpl.defaults.bgPrimary}, ${tpl.defaults.bgSecondary}); border-color: ${tpl.defaults.borderColor};">
-                                    <div class="flex items-center justify-between gap-2">
-                                        <div>
-                                            <p class="text-xs font-black text-white leading-tight">${tpl.label}</p>
-                                            <p class="text-[10px] font-marathi text-amber-300">श्री लिपी मराठी ग्राफिक्स</p>
-                                        </div>
-                                        <span class="px-2 py-0.5 rounded bg-black/80 text-[10px] font-black" style="color:${tpl.defaults.borderColor};">STAR EVENT</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Details -->
-                            <div class="p-5">
-                                <div class="flex items-center justify-between gap-2">
-                                    <h3 class="text-lg font-black text-white">${tpl.label}</h3>
-                                    <div class="text-right">
-                                        <span class="text-xs text-gray-500 line-through mr-1">₹50</span>
-                                        <span class="text-xl font-black text-brandGold">₹19</span>
-                                    </div>
-                                </div>
-                                <p class="text-xs text-gray-400 mt-1">${tpl.subtitle}</p>
-                            </div>
+            // Section 5: Our Services
+            const srvGrid = document.getElementById('home-services-grid');
+            if (srvGrid) {
+                srvGrid.innerHTML = HOME_SERVICES.map(s => `
+                    <div class="bg-studioCard border border-brandGold/25 hover:border-brandGold rounded-2xl p-5 transition-all group">
+                        <div class="w-11 h-11 rounded-xl bg-brandRed/25 border border-brandGold/30 text-brandGold flex items-center justify-center text-lg mb-3 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid ${s.icon}"></i>
                         </div>
-
-                        <div class="px-5 pb-5 grid grid-cols-2 gap-2.5">
-                            <button onclick="openTemplateInStudio('${tpl.id}')" class="py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs">
-                                Live Preview
-                            </button>
-                            <button onclick="buyOverlayNow('${tpl.id}')" class="btn-gold-shine py-2.5 rounded-xl font-black text-xs shadow">
-                                BUY NOW • ₹19
-                            </button>
-                        </div>
+                        <h3 class="text-base font-black text-white">${s.name}</h3>
+                        <p class="text-xs font-marathi font-bold text-amber-300 mt-0.5">${s.mr}</p>
+                        <p class="text-xs text-gray-400 mt-2">${s.desc}</p>
                     </div>
                 `).join('');
+            }
+
+            // Dedicated Services Tab Grid
+            const dedSrvGrid = document.getElementById('dedicated-services-grid');
+            if (dedSrvGrid) {
+                dedSrvGrid.innerHTML = HOME_SERVICES.map(s => `
+                    <div class="bg-studioCard border border-brandGold/30 rounded-2xl p-6 space-y-2.5">
+                        <div class="w-12 h-12 rounded-2xl bg-brandRed/25 text-brandGold flex items-center justify-center text-xl">
+                            <i class="fa-solid ${s.icon}"></i>
+                        </div>
+                        <h3 class="text-lg font-black text-white">${s.name}</h3>
+                        <p class="text-xs font-marathi font-bold text-amber-300">${s.mr}</p>
+                        <p class="text-xs text-gray-300">${s.desc}</p>
+                        <button onclick="openEventBookingModal()" class="mt-2 px-4 py-2 rounded-xl bg-brandGold/20 hover:bg-brandGold text-brandGold hover:text-black text-xs font-extrabold transition-colors">
+                            Book Service →
+                        </button>
+                    </div>
+                `).join('');
+            }
+
+            // Section 6: Featured Overlays (5 Distinct Themes with Live Miniature 16:9 Lower-Third Previews)
+            const featGrid = document.getElementById('home-featured-overlays-grid');
+            if (featGrid) {
+                const paid = isOverlayPaid();
+                const sampleOverrides = {
+                    cricket: {
+                        teamA: 'जय भवानी इलेव्हन',
+                        teamB: 'छत्रपती वॉरियर्स',
+                        scoreText: '112/3 (10.4 Ov)',
+                        playerName: 'रोहित पाटील 48* (22)',
+                        tournamentName: 'भव्य नाईट टेनिस बॉल क्रिकेट स्पर्धा २०२६',
+                        customMarathiText: 'सुपर सिक्स व थेट स्कोअरबोर्ड प्रक्षेपण'
+                    },
+                    kabaddi: {
+                        teamA: 'शिवनेरी टायगर्स',
+                        teamB: 'सह्याद्री लायन्स',
+                        scoreText: '34 - 29 • RAID 0:18',
+                        playerName: 'सुपर रेड: आकाश शिंदे (3 Pts)',
+                        tournamentName: 'महाराष्ट्र केसरी भव्य कबड्डी चषक २०२६',
+                        customMarathiText: 'लाईव्ह मॅट टायमर व रेड पॉईंट्स ग्राफिक्स'
+                    },
+                    wedding: {
+                        eventName: 'शुभविवाह सोहळा',
+                        customMarathiText: 'चि. शुभम  ♥  चि. सौ. कां. स्नेहा',
+                        customEnglishText: 'Royal Marathi Lagna Sohala & Haldi Live Broadcast',
+                        tournamentName: 'मंगल परिणय सोहळा २०२६'
+                    },
+                    birthday: {
+                        eventName: 'HAPPY BIRTHDAY',
+                        customMarathiText: 'वाढदिवसाच्या हार्दिक शुभेच्छा — चि. आरव राजे!',
+                        customEnglishText: 'Grand Birthday Celebration & DJ Night Live Stream',
+                        tournamentName: 'भव्य वाढदिवस अभिष्टचिंतन सोहळा'
+                    },
+                    event: {
+                        eventName: '4K GALA LIVE',
+                        customMarathiText: 'भव्य सांस्कृतिक व संगीत रजनी महोत्सव २०२६',
+                        customEnglishText: 'Multi-Camera Stage Show, Jatra & Cultural Live',
+                        tournamentName: 'स्टार इव्हेंट लाईव्ह विशेष सादरीकरण'
+                    }
+                };
+
+                featGrid.innerHTML = Object.values(DESIGN_TEMPLATES).map((tpl, idx) => {
+                    const previewState = {
+                        ...getDefaultState(),
+                        design: tpl.id,
+                        fields: { ...getDefaultState().fields, ...(sampleOverrides[tpl.id] || {}) },
+                        style: { ...getDefaultState().style, ...tpl.defaults }
+                    };
+                    return `
+                        <div class="bg-studioCard border border-brandGold/35 hover:border-brandGold rounded-3xl overflow-hidden flex flex-col justify-between group shadow-xl transition-all">
+                            <div>
+                                <!-- Live 16:9 Scaled Broadcast Preview -->
+                                <div class="relative w-full aspect-video bg-gradient-to-br ${tpl.gradient} border-b border-brandGold/30 overflow-hidden">
+                                    <div class="absolute top-2.5 left-3 z-20 flex items-center gap-1.5">
+                                        <span class="px-2.5 py-0.5 rounded-full bg-black/85 border border-brandGold/50 text-[10px] font-black text-brandGold uppercase">
+                                            Theme 0${idx + 1}
+                                        </span>
+                                        <span class="px-2 py-0.5 rounded-full bg-brandRed/90 text-[9px] font-black text-white">1920×1080</span>
+                                    </div>
+                                    <div class="featured-mini-scaler pointer-events-none select-none" style="width: 1920px; height: 1080px; transform-origin: top left;">
+                                        ${build1920x1080OverlayHTML(previewState)}
+                                    </div>
+                                </div>
+
+                                <div class="p-5 space-y-2">
+                                    <div class="flex items-center justify-between gap-2">
+                                        <h3 class="text-lg font-black text-white flex items-center gap-2">
+                                            <i class="fa-solid ${tpl.icon} text-brandGold"></i>
+                                            <span>${tpl.label}</span>
+                                        </h3>
+                                        <div class="text-right">
+                                            <span class="text-xs text-gray-500 line-through mr-1">₹50</span>
+                                            <span class="text-xl font-black text-brandGold">₹19</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-gray-300">${tpl.subtitle}</p>
+                                </div>
+                            </div>
+
+                            <div class="px-5 pb-5 flex items-center gap-2.5">
+                                <button onclick="openTemplateInStudio('${tpl.id}')" class="flex-1 py-2.5 px-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs border border-white/15 transition-colors">
+                                    <i class="fa-solid fa-eye mr-1 text-brandGold"></i> ${paid ? 'Customize' : 'Preview'}
+                                </button>
+                                <button onclick="buyOverlayNow('${tpl.id}')" class="btn-gold-shine flex-1 py-2.5 px-3 rounded-xl font-black text-xs shadow">
+                                    ${paid ? 'OPEN STUDIO' : 'BUY NOW • ₹19'}
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                setTimeout(scaleFeaturedMiniPreviews, 30);
             }
 
             // Section 9: Recent Work
@@ -2084,12 +2347,17 @@
             }
         }
 
-        function buyOverlayNow(templateId) {
-            selectOverlayDesign(templateId);
-            openPaymentModal();
+        function scaleFeaturedMiniPreviews() {
+            document.querySelectorAll('.featured-mini-scaler').forEach(scaler => {
+                const parent = scaler.parentElement;
+                if (parent && parent.clientWidth > 0) {
+                    const s = parent.clientWidth / 1920;
+                    scaler.style.transform = `scale(${s})`;
+                }
+            });
         }
 
-        // 5. 1920x1080 Broadcast Overlay Renderer & Studio Controls
+        // 5. 5 Distinct Broadcast-Grade 1920x1080 Lower-Third Overlay Themes
         function build1920x1080OverlayHTML(state) {
             const f = state.fields;
             const s = state.style;
@@ -2108,9 +2376,9 @@
             const textShadowCSS = shadowMap[s.textShadow] || shadowMap.hard;
             const strokeCSS = s.textStroke !== '0px' ? `-webkit-text-stroke: ${s.textStroke};` : '';
 
-            const channelBugHTML = logos.channel.src
-                ? `<img src="${logos.channel.src}" style="height: 82px; width: auto; object-fit: contain;" alt="Channel Logo" />`
-                : `<div style="width: 68px; height: 68px;">${renderStarEventCircularLogoSVG(false)}</div>`;
+            const channelLogoHTML = logos.channel.src
+                ? `<img src="${logos.channel.src}" style="height: 74px; width: auto; object-fit: contain; transform: translate(${logos.channel.x}px, ${logos.channel.y}px) scale(${logos.channel.scale / 100});" alt="Channel Logo" />`
+                : '';
 
             const sponsorLogoHTML = logos.sponsor.src
                 ? `<img src="${logos.sponsor.src}" style="height: 76px; width: auto; object-fit: contain; transform: translate(${logos.sponsor.x}px, ${logos.sponsor.y}px) scale(${logos.sponsor.scale / 100});" alt="Sponsor Logo" />`
@@ -2120,62 +2388,378 @@
                 ? `<img src="${logos.team.src}" style="height: 84px; width: auto; object-fit: contain; transform: translate(${logos.team.x}px, ${logos.team.y}px) scale(${logos.team.scale / 100});" alt="Team Logo" />`
                 : '';
 
-            const isSports = state.design === 'cricket' || state.design === 'kabaddi';
-            const headlineContent = isSports
-                ? `${escapeHtml(f.teamA)} <span style="color:${s.borderColor}; padding: 0 18px;">VS</span> ${escapeHtml(f.teamB)}`
-                : escapeHtml(f.customMarathiText);
+            const leftPos = 54 + Number(s.offsetX);
+            const rightPos = 54 - Number(s.offsetX);
+            const bottomPos = 38 - Number(s.offsetY);
 
-            const badgePill = isSports
-                ? `<div style="background: #DC2626; color: #FFFFFF; border: 3px solid ${s.borderColor}; padding: 10px 26px; border-radius: 18px; font-size: ${Math.round(34 * scaleFactor)}px; font-weight: 900; ${englishInlineFont} white-space: nowrap;">
-                        ${escapeHtml(f.scoreText)}
-                   </div>`
-                : `<div style="background: ${s.borderColor}; color: #090707; padding: 10px 26px; border-radius: 18px; font-size: ${Math.round(30 * scaleFactor)}px; font-weight: 900; ${englishInlineFont} white-space: nowrap;">
-                        ${escapeHtml(f.eventName)}
-                   </div>`;
-
-            return `
-                <div style="width: 1920px; height: 1080px; position: relative; overflow: hidden; color: ${s.textColor}; text-shadow: ${textShadowCSS}; ${strokeCSS}">
-                    <div style="position: absolute; top: 38px; left: 54px; display: flex; align-items: center; gap: 16px; background: linear-gradient(90deg, ${s.bgPrimary}, ${s.bgSecondary}); border: 3px solid ${s.borderColor}; border-radius: 999px; padding: 12px 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.75);">
-                        <span style="width: 16px; height: 16px; border-radius: 50%; background: #EF4444; box-shadow: 0 0 14px #EF4444;"></span>
-                        <span class="${marathiClass}" style="${marathiInlineFont} font-size: ${Math.round(28 * scaleFactor)}px; font-weight: ${s.fontWeight}; letter-spacing: ${s.letterSpacing}px;">
-                            ${escapeHtml(f.tournamentName)}
-                        </span>
-                    </div>
-
-                    <div style="position: absolute; top: 34px; right: 54px; transform: translate(${logos.channel.x}px, ${logos.channel.y}px) scale(${logos.channel.scale / 100}); display: flex; align-items: center; gap: 16px; background: rgba(7,6,6,0.88); border: 3px solid ${s.borderColor}; border-radius: 999px; padding: 10px 28px 10px 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.8);">
-                        ${channelBugHTML}
-                        <div>
-                            <div style="${englishInlineFont} font-size: 32px; font-weight: 900; color: ${s.borderColor}; line-height: 1;">${escapeHtml(f.channelName)}</div>
-                            <div style="font-size: 16px; font-weight: 800; color: #FFFFFF; letter-spacing: 2px;">● LIVE 4K HD BROADCAST</div>
-                        </div>
-                    </div>
-
-                    <div style="position: absolute; left: ${54 + Number(s.offsetX)}px; right: ${54 - Number(s.offsetX)}px; bottom: ${38 - Number(s.offsetY)}px; background: linear-gradient(135deg, ${s.bgPrimary} 0%, ${s.bgSecondary} 55%, ${s.bgPrimary} 100%); border: 4px solid ${s.borderColor}; border-radius: 28px; box-shadow: 0 18px 50px rgba(0,0,0,0.9); overflow: hidden;">
-                        <div style="padding: 20px 36px; display: flex; align-items: center; justify-content: space-between; gap: 24px; text-align: ${s.textAlign};">
-                            <div style="display: flex; align-items: center; gap: 22px; flex: 1; min-width: 0;">
-                                ${teamLogoHTML}
-                                <div style="flex: 1; min-width: 0;">
-                                    <div class="${marathiClass}" style="${marathiInlineFont} font-size: ${Math.round(46 * scaleFactor)}px; font-weight: ${s.fontWeight}; letter-spacing: ${s.letterSpacing}px; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                        ${headlineContent}
+            // =========================================================================
+            // THEME 1: CRICKET PRO – Skewed TV Sports Scoreboard Wing + Cantilevered Box
+            // =========================================================================
+            if (state.design === 'cricket') {
+                return `
+                    <div style="width: 1920px; height: 1080px; position: relative; overflow: hidden; color: ${s.textColor}; text-shadow: ${textShadowCSS}; ${strokeCSS}">
+                        <div style="position: absolute; left: ${leftPos}px; right: ${rightPos}px; bottom: ${bottomPos}px;">
+                            <!-- Protruding Left-Angled Golden Tournament Pennant -->
+                            <div style="display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: -2px; padding: 0 36px 0 18px;">
+                                <div style="transform: skewX(-18deg); background: linear-gradient(90deg, ${s.borderColor} 0%, #F59E0B 85%, #B45309 100%); color: #090707; text-shadow: none; padding: 8px 42px 8px 28px; border-top: 3px solid #FFFBEB; border-left: 4px solid #FFFBEB; box-shadow: 0 -6px 24px rgba(0,0,0,0.65);">
+                                    <div style="transform: skewX(18deg); display: flex; align-items: center; gap: 12px; font-size: ${Math.round(23 * scaleFactor)}px; font-weight: 900;">
+                                        <span style="display:inline-block; width: 13px; height: 13px; border-radius: 9999px; background: #DC2626; box-shadow: 0 0 8px #DC2626;"></span>
+                                        <span class="${marathiClass}" style="${marathiInlineFont}">${escapeHtml(f.tournamentName)}</span>
                                     </div>
-                                    <div class="${marathiClass}" style="${marathiInlineFont} font-size: ${Math.round(25 * scaleFactor)}px; color: ${s.borderColor}; font-weight: 700; margin-top: 6px;">
-                                        ${isSports ? `★ ${escapeHtml(f.playerName)} &nbsp;•&nbsp; ${escapeHtml(f.customMarathiText)}` : `★ ${escapeHtml(f.customEnglishText)}`}
+                                </div>
+                                <div style="transform: skewX(-18deg); background: #090707; border: 2px solid ${s.borderColor}; border-bottom: 0; padding: 6px 28px; color: ${s.borderColor};">
+                                    <div style="transform: skewX(18deg); font-size: ${Math.round(19 * scaleFactor)}px; font-weight: 900; letter-spacing: 1.5px; ${englishInlineFont}">
+                                        🏏 ${escapeHtml(f.eventName)}
                                     </div>
                                 </div>
                             </div>
-                            <div style="display: flex; align-items: center; gap: 18px;">
-                                ${sponsorLogoHTML}
-                                ${badgePill}
+
+                            <!-- Skewed Broadcast Wing Bar + Cantilevered Score Box -->
+                            <div style="position: relative; display: flex; align-items: stretch; gap: 18px;">
+                                <!-- Left/Center Skewed Match & Striker Wing -->
+                                <div style="flex: 1; min-width: 0; transform: skewX(-12deg); background: linear-gradient(105deg, ${s.bgPrimary} 0%, ${s.bgSecondary} 58%, ${s.bgPrimary} 100%); border: 4px solid ${s.borderColor}; border-radius: 14px; box-shadow: 0 22px 55px rgba(0,0,0,0.92); overflow: hidden;">
+                                    <div style="transform: skewX(12deg); padding: 16px 36px; display: flex; align-items: center; justify-content: space-between; gap: 20px; text-align: ${s.textAlign};">
+                                        <div style="display: flex; align-items: center; gap: 18px; flex: 1; min-width: 0;">
+                                            ${teamLogoHTML}
+                                            <div style="flex: 1; min-width: 0;">
+                                                <div class="${marathiClass}" style="${marathiInlineFont} font-size: ${Math.round(45 * scaleFactor)}px; font-weight: ${s.fontWeight}; letter-spacing: ${s.letterSpacing}px; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                    ${escapeHtml(f.teamA)}
+                                                    <span style="display:inline-flex; align-items:center; justify-content:center; width: 54px; height: 54px; border-radius: 9999px; background: radial-gradient(circle, #FFF3A1, ${s.borderColor}); color: #090707; text-shadow: none; font-size: ${Math.round(24 * scaleFactor)}px; font-weight: 900; margin: 0 16px; border: 3px solid #DC2626; vertical-align: middle; box-shadow: 0 4px 14px rgba(0,0,0,0.7);">VS</span>
+                                                    ${escapeHtml(f.teamB)}
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 16px; margin-top: 6px;">
+                                                    <span class="${marathiClass}" style="${marathiInlineFont} background: rgba(0,0,0,0.65); border-left: 4px solid ${s.borderColor}; padding: 3px 14px; font-size: ${Math.round(23 * scaleFactor)}px; color: ${s.borderColor}; font-weight: 800;">
+                                                        ⭐ ${escapeHtml(f.playerName)}
+                                                    </span>
+                                                    <span class="${marathiClass}" style="${marathiInlineFont} font-size: ${Math.round(22 * scaleFactor)}px; color: #FDE68A; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                        ${escapeHtml(f.customMarathiText)}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 12px; shrink: 0;">
+                                            ${sponsorLogoHTML}
+                                            ${channelLogoHTML}
+                                        </div>
+                                    </div>
+                                    <!-- Metallic Dark Bottom Ticker -->
+                                    <div style="transform: skewX(12deg); background: linear-gradient(90deg, #050505, #18181b, #050505); border-top: 2px solid ${s.borderColor}; padding: 8px 36px; display: flex; align-items: center; justify-content: space-between; font-size: ${Math.round(20 * scaleFactor)}px; font-weight: 700;">
+                                        <span class="${marathiClass}" style="${marathiInlineFont} color: #FDE68A;">
+                                            प्रायोजक: ${escapeHtml(f.sponsorName)} &nbsp;|&nbsp; स्थळ: ${escapeHtml(f.location)} (${escapeHtml(f.date)})
+                                        </span>
+                                        <span style="${englishInlineFont} color: ${s.borderColor}; font-weight: 900; letter-spacing: 1px;">
+                                            ${escapeHtml(f.channelName)} • ☎ ${escapeHtml(f.contactNumber)}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Cantilevered Glowing Crimson & Gold Score Box -->
+                                <div style="transform: skewX(-12deg); width: 340px; shrink: 0; background: linear-gradient(160deg, #DC2626 0%, #7F1D1D 55%, #1c0404 100%); border: 4px solid ${s.borderColor}; border-radius: 16px; box-shadow: 0 22px 55px rgba(220,38,38,0.55); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 14px 22px;">
+                                    <div style="transform: skewX(12deg); text-align: center; width: 100%;">
+                                        <div style="display: inline-block; background: ${s.borderColor}; color: #090707; text-shadow: none; font-size: 14px; font-weight: 900; letter-spacing: 2.5px; padding: 2px 14px; border-radius: 9999px; margin-bottom: 6px;">
+                                            ● LIVE SCORE
+                                        </div>
+                                        <div style="font-size: ${Math.round(42 * scaleFactor)}px; font-weight: 900; color: #FFFFFF; ${englishInlineFont} line-height: 1.05; white-space: nowrap;">
+                                            ${escapeHtml(f.scoreText)}
+                                        </div>
+                                        <div style="font-size: 15px; font-weight: 700; color: #FDE68A; margin-top: 4px; ${englishInlineFont}">
+                                            4K BROADCAST TELECAST
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                `;
+            }
 
-                        <div style="background: rgba(0,0,0,0.88); border-top: 2px solid ${s.borderColor}; padding: 10px 36px; display: flex; align-items: center; justify-content: space-between; font-size: ${Math.round(22 * scaleFactor)}px; font-weight: 700;">
-                            <span class="${marathiClass}" style="${marathiInlineFont} color: #FDE68A;">
-                                प्रायोजक: ${escapeHtml(f.sponsorName)} &nbsp;|&nbsp; स्थळ: ${escapeHtml(f.location)} (${escapeHtml(f.date)})
-                            </span>
-                            <span style="${englishInlineFont} color: ${s.borderColor}; font-weight: 900; letter-spacing: 1px;">
-                                LIVE BOOKING: ☎ ${escapeHtml(f.contactNumber)}
-                            </span>
+            // =========================================================================
+            // THEME 2: KABADDI PRO – Cyber-Arena Hexagon HUD + Lightning VS Crest
+            // =========================================================================
+            if (state.design === 'kabaddi') {
+                const hexClip = 'polygon(28px 0%, calc(100% - 28px) 0%, 100% 28px, 100% calc(100% - 28px), calc(100% - 28px) 100%, 28px 100%, 0% calc(100% - 28px), 0% 28px)';
+                const shieldClip = 'polygon(18px 0%, calc(100% - 18px) 0%, 100% 50%, calc(100% - 18px) 100%, 18px 100%, 0% 50%)';
+                return `
+                    <div style="width: 1920px; height: 1080px; position: relative; overflow: hidden; color: ${s.textColor}; text-shadow: ${textShadowCSS}; ${strokeCSS}">
+                        <div style="position: absolute; left: ${leftPos}px; right: ${rightPos}px; bottom: ${bottomPos}px;">
+                            <!-- Top-Center Shield Crest -->
+                            <div style="display: flex; justify-content: center; margin-bottom: -18px; position: relative; z-index: 15;">
+                                <div style="background: ${s.borderColor}; padding: 3px; clip-path: ${shieldClip}; box-shadow: 0 10px 30px rgba(0,0,0,0.85);">
+                                    <div style="background: linear-gradient(90deg, #1a0303, #7f1d1d, #1a0303); padding: 7px 54px; clip-path: ${shieldClip}; display: flex; align-items: center; gap: 14px;">
+                                        <span style="color: ${s.borderColor}; font-size: 20px;">⚡</span>
+                                        <span class="${marathiClass}" style="${marathiInlineFont} font-size: ${Math.round(23 * scaleFactor)}px; font-weight: 900; color: #FFFFFF;">
+                                            ${escapeHtml(f.tournamentName)}
+                                        </span>
+                                        <span style="background: #DC2626; color: #FFFFFF; font-size: 14px; font-weight: 900; padding: 2px 10px; border-radius: 4px; ${englishInlineFont}">RAID LIVE</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Outer Gold Chamfered Frame Wrapper -->
+                            <div style="background: linear-gradient(90deg, ${s.borderColor}, #EF4444, ${s.borderColor}); padding: 4px; clip-path: ${hexClip}; box-shadow: 0 24px 60px rgba(0,0,0,0.95);">
+                                <div style="background: radial-gradient(circle at 50% 50%, ${s.bgPrimary} 0%, ${s.bgSecondary} 85%); clip-path: ${hexClip}; overflow: hidden;">
+                                    <!-- Main Dual-Team Split Arena Plates -->
+                                    <div style="padding: 24px 44px 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px;">
+                                        <!-- Glowing Left Energy Chevrons -->
+                                        <div style="display: flex; gap: 6px; shrink: 0;">
+                                            <div style="width: 14px; height: 78px; background: ${s.borderColor}; clip-path: polygon(0 0, 65% 0, 100% 50%, 65% 100%, 0 100%, 35% 50%);"></div>
+                                            <div style="width: 14px; height: 78px; background: #EF4444; clip-path: polygon(0 0, 65% 0, 100% 50%, 65% 100%, 0 100%, 35% 50%);"></div>
+                                        </div>
+
+                                        ${teamLogoHTML}
+
+                                        <!-- Dual Team Plates with Lightning Bolt -->
+                                        <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; text-align: ${s.textAlign};">
+                                            <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px;">
+                                                <div class="${marathiClass}" style="${marathiInlineFont} flex: 1; background: linear-gradient(90deg, rgba(0,0,0,0.75), rgba(220,38,38,0.35)); border-left: 6px solid ${s.borderColor}; padding: 8px 22px; font-size: ${Math.round(42 * scaleFactor)}px; font-weight: 900; letter-spacing: ${s.letterSpacing}px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                    ${escapeHtml(f.teamA)}
+                                                </div>
+
+                                                <!-- Lightning VS Hexagon Badge -->
+                                                <div style="width: 68px; height: 64px; shrink: 0; background: linear-gradient(135deg, ${s.borderColor}, #F59E0B); color: #090707; text-shadow: none; clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 900; ${englishInlineFont}">
+                                                    ⚡VS
+                                                </div>
+
+                                                <div class="${marathiClass}" style="${marathiInlineFont} flex: 1; background: linear-gradient(270deg, rgba(0,0,0,0.75), rgba(220,38,38,0.35)); border-right: 6px solid ${s.borderColor}; padding: 8px 22px; font-size: ${Math.round(42 * scaleFactor)}px; font-weight: 900; letter-spacing: ${s.letterSpacing}px; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                    ${escapeHtml(f.teamB)}
+                                                </div>
+                                            </div>
+
+                                            <div class="${marathiClass}" style="${marathiInlineFont} font-size: ${Math.round(23 * scaleFactor)}px; color: #FDE68A; font-weight: 800; text-align: center;">
+                                                🔥 ${escapeHtml(f.playerName)} &nbsp;•&nbsp; ${escapeHtml(f.customMarathiText)}
+                                            </div>
+                                        </div>
+
+                                        <!-- High-Impact Hexagon Score Badge -->
+                                        <div style="background: ${s.borderColor}; padding: 3px; clip-path: ${shieldClip}; shrink: 0;">
+                                            <div style="background: #090707; padding: 12px 34px; clip-path: ${shieldClip}; text-align: center;">
+                                                <div style="font-size: 13px; font-weight: 900; color: #EF4444; letter-spacing: 2px;">MAT SCORE</div>
+                                                <div style="font-size: ${Math.round(35 * scaleFactor)}px; font-weight: 900; color: ${s.borderColor}; ${englishInlineFont} white-space: nowrap;">
+                                                    ${escapeHtml(f.scoreText)}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        ${sponsorLogoHTML}
+                                        ${channelLogoHTML}
+                                    </div>
+
+                                    <!-- Bottom Arena Strip -->
+                                    <div style="background: rgba(0,0,0,0.92); border-top: 2px solid ${s.borderColor}; padding: 8px 48px; display: flex; align-items: center; justify-content: space-between; font-size: ${Math.round(20 * scaleFactor)}px; font-weight: 700;">
+                                        <span class="${marathiClass}" style="${marathiInlineFont} color: #FDE68A;">
+                                            प्रायोजक: ${escapeHtml(f.sponsorName)} &nbsp;|&nbsp; मैदान: ${escapeHtml(f.location)} (${escapeHtml(f.date)})
+                                        </span>
+                                        <span style="${englishInlineFont} color: ${s.borderColor}; font-weight: 900;">
+                                            ${escapeHtml(f.channelName)} • ☎ ${escapeHtml(f.contactNumber)}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // =========================================================================
+            // THEME 3: WEDDING SPECIAL – Royal Arched Palace Mandap & Kalash Frame
+            // =========================================================================
+            if (state.design === 'wedding') {
+                return `
+                    <div style="width: 1920px; height: 1080px; position: relative; overflow: hidden; color: ${s.textColor}; text-shadow: ${textShadowCSS}; ${strokeCSS}">
+                        <div style="position: absolute; left: ${leftPos + 30}px; right: ${rightPos + 30}px; bottom: ${bottomPos}px;">
+                            <!-- Scalloped Arched Palace Crown Dome -->
+                            <div style="display: flex; justify-content: center; margin-bottom: -22px; position: relative; z-index: 20;">
+                                <div style="background: linear-gradient(180deg, #FFF3A1 0%, ${s.borderColor} 55%, #B45309 100%); color: #2b0509; text-shadow: none; padding: 10px 56px 14px; border-radius: 9999px 9999px 24px 24px; border: 3px solid #FFFBEB; box-shadow: 0 8px 28px rgba(0,0,0,0.8); text-align: center;">
+                                    <div class="${marathiClass}" style="${marathiInlineFont} font-size: ${Math.round(22 * scaleFactor)}px; font-weight: 900; letter-spacing: 1px;">
+                                        ॥ श्री गणेशाय नमः ॥ • ${escapeHtml(f.eventName)}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Royal Arched Palace & Filigree Double-Gold Frame -->
+                            <div style="position: relative; background: radial-gradient(ellipse at 50% 10%, ${s.bgPrimary} 0%, ${s.bgSecondary} 88%); border: 5px solid ${s.borderColor}; border-radius: 72px 72px 26px 26px; box-shadow: 0 24px 65px rgba(0,0,0,0.95), inset 0 0 36px rgba(255,215,0,0.22); overflow: hidden;">
+                                <!-- Inner Filigree Gold Arch Border -->
+                                <div style="margin: 8px; border: 2px dashed rgba(255,215,0,0.65); border-radius: 64px 64px 20px 20px; overflow: hidden;">
+                                    <div style="padding: 26px 46px 16px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+                                        <!-- Left Ornate Kalash / Floral Motif -->
+                                        <div style="display: flex; align-items: center; gap: 14px; shrink: 0;">
+                                            <div style="width: 82px; height: 82px; border-radius: 9999px; background: radial-gradient(circle, #FFF3A1, ${s.borderColor}, #92400E); color: #3b0712; text-shadow: none; border: 3px solid #FFFBEB; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 0 25px rgba(255,215,0,0.5);">
+                                                <span style="font-size: 34px; line-height: 1;">🪔</span>
+                                                <span style="font-size: 10px; font-weight: 900; letter-spacing: 1px;">शुभमंगल</span>
+                                            </div>
+                                            ${teamLogoHTML}
+                                        </div>
+
+                                        <!-- Centered Royal Couple & Ceremony Showcase with Ornamental Dividers -->
+                                        <div style="flex: 1; min-width: 0; text-align: center;">
+                                            <div class="${marathiClass}" style="${marathiInlineFont} font-size: ${Math.round(50 * scaleFactor)}px; font-weight: ${s.fontWeight}; letter-spacing: ${s.letterSpacing}px; color: #FFFBEB; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                ${escapeHtml(f.customMarathiText)}
+                                            </div>
+
+                                            <!-- Golden Ornamental Flourish Divider -->
+                                            <div style="display: flex; align-items: center; justify-content: center; gap: 14px; margin: 6px 0;">
+                                                <div style="height: 2px; width: 140px; background: linear-gradient(90deg, transparent, ${s.borderColor});"></div>
+                                                <span style="color: ${s.borderColor}; font-size: 18px;">❖ ♥ ❖</span>
+                                                <div style="height: 2px; width: 140px; background: linear-gradient(270deg, transparent, ${s.borderColor});"></div>
+                                            </div>
+
+                                            <div style="${englishInlineFont} font-size: ${Math.round(23 * scaleFactor)}px; color: ${s.borderColor}; font-weight: 700; letter-spacing: 1.2px;">
+                                                ${escapeHtml(f.customEnglishText)} &nbsp;•&nbsp; शुभ दिनांक: ${escapeHtml(f.date)}
+                                            </div>
+                                        </div>
+
+                                        <!-- Right Auspicious Venue Medallion & Logos -->
+                                        <div style="display: flex; align-items: center; gap: 14px; shrink: 0;">
+                                            ${sponsorLogoHTML}
+                                            ${channelLogoHTML}
+                                            <div style="width: 82px; height: 82px; border-radius: 9999px; background: radial-gradient(circle, #FFF3A1, ${s.borderColor}, #92400E); color: #3b0712; text-shadow: none; border: 3px solid #FFFBEB; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 0 25px rgba(255,215,0,0.5);">
+                                                <span style="font-size: 32px; line-height: 1;">🌺</span>
+                                                <span style="font-size: 10px; font-weight: 900; letter-spacing: 1px;">विवाह</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Royal Velvet Ribbon Footer -->
+                                    <div style="background: linear-gradient(90deg, #2b0509, #4c0519, #2b0509); border-top: 2px solid ${s.borderColor}; padding: 9px 44px; display: flex; align-items: center; justify-content: space-between; font-size: ${Math.round(20 * scaleFactor)}px; font-weight: 700;">
+                                        <span class="${marathiClass}" style="${marathiInlineFont} color: #FDE68A;">
+                                            निमंत्रक: ${escapeHtml(f.sponsorName)} &nbsp;|&nbsp; विवाह स्थळ: ${escapeHtml(f.location)}
+                                        </span>
+                                        <span style="${englishInlineFont} color: ${s.borderColor}; font-weight: 900;">
+                                            4K LIVE TELECAST: ${escapeHtml(f.channelName)} • ☎ ${escapeHtml(f.contactNumber)}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // =========================================================================
+            // THEME 4: BIRTHDAY SPECIAL – Festive Pill Cards + Overlapping Crown Badge
+            // =========================================================================
+            if (state.design === 'birthday') {
+                return `
+                    <div style="width: 1920px; height: 1080px; position: relative; overflow: hidden; color: ${s.textColor}; text-shadow: ${textShadowCSS}; ${strokeCSS}">
+                        <div style="position: absolute; left: ${leftPos + 20}px; right: ${rightPos + 20}px; bottom: ${bottomPos}px;">
+                            <!-- Overlapping Circular Golden Birthday Crown Medallion -->
+                            <div style="position: absolute; left: 46px; top: -44px; z-index: 25; width: 112px; height: 112px; border-radius: 9999px; background: radial-gradient(circle at 30% 30%, #FFFBEB, ${s.borderColor}, #D97706); border: 5px solid #FFFFFF; box-shadow: 0 12px 32px rgba(255,215,0,0.65); display: flex; flex-direction: column; align-items: center; justify-content: center; color: #1e0524; text-shadow: none;">
+                                <span style="font-size: 38px; line-height: 1;">👑</span>
+                                <span style="font-size: 11px; font-weight: 900; letter-spacing: 0.8px; margin-top: 2px;">BIRTHDAY</span>
+                            </div>
+
+                            <!-- Floating Golden Sparkles Top Right -->
+                            <div style="display: flex; justify-content: flex-end; padding-right: 48px; margin-bottom: -14px; position: relative; z-index: 20;">
+                                <div style="background: linear-gradient(90deg, #EC4899, #8B5CF6, ${s.borderColor}); color: #FFFFFF; padding: 6px 30px; border-radius: 9999px; border: 3px solid #FFFBEB; font-size: ${Math.round(21 * scaleFactor)}px; font-weight: 900; box-shadow: 0 6px 20px rgba(0,0,0,0.65);">
+                                    ✨ ★ ${escapeHtml(f.eventName)} ★ ✨
+                                </div>
+                            </div>
+
+                            <!-- Multi-Layered Pill / Cloud Celebration Card -->
+                            <div style="background: linear-gradient(120deg, #3b0764 0%, ${s.bgPrimary} 45%, #831843 100%); border: 5px solid ${s.borderColor}; border-radius: 9999px; box-shadow: 0 22px 55px rgba(0,0,0,0.92), 0 0 36px rgba(236,72,153,0.35); padding: 18px 46px 18px 175px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+                                <div style="display: flex; align-items: center; gap: 20px; flex: 1; min-width: 0; text-align: ${s.textAlign};">
+                                    ${teamLogoHTML}
+                                    <div style="flex: 1; min-width: 0;">
+                                        <div class="${marathiClass}" style="${marathiInlineFont} font-size: ${Math.round(46 * scaleFactor)}px; font-weight: 900; letter-spacing: ${s.letterSpacing}px; color: #FFFFFF; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                            🎂 ${escapeHtml(f.customMarathiText)}
+                                        </div>
+                                        <div style="${englishInlineFont} font-size: ${Math.round(24 * scaleFactor)}px; color: #FDE047; font-weight: 800; margin-top: 4px;">
+                                            🎈 ${escapeHtml(f.customEnglishText)} &nbsp;•&nbsp; ${escapeHtml(f.date)}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="display: flex; align-items: center; gap: 16px; shrink: 0;">
+                                    ${sponsorLogoHTML}
+                                    ${channelLogoHTML}
+                                    <div style="background: #FFFFFF; color: #3b0764; text-shadow: none; padding: 12px 28px; border-radius: 9999px; border: 4px solid ${s.borderColor}; font-size: ${Math.round(24 * scaleFactor)}px; font-weight: 900; ${englishInlineFont} text-align: center;">
+                                        🎉 CELEBRATE LIVE
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Floating Confetti Bottom Pill Ticker -->
+                            <div style="margin: -10px auto 0; width: 86%; background: rgba(9,7,7,0.94); border: 2px solid ${s.borderColor}; border-radius: 9999px; padding: 7px 34px; display: flex; align-items: center; justify-content: space-between; font-size: ${Math.round(19 * scaleFactor)}px; font-weight: 700; box-shadow: 0 10px 25px rgba(0,0,0,0.85);">
+                                <span class="${marathiClass}" style="${marathiInlineFont} color: #FDE68A;">
+                                    शुभेच्छुक: ${escapeHtml(f.sponsorName)} &nbsp;|&nbsp; स्थळ: ${escapeHtml(f.location)}
+                                </span>
+                                <span style="${englishInlineFont} color: ${s.borderColor}; font-weight: 900;">
+                                    ${escapeHtml(f.channelName)} • ☎ ${escapeHtml(f.contactNumber)}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // =========================================================================
+            // THEME 5: PREMIUM EVENT – 4K Cinema Glassmorphic Split Grid + Equalizer
+            // =========================================================================
+            return `
+                <div style="width: 1920px; height: 1080px; position: relative; overflow: hidden; color: ${s.textColor}; text-shadow: ${textShadowCSS}; ${strokeCSS}">
+                    <div style="position: absolute; left: ${leftPos}px; right: ${rightPos}px; bottom: ${bottomPos}px;">
+                        <!-- Sleek Glassmorphic 4K Cinema Lower-Third -->
+                        <div style="background: linear-gradient(135deg, rgba(10,10,12,0.94) 0%, ${s.bgPrimary} 52%, rgba(10,10,12,0.96) 100%); backdrop-filter: blur(16px); border: 2px solid ${s.borderColor}; border-radius: 18px; box-shadow: 0 26px 65px rgba(0,0,0,0.95), inset 0 1px 0 rgba(255,255,255,0.22); overflow: hidden;">
+                            <div style="display: grid; grid-template-columns: 96px 1fr auto; align-items: stretch;">
+                                <!-- Left Vertical Gold-Red Audio Equalizer Bars -->
+                                <div style="background: rgba(0,0,0,0.75); border-right: 1px solid rgba(255,215,0,0.35); display: flex; align-items: flex-end; justify-content: center; gap: 7px; padding: 20px 14px;">
+                                    <div style="width: 8px; height: 42px; border-radius: 99px; background: ${s.borderColor};"></div>
+                                    <div style="width: 8px; height: 78px; border-radius: 99px; background: #EF4444;"></div>
+                                    <div style="width: 8px; height: 96px; border-radius: 99px; background: ${s.borderColor};"></div>
+                                    <div style="width: 8px; height: 60px; border-radius: 99px; background: #EF4444;"></div>
+                                    <div style="width: 8px; height: 84px; border-radius: 99px; background: ${s.borderColor};"></div>
+                                </div>
+
+                                <!-- Center Architectural Split Grid Content -->
+                                <div style="padding: 20px 36px; display: flex; align-items: center; gap: 22px; min-width: 0; text-align: ${s.textAlign};">
+                                    ${teamLogoHTML}
+                                    <div style="flex: 1; min-width: 0;">
+                                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 4px;">
+                                            <span style="background: ${s.borderColor}; color: #090707; text-shadow: none; font-size: 13px; font-weight: 900; padding: 2px 12px; border-radius: 4px; letter-spacing: 1.5px; ${englishInlineFont}">
+                                                4K ULTRA HD LIVE
+                                            </span>
+                                            <span class="${marathiClass}" style="${marathiInlineFont} font-size: ${Math.round(22 * scaleFactor)}px; color: #FDE68A; font-weight: 800;">
+                                                ${escapeHtml(f.tournamentName)}
+                                            </span>
+                                        </div>
+
+                                        <div class="${marathiClass}" style="${marathiInlineFont} font-size: ${Math.round(46 * scaleFactor)}px; font-weight: ${s.fontWeight}; letter-spacing: ${s.letterSpacing}px; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                            ${escapeHtml(f.customMarathiText)}
+                                        </div>
+
+                                        <div style="height: 1px; background: linear-gradient(90deg, ${s.borderColor}, transparent); margin: 8px 0;"></div>
+
+                                        <div style="${englishInlineFont} font-size: ${Math.round(22 * scaleFactor)}px; color: #E5E7EB; font-weight: 600; letter-spacing: 0.6px;">
+                                            ${escapeHtml(f.customEnglishText)}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Right Live Telecast Status Module -->
+                                <div style="background: linear-gradient(180deg, rgba(220,38,38,0.28), rgba(0,0,0,0.82)); border-left: 1px solid rgba(255,215,0,0.35); padding: 20px 34px; display: flex; align-items: center; gap: 18px;">
+                                    ${sponsorLogoHTML}
+                                    ${channelLogoHTML}
+                                    <div style="text-align: right;">
+                                        <div style="display: inline-flex; align-items: center; gap: 8px; background: #DC2626; color: #FFFFFF; border: 2px solid ${s.borderColor}; padding: 8px 22px; border-radius: 10px; font-size: ${Math.round(26 * scaleFactor)}px; font-weight: 900; ${englishInlineFont}">
+                                            <span style="width: 10px; height: 10px; border-radius: 99px; background: #FFFFFF;"></span>
+                                            ${escapeHtml(f.eventName)}
+                                        </div>
+                                        <div style="font-size: 16px; font-weight: 800; color: ${s.borderColor}; margin-top: 8px; ${englishInlineFont}">
+                                            ${escapeHtml(f.date)}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Minimalist Gold Hairline Footer -->
+                            <div style="background: rgba(0,0,0,0.95); border-top: 1px solid ${s.borderColor}; padding: 8px 36px; display: flex; align-items: center; justify-content: space-between; font-size: ${Math.round(19 * scaleFactor)}px; font-weight: 700;">
+                                <span class="${marathiClass}" style="${marathiInlineFont} color: #FDE68A;">
+                                    आयोजक: ${escapeHtml(f.sponsorName)} &nbsp;|&nbsp; स्थळ: ${escapeHtml(f.location)}
+                                </span>
+                                <span style="${englishInlineFont} color: ${s.borderColor}; font-weight: 900; letter-spacing: 1px;">
+                                    ${escapeHtml(f.channelName)} • ☎ ${escapeHtml(f.contactNumber)}
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2202,6 +2786,7 @@
         window.addEventListener('resize', () => {
             scale1920Stage('preview-stage-wrapper', 'preview-1920-scaler');
             scale1920Stage('theater-stage-wrapper', 'theater-1920-scaler');
+            scaleFeaturedMiniPreviews();
         });
 
         function renderDesignSelector() {
@@ -2477,40 +3062,213 @@
             const ctx = canvas.getContext('2d');
             const f = studioState.fields;
             const s = studioState.style;
+            const design = studioState.design;
 
             ctx.clearRect(0, 0, 1920, 1080);
 
             const boxX = 60 + Number(s.offsetX);
-            const boxY = 830 + Number(s.offsetY);
+            const boxY = 825 + Number(s.offsetY);
             const boxW = 1800;
-            const boxH = 195;
+            const boxH = 205;
 
-            const grad = ctx.createLinearGradient(boxX, boxY, boxX + boxW, boxY);
-            grad.addColorStop(0, s.bgPrimary);
-            grad.addColorStop(0.5, s.bgSecondary);
-            grad.addColorStop(1, s.bgPrimary);
+            ctx.save();
 
-            ctx.fillStyle = grad;
-            ctx.strokeStyle = s.borderColor;
-            ctx.lineWidth = 6;
-            ctx.beginPath();
-            ctx.roundRect(boxX, boxY, boxW, boxH, 28);
-            ctx.fill();
-            ctx.stroke();
+            // 1. CRICKET PRO: Skewed TV Sports Wing + Cantilevered Red/Gold Score Box
+            if (design === 'cricket') {
+                // Top Gold Pennant Tab
+                ctx.fillStyle = s.borderColor;
+                ctx.beginPath();
+                ctx.moveTo(boxX + 45, boxY - 42);
+                ctx.lineTo(boxX + 760, boxY - 42);
+                ctx.lineTo(boxX + 735, boxY);
+                ctx.lineTo(boxX + 20, boxY);
+                ctx.closePath();
+                ctx.fill();
 
-            ctx.fillStyle = s.textColor;
-            ctx.font = '900 44px "Noto Sans Devanagari", Poppins, sans-serif';
-            const mainTitle = (studioState.design === 'cricket' || studioState.design === 'kabaddi')
-                ? `${f.teamA}  VS  ${f.teamB}   |   ${f.scoreText}`
-                : f.customMarathiText;
-            ctx.fillText(mainTitle, boxX + 48, boxY + 82);
+                ctx.fillStyle = '#090707';
+                ctx.font = '900 22px "Noto Sans Devanagari", Poppins, sans-serif';
+                ctx.fillText(`● ${f.tournamentName}`, boxX + 55, boxY - 13);
 
-            ctx.fillStyle = s.borderColor;
-            ctx.font = '700 28px "Noto Sans Devanagari", Poppins, sans-serif';
-            ctx.fillText(`${f.tournamentName}  •  ${f.location} (${f.date})  •  ☎ ${f.contactNumber}`, boxX + 48, boxY + 145);
+                // Skewed Main Wing
+                ctx.save();
+                ctx.transform(1, 0, -0.18, 1, 160, 0);
+                const grad = ctx.createLinearGradient(boxX, boxY, boxX + 1420, boxY);
+                grad.addColorStop(0, s.bgPrimary);
+                grad.addColorStop(0.5, s.bgSecondary);
+                grad.addColorStop(1, s.bgPrimary);
+                ctx.fillStyle = grad;
+                ctx.strokeStyle = s.borderColor;
+                ctx.lineWidth = 5;
+                ctx.beginPath();
+                ctx.roundRect(boxX, boxY, 1420, boxH, 16);
+                ctx.fill();
+                ctx.stroke();
+
+                // Cantilevered Score Box
+                ctx.fillStyle = '#B91C1C';
+                ctx.beginPath();
+                ctx.roundRect(boxX + 1440, boxY, 340, boxH, 16);
+                ctx.fill();
+                ctx.stroke();
+                ctx.restore();
+
+                ctx.fillStyle = s.textColor;
+                ctx.font = '900 44px "Noto Sans Devanagari", Poppins, sans-serif';
+                ctx.fillText(`${f.teamA}   VS   ${f.teamB}`, boxX + 55, boxY + 72);
+
+                ctx.fillStyle = s.borderColor;
+                ctx.font = '800 24px "Noto Sans Devanagari", Poppins, sans-serif';
+                ctx.fillText(`⭐ ${f.playerName}  •  ${f.customMarathiText}`, boxX + 55, boxY + 122);
+
+                ctx.fillStyle = '#FDE68A';
+                ctx.font = '700 20px "Noto Sans Devanagari", Poppins, sans-serif';
+                ctx.fillText(`प्रायोजक: ${f.sponsorName}  |  ${f.location} (${f.date})  •  ☎ ${f.contactNumber}`, boxX + 55, boxY + 178);
+
+                ctx.fillStyle = '#FFFFFF';
+                ctx.font = '900 38px Teko, Poppins, sans-serif';
+                ctx.fillText(f.scoreText, boxX + 1475, boxY + 115);
+
+            // 2. KABADDI PRO: Chamfered Hexagon Arena Frame
+            } else if (design === 'kabaddi') {
+                const drawHexRect = (x, y, w, h, cut) => {
+                    ctx.beginPath();
+                    ctx.moveTo(x + cut, y);
+                    ctx.lineTo(x + w - cut, y);
+                    ctx.lineTo(x + w, y + cut);
+                    ctx.lineTo(x + w, y + h - cut);
+                    ctx.lineTo(x + w - cut, y + h);
+                    ctx.lineTo(x + cut, y + h);
+                    ctx.lineTo(x, y + h - cut);
+                    ctx.lineTo(x, y + cut);
+                    ctx.closePath();
+                };
+
+                const grad = ctx.createLinearGradient(boxX, boxY, boxX + boxW, boxY);
+                grad.addColorStop(0, '#1a0303');
+                grad.addColorStop(0.5, s.bgPrimary);
+                grad.addColorStop(1, '#1a0303');
+
+                ctx.fillStyle = grad;
+                ctx.strokeStyle = s.borderColor;
+                ctx.lineWidth = 6;
+                drawHexRect(boxX, boxY, boxW, boxH, 30);
+                ctx.fill();
+                ctx.stroke();
+
+                ctx.fillStyle = s.textColor;
+                ctx.font = '900 44px "Noto Sans Devanagari", Poppins, sans-serif';
+                ctx.fillText(`${f.teamA}   ⚡VS   ${f.teamB}`, boxX + 60, boxY + 78);
+
+                ctx.fillStyle = s.borderColor;
+                ctx.font = '900 36px Teko, Poppins, sans-serif';
+                ctx.fillText(f.scoreText, boxX + 1460, boxY + 82);
+
+                ctx.fillStyle = '#FDE68A';
+                ctx.font = '700 22px "Noto Sans Devanagari", Poppins, sans-serif';
+                ctx.fillText(`${f.tournamentName}  •  ${f.location} (${f.date})  •  ☎ ${f.contactNumber}`, boxX + 60, boxY + 155);
+
+            // 3. WEDDING SPECIAL: Royal Arched Palace Frame
+            } else if (design === 'wedding') {
+                const grad = ctx.createRadialGradient(boxX + boxW / 2, boxY, 80, boxX + boxW / 2, boxY + boxH, 1000);
+                grad.addColorStop(0, s.bgPrimary);
+                grad.addColorStop(1, s.bgSecondary);
+
+                ctx.fillStyle = grad;
+                ctx.strokeStyle = s.borderColor;
+                ctx.lineWidth = 6;
+                ctx.beginPath();
+                ctx.roundRect(boxX + 30, boxY, boxW - 60, boxH, [72, 72, 24, 24]);
+                ctx.fill();
+                ctx.stroke();
+
+                // Top Gold Crown Pill
+                ctx.fillStyle = s.borderColor;
+                ctx.beginPath();
+                ctx.roundRect(boxX + 620, boxY - 26, 560, 44, 22);
+                ctx.fill();
+                ctx.fillStyle = '#2b0509';
+                ctx.font = '900 21px "Noto Sans Devanagari", Poppins, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(`॥ श्री गणेशाय नमः ॥ • ${f.eventName}`, boxX + 900, boxY + 3);
+
+                ctx.fillStyle = '#FFFBEB';
+                ctx.font = '900 48px "Noto Sans Devanagari", Poppins, sans-serif';
+                ctx.fillText(f.customMarathiText, boxX + 900, boxY + 88);
+
+                ctx.fillStyle = s.borderColor;
+                ctx.font = '700 22px "Noto Sans Devanagari", Poppins, sans-serif';
+                ctx.fillText(`निमंत्रक: ${f.sponsorName}  •  स्थळ: ${f.location} (${f.date})  •  ☎ ${f.contactNumber}`, boxX + 900, boxY + 162);
+                ctx.textAlign = 'left';
+
+            // 4. BIRTHDAY SPECIAL: Festive Pill Card + Overlapping Crown Badge
+            } else if (design === 'birthday') {
+                const grad = ctx.createLinearGradient(boxX, boxY, boxX + boxW, boxY);
+                grad.addColorStop(0, '#3b0764');
+                grad.addColorStop(0.5, s.bgPrimary);
+                grad.addColorStop(1, '#831843');
+
+                ctx.fillStyle = grad;
+                ctx.strokeStyle = s.borderColor;
+                ctx.lineWidth = 6;
+                ctx.beginPath();
+                ctx.roundRect(boxX + 20, boxY + 10, boxW - 40, boxH - 20, 95);
+                ctx.fill();
+                ctx.stroke();
+
+                // Crown Medallion
+                ctx.fillStyle = s.borderColor;
+                ctx.beginPath();
+                ctx.arc(boxX + 115, boxY + 35, 56, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = '#FFFFFF';
+                ctx.lineWidth = 5;
+                ctx.stroke();
+
+                ctx.fillStyle = '#FFFFFF';
+                ctx.font = '900 46px "Noto Sans Devanagari", Poppins, sans-serif';
+                ctx.fillText(`🎂 ${f.customMarathiText}`, boxX + 205, boxY + 95);
+
+                ctx.fillStyle = '#FDE047';
+                ctx.font = '700 23px "Noto Sans Devanagari", Poppins, sans-serif';
+                ctx.fillText(`✨ ${f.customEnglishText}  •  ${f.sponsorName}  •  ☎ ${f.contactNumber}`, boxX + 205, boxY + 152);
+
+            // 5. PREMIUM EVENT: 4K Cinema Glassmorphic Split Frame + Equalizer
+            } else {
+                const grad = ctx.createLinearGradient(boxX, boxY, boxX + boxW, boxY);
+                grad.addColorStop(0, '#0a0a0c');
+                grad.addColorStop(0.5, s.bgPrimary);
+                grad.addColorStop(1, '#0a0a0c');
+
+                ctx.fillStyle = grad;
+                ctx.strokeStyle = s.borderColor;
+                ctx.lineWidth = 4;
+                ctx.beginPath();
+                ctx.roundRect(boxX, boxY, boxW, boxH, 18);
+                ctx.fill();
+                ctx.stroke();
+
+                // Left Vertical Equalizer Bars
+                const barHeights = [42, 78, 96, 60, 84];
+                barHeights.forEach((h, i) => {
+                    ctx.fillStyle = i % 2 === 0 ? s.borderColor : '#EF4444';
+                    ctx.beginPath();
+                    ctx.roundRect(boxX + 24 + i * 14, boxY + 145 - h, 8, h, 4);
+                    ctx.fill();
+                });
+
+                ctx.fillStyle = s.textColor;
+                ctx.font = '900 46px "Noto Sans Devanagari", Poppins, sans-serif';
+                ctx.fillText(f.customMarathiText, boxX + 125, boxY + 86);
+
+                ctx.fillStyle = '#FDE68A';
+                ctx.font = '700 22px "Noto Sans Devanagari", Poppins, sans-serif';
+                ctx.fillText(`${f.tournamentName}  •  ${f.location} (${f.date})  •  ☎ ${f.contactNumber}`, boxX + 125, boxY + 154);
+            }
+
+            ctx.restore();
 
             const link = document.createElement('a');
-            link.download = `STAR_EVENT_LIVE_${studioState.design.toUpperCase()}_1920x1080.png`;
+            link.download = `STAR_EVENT_LIVE_${design.toUpperCase()}_1920x1080.png`;
             link.href = canvas.toDataURL('image/png');
             link.click();
             showToast('1920×1080 Transparent PNG Downloaded!');
@@ -2855,6 +3613,7 @@
             setBadge('footer-logo-badge', false);
 
             updateOverlayAccessUI();
+            initAnimatedBackgroundSlideshow();
             initMovingParticles();
             initScrollReveal();
             renderHomeSections();
@@ -2862,6 +3621,7 @@
             syncControlsWithState();
             refreshOverlayUrlInput();
             renderLivePreview();
+            setTimeout(scaleFeaturedMiniPreviews, 80);
 
             if (window.location.hash === '#overlays') {
                 handleOverlayAccessAction();
