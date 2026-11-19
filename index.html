@@ -1351,61 +1351,104 @@
                     </div>
                 </div>
 
-                <form onsubmit="submitPaymentPass(event)" class="md:col-span-7 space-y-3">
-                    <div>
-                        <label class="block text-[11px] text-gray-400 mb-1">Customer / Broadcaster Name *</label>
-                        <input type="text" id="pass-cust-name" required placeholder="e.g. Bharat Nirguda" class="w-full bg-black border border-white/15 rounded-xl px-3 py-2 text-xs text-white outline-none">
-                    </div>
-                    <div class="grid grid-cols-2 gap-2.5">
-                        <div>
-                            <label class="block text-[11px] text-gray-400 mb-1">Mobile Number *</label>
-                            <input type="tel" id="pass-cust-mobile" required placeholder="9890175727" class="w-full bg-black border border-white/15 rounded-xl px-3 py-2 text-xs text-white outline-none">
+                <div class="md:col-span-7">
+                    <!-- STEP 1: Customer Details & Strict 12-Digit UTR Form -->
+                    <form id="payment-step-form" onsubmit="submitPaymentPass(event)" class="space-y-3">
+                        <div class="flex items-center justify-between bg-amber-500/10 border border-brandGold/30 rounded-xl px-3 py-2 text-[11px]">
+                            <span class="text-amber-200 font-semibold"><i class="fa-solid fa-shield-halved text-brandGold mr-1"></i>Step 1: Pay ₹19 & Enter 12-Digit UPI UTR</span>
+                            <span id="pending-badge-shortcut" class="hidden">
+                                <button type="button" onclick="showPendingVerificationScreen()" class="text-brandGold underline font-bold">View Pending</button>
+                            </span>
                         </div>
                         <div>
-                            <label class="block text-[11px] text-gray-400 mb-1">Email *</label>
-                            <input type="email" id="pass-cust-email" required placeholder="you@email.com" class="w-full bg-black border border-white/15 rounded-xl px-3 py-2 text-xs text-white outline-none">
+                            <label class="block text-[11px] text-gray-400 mb-1">Customer / Broadcaster Name *</label>
+                            <input type="text" id="pass-cust-name" required placeholder="e.g. Bharat Nirguda" class="w-full bg-black border border-white/15 focus:border-brandGold rounded-xl px-3 py-2 text-xs text-white outline-none">
+                        </div>
+                        <div class="grid grid-cols-2 gap-2.5">
+                            <div>
+                                <label class="block text-[11px] text-gray-400 mb-1">10-Digit Mobile Number *</label>
+                                <input type="tel" id="pass-cust-mobile" required maxlength="10" pattern="[6-9][0-9]{9}" placeholder="9890175727" class="w-full bg-black border border-white/15 focus:border-brandGold rounded-xl px-3 py-2 text-xs text-white outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] text-gray-400 mb-1">Email *</label>
+                                <input type="email" id="pass-cust-email" required placeholder="you@email.com" class="w-full bg-black border border-white/15 focus:border-brandGold rounded-xl px-3 py-2 text-xs text-white outline-none">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between mb-1">
+                                <label class="block text-[11px] text-gray-400">12-Digit UPI UTR / Ref Number *</label>
+                                <span id="utr-digit-counter" class="text-[10px] font-mono text-gray-500">0 / 12 digits</span>
+                            </div>
+                            <input type="text" id="pass-cust-utr" required inputmode="numeric" maxlength="12" oninput="handleUtrInputFormatting(this)" placeholder="Enter exact 12-digit GPay / PhonePe UTR" class="w-full bg-black border border-white/15 focus:border-brandGold rounded-xl px-3 py-2 text-xs font-mono tracking-wider text-white outline-none">
+                            <p id="utr-validation-error" class="hidden text-[11px] text-red-400 font-semibold mt-1 flex items-center gap-1"></p>
+                        </div>
+                        <button type="submit" class="btn-gold-shine w-full py-3 rounded-xl font-black text-xs shadow-lg">
+                            Submit Payment for Verification
+                        </button>
+                    </form>
+
+                    <!-- STEP 2: Payment Verification Pending & Owner Bank-Check PIN Verification -->
+                    <div id="payment-step-pending" class="hidden space-y-3.5">
+                        <div class="bg-amber-500/15 border border-amber-400/50 rounded-2xl p-3.5 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2.5 py-0.5 rounded-full bg-amber-500 text-black text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
+                                    <i class="fa-solid fa-clock animate-spin"></i> Payment Verification Pending
+                                </span>
+                                <span id="pending-ref-id" class="text-[11px] font-mono font-bold text-brandGold">REF-000000</span>
+                            </div>
+                            <p class="text-[11px] text-gray-200 leading-relaxed">
+                                Your 12-digit UTR has been recorded. Send payment proof on WhatsApp or verify via Owner PIN after checking ₹19 receipt in Google Pay / SBI.
+                            </p>
+                            <div class="bg-black/70 border border-white/10 rounded-xl p-2.5 grid grid-cols-2 gap-2 text-[11px]">
+                                <div>
+                                    <span class="text-gray-400 block text-[10px]">Customer Name</span>
+                                    <strong id="pending-cust-name" class="text-white truncate block">-</strong>
+                                </div>
+                                <div>
+                                    <span class="text-gray-400 block text-[10px]">Mobile Number</span>
+                                    <strong id="pending-cust-mobile" class="text-white font-mono">-</strong>
+                                </div>
+                                <div>
+                                    <span class="text-gray-400 block text-[10px]">Submitted 12-Digit UTR</span>
+                                    <strong id="pending-cust-utr" class="text-brandGold font-mono tracking-wider">-</strong>
+                                </div>
+                                <div>
+                                    <span class="text-gray-400 block text-[10px]">Selected Overlay</span>
+                                    <strong id="pending-cust-frame" class="text-amber-300">-</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- One-Click WhatsApp Proof Button -->
+                        <a id="whatsapp-proof-link" href="https://wa.me/919890175727" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-green-600 hover:bg-green-500 text-white font-black text-xs flex items-center justify-center gap-2 shadow-lg transition-all">
+                            <i class="fa-brands fa-whatsapp text-base"></i>
+                            <span>Send Payment Proof on WhatsApp (9890175727)</span>
+                        </a>
+
+                        <!-- Inline Owner Quick-Verify (PIN) Box -->
+                        <div class="bg-black/80 border border-brandGold/40 rounded-2xl p-3 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <label class="text-[11px] font-extrabold text-brandGold uppercase tracking-wider">
+                                    <i class="fa-solid fa-key mr-1"></i>Owner Quick-Verify (PIN)
+                                </label>
+                                <span class="text-[10px] text-gray-400">Confirm ₹19 in GPay/SBI first</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <input type="password" id="owner-verify-pin-input" inputmode="numeric" maxlength="6" placeholder="Enter Owner PIN" class="flex-1 bg-neutral-900 border border-white/15 focus:border-brandGold rounded-xl px-3 py-2 text-xs font-mono text-white outline-none">
+                                <button type="button" onclick="verifyOwnerPinAndUnlock()" class="btn-gold-shine px-4 py-2 rounded-xl font-black text-xs shrink-0">
+                                    Approve & Unlock
+                                </button>
+                            </div>
+                            <p id="owner-pin-error" class="hidden text-[11px] text-red-400 font-semibold"></p>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-1 text-[11px]">
+                            <button type="button" onclick="resetPaymentFormForCorrection()" class="text-gray-400 hover:text-brandGold underline">
+                                ← Edit Details / Enter Different UTR
+                            </button>
+                            <span class="text-gray-500">Status: <strong class="text-amber-400">Locked</strong></span>
                         </div>
                     </div>
-                    <div>
-                        <label class="block text-[11px] text-gray-400 mb-1">UPI UTR / Transaction Reference</label>
-                        <input type="text" id="pass-cust-utr" placeholder="12-digit UPI ID" class="w-full bg-black border border-white/15 rounded-xl px-3 py-2 text-xs text-white outline-none">
-                    </div>
-                    <button type="submit" class="btn-gold-shine w-full py-3 rounded-xl font-black text-xs shadow-lg">
-                        Verify ₹19 Payment & Open Overlay Studio
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Fullscreen Theater Preview Modal -->
-    <div id="theater-preview-modal" class="hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col items-center justify-center p-4">
-        <div class="w-full max-w-6xl flex items-center justify-between mb-3">
-            <span class="text-sm font-extrabold text-brandGold">1920×1080 Fullscreen Broadcast Preview</span>
-            <button onclick="closeFullscreenTheaterPreview()" class="px-4 py-1.5 rounded-xl bg-brandRed text-white font-bold text-xs">Close Preview</button>
-        </div>
-        <div id="theater-stage-wrapper" class="relative w-full max-w-6xl aspect-video rounded-2xl overflow-hidden border-2 border-brandGold bg-checkerboard">
-            <div id="theater-1920-scaler" style="width: 1920px; height: 1080px; transform-origin: top left;" class="relative pointer-events-none">
-                <div id="theater-overlay-dom" class="w-full h-full"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- OBS / vMix Guide Modal -->
-    <div id="obs-guide-modal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="w-full max-w-xl bg-studioCard border-2 border-brandGold rounded-3xl p-6 space-y-4">
-            <div class="flex items-center justify-between border-b border-white/10 pb-3">
-                <h3 class="text-base font-black text-brandGold"><i class="fa-solid fa-tv mr-2"></i>OBS Studio & vMix Integration</h3>
-                <button onclick="document.getElementById('obs-guide-modal').classList.add('hidden')" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="space-y-3 text-xs text-gray-300">
-                <div class="bg-black/60 border border-white/10 rounded-xl p-3.5">
-                    <p class="font-bold text-white text-sm mb-1">1. OBS Studio Browser Source</p>
-                    <p>Sources → <strong>+ Browser</strong> → Paste your Persistent Overlay URL → Width: <strong class="text-brandGold">1920</strong>, Height: <strong class="text-brandGold">1080</strong>. Transparent background works automatically.</p>
-                </div>
-                <div class="bg-black/60 border border-white/10 rounded-xl p-3.5">
-                    <p class="font-bold text-white text-sm mb-1">2. vMix Web Browser Input</p>
-                    <p>Add Input → <strong>Web Browser</strong> → Paste URL → Resolution: <strong class="text-brandGold">1920×1080</strong> → Overlay Channel 1. Clicking <strong>UPDATE OVERLAY</strong> updates vMix & OBS live!</p>
                 </div>
             </div>
         </div>
@@ -1436,6 +1479,9 @@
         const STUDIO_STATE_KEY = 'star_event_live_studio_state_v3';
         const STUDIO_PASS_KEY = 'star_event_live_pass_v3';
         const STUDIO_PAID_KEY = 'star_event_paid_v1';
+        const STUDIO_PENDING_PAYMENT_KEY = 'star_event_pending_payment_v1';
+        const STUDIO_USED_UTRS_KEY = 'star_event_used_utrs_v1';
+        const OWNER_VERIFICATION_PIN = '9890';
         const syncChannel = ('BroadcastChannel' in window) ? new BroadcastChannel('star_event_live_sync') : null;
 
         // 5 Premium Broadcast Overlay Design Templates
@@ -1580,10 +1626,94 @@
 
         function isOverlayPaid() {
             try {
-                return localStorage.getItem(STUDIO_PAID_KEY) === 'true';
+                if (localStorage.getItem(STUDIO_PAID_KEY) !== 'true') return false;
+                const pass = getPassData();
+                // Require at least one verified 12-digit UTR record
+                const hasVerifiedUtr = Array.isArray(pass.subscribers) && pass.subscribers.some(sub => sub.verified === true && isValid12DigitNpciUtr(sub.utr).valid);
+                if (!hasVerifiedUtr) {
+                    localStorage.setItem(STUDIO_PAID_KEY, 'false');
+                    return false;
+                }
+                return true;
             } catch (e) {
                 return false;
             }
+        }
+
+        function getSubmittedUtrs() {
+            try {
+                const raw = localStorage.getItem(STUDIO_USED_UTRS_KEY);
+                const parsed = raw ? JSON.parse(raw) : [];
+                return Array.isArray(parsed) ? parsed : [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function recordSubmittedUtr(utr) {
+            try {
+                const list = getSubmittedUtrs();
+                if (!list.includes(utr)) {
+                    list.push(utr);
+                    localStorage.setItem(STUDIO_USED_UTRS_KEY, JSON.stringify(list));
+                }
+            } catch (e) {}
+        }
+
+        function getPendingPayment() {
+            try {
+                const raw = localStorage.getItem(STUDIO_PENDING_PAYMENT_KEY);
+                return raw ? JSON.parse(raw) : null;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function savePendingPayment(data) {
+            try {
+                if (data) {
+                    localStorage.setItem(STUDIO_PENDING_PAYMENT_KEY, JSON.stringify(data));
+                } else {
+                    localStorage.removeItem(STUDIO_PENDING_PAYMENT_KEY);
+                }
+            } catch (e) {}
+        }
+
+        function isValid12DigitNpciUtr(rawUtr) {
+            const utr = String(rawUtr || '').trim();
+            if (!utr) {
+                return { valid: false, reason: 'Please enter your 12-digit UPI UTR / Reference number.' };
+            }
+            if (!/^\d{12}$/.test(utr)) {
+                return { valid: false, reason: 'Invalid UTR: Must be exactly 12 numeric digits (0-9 only, no letters or spaces).' };
+            }
+            // Reject all identical repeated digits e.g. 000000000000, 111111111111 ... 999999999999
+            if (/^(\d)\1{11}$/.test(utr)) {
+                return { valid: false, reason: 'Fake UTR rejected: Repeated identical digits (e.g., 111111111111) are not valid.' };
+            }
+            // Reject repeating 2-digit or 3-digit patterns e.g. 121212121212, 123123123123
+            if (/^(\d{2})\1{5}$/.test(utr) || /^(\d{3})\1{3}$/.test(utr)) {
+                return { valid: false, reason: 'Fake UTR rejected: Patterned dummy numbers are not accepted.' };
+            }
+            // Reject ascending or descending sequential dummy numbers e.g. 123456789012, 987654321098
+            const ascSeq = '01234567890123456789';
+            const descSeq = '98765432109876543210';
+            if (ascSeq.includes(utr) || descSeq.includes(utr)) {
+                return { valid: false, reason: 'Fake UTR rejected: Sequential dummy numbers (e.g., 123456789012) are invalid.' };
+            }
+            // Reject common test/dummy sequences
+            const blockedDummies = new Set([
+                '123456123456', '112233445566', '998877665544', '102030405060', '989017572700'
+            ]);
+            if (blockedDummies.has(utr)) {
+                return { valid: false, reason: 'Dummy UTR rejected: Enter your real 12-digit UPI transaction UTR.' };
+            }
+            // Reject duplicate UTRs already submitted
+            const existingUtrs = getSubmittedUtrs();
+            if (existingUtrs.includes(utr)) {
+                return { valid: false, reason: 'Duplicate UTR: This 12-digit UTR has already been submitted.' };
+            }
+            return { valid: true, utr };
         }
 
         function updateOverlayAccessUI() {
@@ -1646,18 +1776,8 @@
                 if (raw) return JSON.parse(raw);
             } catch (e) {}
             const initial = {
-                active: true,
-                expiresAt: Date.now() + (24 * 3600 * 1000),
-                subscribers: [
-                    {
-                        name: 'Bharat Nirguda (Owner)',
-                        mobile: '9890175727',
-                        email: 'stareventlive@gmail.com',
-                        utr: 'UPI2026STAR19',
-                        verified: true,
-                        expiresAt: Date.now() + (24 * 3600 * 1000)
-                    }
-                ]
+                active: false,
+                subscribers: []
             };
             savePassData(initial);
             return initial;
@@ -2419,24 +2539,180 @@
                 colorLight: '#ffffff',
                 correctLevel: QRCode.CorrectLevel.H
             });
+
+            const pending = getPendingPayment();
+            if (pending && !isOverlayPaid()) {
+                showPendingVerificationScreen(pending);
+            } else {
+                resetPaymentFormForCorrection(false);
+            }
         }
 
         function closePaymentModal() {
             document.getElementById('payment-modal').classList.add('hidden');
         }
 
+        function handleUtrInputFormatting(inputEl) {
+            const cleaned = inputEl.value.replace(/\D/g, '').slice(0, 12);
+            inputEl.value = cleaned;
+            const counter = document.getElementById('utr-digit-counter');
+            if (counter) {
+                counter.textContent = `${cleaned.length} / 12 digits`;
+                counter.className = cleaned.length === 12
+                    ? 'text-[10px] font-mono text-green-400 font-bold'
+                    : 'text-[10px] font-mono text-gray-500';
+            }
+            const errEl = document.getElementById('utr-validation-error');
+            if (errEl) errEl.classList.add('hidden');
+        }
+
+        function showPendingVerificationScreen(pendingObj = null) {
+            const data = pendingObj || getPendingPayment();
+            if (!data) return;
+
+            document.getElementById('payment-step-form').classList.add('hidden');
+            document.getElementById('payment-step-pending').classList.remove('hidden');
+            document.getElementById('owner-pin-error').classList.add('hidden');
+            document.getElementById('owner-verify-pin-input').value = '';
+
+            document.getElementById('pending-ref-id').textContent = data.refId;
+            document.getElementById('pending-cust-name').textContent = data.name;
+            document.getElementById('pending-cust-mobile').textContent = data.mobile;
+            document.getElementById('pending-cust-utr').textContent = data.utr;
+            document.getElementById('pending-cust-frame').textContent = data.frameLabel;
+
+            const waMessage = [
+                'Hello STAR EVENT LIVE,',
+                'I have paid ₹19 for Overlay Studio Access.',
+                `Ref ID: ${data.refId}`,
+                `Name: ${data.name}`,
+                `Mobile: ${data.mobile}`,
+                `Selected Frame: ${data.frameLabel}`,
+                `12-Digit UTR: ${data.utr}`,
+                'Please verify & activate my access.'
+            ].join('\n');
+
+            const waLink = document.getElementById('whatsapp-proof-link');
+            if (waLink) {
+                waLink.href = `https://wa.me/919890175727?text=${encodeURIComponent(waMessage)}`;
+            }
+        }
+
+        function resetPaymentFormForCorrection(clearPending = true) {
+            if (clearPending) {
+                savePendingPayment(null);
+            }
+            document.getElementById('payment-step-pending').classList.add('hidden');
+            document.getElementById('payment-step-form').classList.remove('hidden');
+            const errEl = document.getElementById('utr-validation-error');
+            if (errEl) errEl.classList.add('hidden');
+            const pendingShortcut = document.getElementById('pending-badge-shortcut');
+            if (pendingShortcut) {
+                pendingShortcut.classList.toggle('hidden', !getPendingPayment());
+            }
+        }
+
         function submitPaymentPass(e) {
             e.preventDefault();
+            const name = document.getElementById('pass-cust-name').value.trim();
+            const mobile = document.getElementById('pass-cust-mobile').value.trim();
+            const email = document.getElementById('pass-cust-email').value.trim();
+            const rawUtr = document.getElementById('pass-cust-utr').value.trim();
+            const errEl = document.getElementById('utr-validation-error');
+
+            // 1. Strict 10-digit Indian mobile validation
+            if (!/^[6-9]\d{9}$/.test(mobile)) {
+                errEl.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Please enter a valid 10-digit mobile number.';
+                errEl.classList.remove('hidden');
+                showToast('Invalid 10-digit mobile number.');
+                return;
+            }
+
+            // 2. Strict 12-digit NPCI UTR validation
+            const utrCheck = isValid12DigitNpciUtr(rawUtr);
+            if (!utrCheck.valid) {
+                errEl.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> ${escapeHtml(utrCheck.reason)}`;
+                errEl.classList.remove('hidden');
+                showToast(utrCheck.reason);
+                return;
+            }
+
+            errEl.classList.add('hidden');
+
+            // 3. Record UTR & create Pending Verification record (keep isPaid = false!)
+            const activeTemplate = DESIGN_TEMPLATES[studioState.design] || DESIGN_TEMPLATES.cricket;
+            const pendingRecord = {
+                refId: 'SEL-' + Math.floor(100000 + Math.random() * 900000),
+                name,
+                mobile,
+                email,
+                utr: utrCheck.utr,
+                frameId: activeTemplate.id,
+                frameLabel: activeTemplate.label,
+                submittedAt: Date.now(),
+                verified: false
+            };
+
+            recordSubmittedUtr(utrCheck.utr);
+            savePendingPayment(pendingRecord);
+
+            try {
+                localStorage.setItem(STUDIO_PAID_KEY, 'false');
+            } catch (err) {}
+
+            const pass = getPassData();
+            pass.active = false;
+            pass.subscribers.unshift(pendingRecord);
+            savePassData(pass);
+
+            updateOverlayAccessUI();
+            showPendingVerificationScreen(pendingRecord);
+            showToast('UTR Submitted! Verification Pending — Send proof on WhatsApp or verify via Owner PIN.');
+        }
+
+        function verifyOwnerPinAndUnlock() {
+            const pinInput = document.getElementById('owner-verify-pin-input');
+            const pinErrEl = document.getElementById('owner-pin-error');
+            const enteredPin = (pinInput ? pinInput.value : '').trim();
+            const pending = getPendingPayment();
+
+            if (!pending) {
+                pinErrEl.textContent = 'No pending UTR found. Please submit payment details first.';
+                pinErrEl.classList.remove('hidden');
+                return;
+            }
+
+            if (enteredPin !== OWNER_VERIFICATION_PIN) {
+                try {
+                    localStorage.setItem(STUDIO_PAID_KEY, 'false');
+                } catch (err) {}
+                updateOverlayAccessUI();
+                pinErrEl.innerHTML = '<i class="fa-solid fa-lock mr-1"></i>Incorrect Owner PIN! Overlays Tab remains locked.';
+                pinErrEl.classList.remove('hidden');
+                showToast('Wrong Owner PIN! Access denied.');
+                return;
+            }
+
+            // Owner PIN matched: mark this exact UTR verified and unlock Overlays Studio
+            pinErrEl.classList.add('hidden');
+            pending.verified = true;
+            pending.verifiedAt = Date.now();
+
             const pass = getPassData();
             pass.active = true;
-            pass.subscribers.unshift({
-                name: document.getElementById('pass-cust-name').value.trim(),
-                mobile: document.getElementById('pass-cust-mobile').value.trim(),
-                email: document.getElementById('pass-cust-email').value.trim(),
-                utr: document.getElementById('pass-cust-utr').value.trim() || 'UPI-19-VERIFIED',
-                verified: true
+            let matched = false;
+            pass.subscribers = (pass.subscribers || []).map(sub => {
+                if (sub.utr === pending.utr) {
+                    matched = true;
+                    return { ...sub, verified: true, verifiedAt: pending.verifiedAt };
+                }
+                return sub;
             });
+            if (!matched) {
+                pass.subscribers.unshift(pending);
+            }
             savePassData(pass);
+            savePendingPayment(null);
 
             try {
                 localStorage.setItem(STUDIO_PAID_KEY, 'true');
@@ -2446,7 +2722,7 @@
             handleUpdateOverlay();
             closePaymentModal();
             switchMainTab('overlays');
-            showToast('₹19 Payment Verified! Overlays Tab & 1920×1080 Studio Unlocked.');
+            showToast(`UTR ${pending.utr} Verified! Overlays Tab & 1920×1080 Studio Unlocked.`);
         }
 
         function openObsGuideModal() {
